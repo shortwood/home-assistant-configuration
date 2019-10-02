@@ -17,6 +17,6 @@ deps/*
 .spotify-token-cache
 google_calendars.yaml
 home-assistant_v2.db
-home-assisant.log
+home-assistant.log
 known_devices.yaml
 secrets.yaml
