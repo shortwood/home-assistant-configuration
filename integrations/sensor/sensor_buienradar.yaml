@@ -1,0 +1,7 @@
+  - platform: buienradar
+    timeframe: 30
+    monitored_conditions:
+      - precipitation
+      - precipitation_forecast_average
+      - precipitation_forecast_total
+      - rainchance_1d

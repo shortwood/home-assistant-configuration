@@ -1,0 +1,17 @@
+  - name: Google Home Broadcast
+    platform: rest
+    resource: !secret google_ar_host
+    method: POST_JSON
+    message_param_name: command
+    data:
+      user: !secret google_ar_user
+      broadcast: true
+
+  - name: Google Home Command
+    platform: rest
+    resource: !secret google_ar_host
+    method: POST_JSON
+    message_param_name: command
+    data:
+      user: !secret google_ar_user
+      converse: true

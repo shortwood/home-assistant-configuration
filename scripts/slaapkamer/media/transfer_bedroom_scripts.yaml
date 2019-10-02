@@ -1,0 +1,77 @@
+bedroom_transfer:
+  alias: '[Slaapkamer][Mediacenter] - Verder kijken'
+  sequence:
+    - service_template: >-
+        {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+          script.bedroom_transfer_tv
+        {% elif is_state('media_player.kodi_woonkamer','playing') or
+                is_state('media_player.kodi_woonkamer','paused')
+         %}
+          script.bedroom_transfer_kodi
+        {% else %}
+          script.dummy
+        {% endif %}
+
+bedroom_transfer_tv:
+  alias: '[Slaapkamer][Mediacenter] - Verder kijken TV'
+  sequence:
+    - service: script.bedroom_watch_tv
+    - wait_template: "{{ is_state('script.bedroom_watch_tv','off') }}"
+    - service: media_player.select_source
+      data_template:
+        entity_id: media_player.3c36e4_eosstb_003898505601
+        source: "{{state_attr('media_player.3c36e4_eosstb_003766202901','media_title')}}"
+
+bedroom_transfer_kodi:
+  alias: '[Slaapkamer][Mediacenter] - Kodi verder Kijken'
+  sequence:
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.kodi_woonkamer
+    - service: script.bedroom_watch_kodi
+    - wait_template: "{{ is_state('script.bedroom_watch_kodi','off') }}"
+    - service_template: >-
+        {% if is_state_attr('media_player.kodi_woonkamer','media_content_type','tvshow') %}
+          script.bedroom_transfer_kodi_tvshow
+        {% elif is_state_attr('media_player.kodi_woonkamer','media_content_type','movie') %}
+          script.bedroom_transfer_kodi_movie
+        {% else %}
+          script.dummy
+        {% endif %}
+
+bedroom_transfer_kodi_tvshow:
+  alias: '[Slaapkamer][Mediacenter] - Kodi TV Serie verder kijken'
+  sequence:
+    - service: rest_command.transfer_kodiepisode_to_bedroom
+      data_template:
+        TextField: "{{state_attr('media_player.kodi_woonkamer','media_series_title') }} Season {{ state_attr('media_player.kodi_woonkamer','media_season') }}"
+        NumberField: "{{state_attr('media_player.kodi_woonkamer','media_episode')}}"
+    - wait_template: "{{ is_state('media_player.kodi_slaapkamer','playing')}}"
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.kodi_slaapkamer
+    - service: media_player.media_seek
+      data_template:
+        entity_id: media_player.kodi_slaapkamer
+        seek_position: "{{state_attr('media_player.kodi_woonkamer','media_position')}}"
+    - service: media_player.media_stop
+      data:
+        entity_id: media_player.kodi_woonkamer
+
+bedroom_transfer_kodi_movie:
+  alias: '[Slaapkamer][Mediacenter] - Kodi Film verder kijken'
+  sequence:
+    - service: rest_command.transfer_kodimovie_to_bedroom
+      data_template:
+        TextField: "{{state_attr('media_player.kodi_woonkamer','media_title') }}"
+    - wait_template: "{{ is_state('media_player.kodi_slaapkamer','playing')}}"
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.kodi_slaapkamer
+    - service: media_player.media_seek
+      data_template:
+        entity_id: media_player.kodi_slaapkamer
+        seek_position: "{{state_attr('media_player.kodi_woonkamer','media_position')}}"
+    - service: media_player.media_stop
+      data:
+        entity_id: media_player.kodi_woonkamer

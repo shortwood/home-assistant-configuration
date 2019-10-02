@@ -1,0 +1,5 @@
+discovery: false
+switch:
+  - host: !secret tp_link_vaatwasser
+  - host: !secret tp_link_wasmachine
+  - host: !secret tp_link_droger

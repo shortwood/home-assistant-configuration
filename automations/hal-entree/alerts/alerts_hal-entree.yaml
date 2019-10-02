@@ -1,0 +1,13 @@
+- alias: '[Hal-Entree][Melding] - Voordeur staat 5 minuten open'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00044b3df7_contact
+      to: 'on'
+      for:
+        minutes: 5
+  action:
+    - service: notify.ios_iedereen
+      data_template:
+        title: 'Waarschuwing'
+        message: >-
+          De voordeur staat al 5 minuten open.

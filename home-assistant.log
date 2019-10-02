@@ -1,0 +1,1 @@
+2019-10-02 17:14:57 WARNING (MainThread) [homeassistant.loader] You are using a custom integration for spotcast which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you do experience issues with Home Assistant.

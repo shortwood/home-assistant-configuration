@@ -1,0 +1,6 @@
+  - name: "Studeerkamer - helder"
+    entities:
+      light.studeerkamer:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254

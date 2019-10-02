@@ -1,0 +1,4 @@
+  media_player:
+    hosts:
+      # Woonkamer
+      - !secret sonos_ip_woonkamer

@@ -1,0 +1,21 @@
+- alias: '[Zolder][Melding] - Regen verwacht en zolderraam is open'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.br_precipitation_forecast_average
+      above: 0.01
+      for:
+        minutes: 1
+  condition:
+    - condition: state
+      entity_id: binary_sensor.0x00158d000444c094_contact
+      state: 'on'
+  action:
+    - service: script.smart_notify
+      data_template:
+        title: 'Waarschuwing'
+        message: >-
+          Er wordt in het komende half uur regen verwacht
+            ({{states('sensor.br_precipitation_forecast_average')}} mm/uur)
+            en het zolderraam staat nog open.
+        category: 'none'
+        speak: false

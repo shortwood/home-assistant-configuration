@@ -1,0 +1,25 @@
+# CARDS
+# Card-Specific Modifications
+ha-card-box-shadow: "none" # Shadows on cards. Same as `shadow-elevation-2dp_-_box-shadow:
+ha-card-border-radius: "5px" # Rounded corners on cards. NOTE: may not work with custom cards.
+
+# FONTS
+primary-font-family: 'Open Sans,sans-serif'
+paper-font-common-base_-_font-family: "var(--primary-font-family)"
+paper-font-common-code_-_font-family: "var(--primary-font-family)"
+paper-font-body1_-_font-family: "var(--primary-font-family)"
+paper-font-subhead_-_font-family: "var(--primary-font-family)"
+paper-font-headline_-_font-family: "var(--primary-font-family)"
+paper-font-caption_-_font-family: "var(--primary-font-family)"
+paper-font-title_-_font-family: "var(--primary-font-family)"
+
+# COLORS
+text-primary-color: '#FFFFFF'
+primary-color: "#999999"
+secondary-text-color: "#808080"
+text-light-color: '#B3B3B3'
+paper-item-icon-color: 'var(--primary-color)'
+paper-item-icon-active-color: '#F4B400'
+
+# PAPER COLORS
+paper-card-background-color: "rgba(255, 255, 255, 1)"

@@ -1,0 +1,9 @@
+  ##
+  # MOCKUPANCY BEDTIME
+  # USECASE: Used for setting random bedtime during MOCKUPANCY
+  ##
+  
+  mockupancy_bedtime:
+    has_date: false
+    has_time: true
+    initial: '23:00'

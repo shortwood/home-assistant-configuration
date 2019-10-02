@@ -1,0 +1,29 @@
+set_mediacenter_volume:
+  alias: '[Woonkamer][MediaCenter][Control] - Volume'
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: "woonkamer/cec/volume/set"
+        payload_template: "{{ (float(volume_level)*100) | int }}"
+
+set_mediacenter_input:
+  alias: '[Woonkamer][MediaCenter][Control] - Select input'
+  sequence:
+    - service_template: >-
+        {% if (source == 'HDMI1') or (source == 'HDMI3') %}
+          switch.turn_on
+        {% else %}
+          switch.turn_off
+        {% endif %}
+
+      data_template:
+        entity_id: >-
+          {% if (source == 'HDMI1') or (source == 'HDMI2') %}
+            switch.woonkamer_receiver_hdmi1-2
+          {% else %}
+            switch.woonkamer_receiver_hdmi3-4
+          {% endif %}
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.woonkamer_receiver_input
+        option: "{{source}}"

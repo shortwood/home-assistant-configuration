@@ -1,0 +1,178 @@
+      person.peter:
+        title: Peter
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - entity: device_tracker.pkorthout_3cd38954_05d8_4c2a_8cdf_7257d9452128
+                  name: Locatie
+                  icon: mdi:map-marker-circle
+                  secondary_info: last-changed
+                - entity: sensor.peter_room_presence
+                  name: Ruimte
+                  icon: mdi:location-enter
+                  secondary_info: last-changed
+                - entity: proximity.home_peter
+                  name: Afstand tot huis
+                  icon: mdi:map-marker-distance
+                  secondary_info: last-changed
+                  type: custom:multiple-entity-row
+                  primary:
+                    entity: proximity.home_peter
+                    attribute: dir_of_travel
+                    name: false
+                - entity: sensor.reistijd_peter_werk
+                  name: Reistijd naar werk
+                  icon: mdi:car
+                  secondary_info: last-changed
+                - entity: sensor.peter_sleepmode
+                  name: Slaapmodus
+                  icon: mdi:sleep
+                  secondary_info: last-changed
+                - type: custom:fold-entity-row
+                  head:
+                    type: section
+                    label: iPhone X
+                  group_config:
+                    secondary_info: last-changed
+                  items:
+                    - entity: sensor.battery_level
+                      name: Batterijniveau
+                      icon: mdi:battery-50
+                    - entity: sensor.battery_state
+                      name: Batterijstatus
+                      icon: mdi:battery-charging
+      person.sharona:
+        title: Sharona
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - entity: device_tracker.skorthout_f4602191_c579_4d80_8762_52b67e7feebe
+                  name: Locatie
+                  icon: mdi:map-marker-circle
+                  secondary_info: last-changed
+                - entity: sensor.sharona_room_presence
+                  name: Ruimte
+                  icon: mdi:location-enter
+                  secondary_info: last-changed
+                - entity: proximity.home_sharona
+                  name: Afstand tot huis
+                  icon: mdi:map-marker-distance
+                  type: custom:multiple-entity-row
+                  primary:
+                    entity: proximity.home_sharona
+                    attribute: dir_of_travel
+                    name: false
+                  secondary_info: last-changed
+                - entity: sensor.reistijd_sharona_werk
+                  name: Reistijd naar werk
+                  icon: mdi:car
+                  secondary_info: last-changed
+                - entity: sensor.sharona_sleepmode
+                  name: Slaapmodus
+                  icon: mdi:sleep
+                  secondary_info: last-changed
+                - type: custom:fold-entity-row
+                  head:
+                    type: section
+                    label: iPhone XR
+                  group_config:
+                    secondary_info: last-changed
+                  items:
+                    - entity: sensor.battery_level_2
+                      name: Batterijniveau
+                      icon: mdi:battery-50
+                    - entity: sensor.battery_state_2
+                      name: Batterijstatus
+                      icon: mdi:battery-charging
+
+      light.hal_entree:
+        title: Verlichting Entree
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.hal_entree
+                - type: custom:slider-entity-row
+                  entity: light.hal_entree
+
+      light.hal_1e_verdieping:
+        title: Verlichting Hal 1e Verdieping
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.hal_1e_verdieping
+                - type: custom:slider-entity-row
+                  entity: light.hal_1e_verdieping
+
+      light.zolder:
+        title: Verlichting Zolder
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.zolder
+                - type: custom:slider-entity-row
+                  entity: light.zolder
+
+      light.keuken:
+        title: Verlichting Keuken
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.keuken
+                - type: custom:slider-entity-row
+                  entity: light.keuken
+
+      light.woonkamer:
+        title: Verlichting Woonkamer
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.woonkamer
+                - type: custom:slider-entity-row
+                  entity: light.woonkamer
+
+      light.slaapkamer:
+        title: Verlichting Keuken
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.slaapkamer
+                - type: custom:slider-entity-row
+                  entity: light.slaapkamer
+
+      light.babykamer:
+        title: Verlichting Babykamer
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.babykamer
+                - type: custom:slider-entity-row
+                  entity: light.babykamer
+
+      light.studeerkamer:
+        title: Verlichting Studeerkamer
+        card:
+          type: vertical-stack
+          cards:
+            - type: entities
+              entities:
+                - light.studeerkamer
+                - type: custom:slider-entity-row
+                  entity: light.studeerkamer

@@ -1,0 +1,11 @@
+  - platform: waze_travel_time
+    name: "Reistijd Peter Werk"
+    origin: zone.home
+    destination: zone.werk
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: "Reistijd Sharona Werk"
+    origin: zone.home
+    destination: zone.werk_2
+    region: 'EU'

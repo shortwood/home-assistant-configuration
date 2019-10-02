@@ -1,0 +1,6 @@
+## TTS INTEGRATION
+### USED PLATFORM: GOOGLE CLOUD
+
+  - platform: google_cloud
+    key_file: !secret tts_config_json
+    voice: 'nl-NL-Wavenet-D'

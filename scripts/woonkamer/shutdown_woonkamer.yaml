@@ -1,0 +1,9 @@
+shutdown_livingroom:
+  alias: '[Woonkamer][Shutdown] - Woonkamer afsluiten'
+  sequence:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.woonkamer
+          - light.keuken
+    - service: script.shutdown_mediacenter

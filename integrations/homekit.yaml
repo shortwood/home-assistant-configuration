@@ -1,0 +1,4 @@
+safe_mode: true
+filter:
+    include_domains:
+      - light

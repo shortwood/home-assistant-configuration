@@ -1,0 +1,6 @@
+  - name: "Slaapkamer - gedimd"
+    entities:
+      light.slaapkamer:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 77

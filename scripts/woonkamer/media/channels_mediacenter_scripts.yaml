@@ -1,0 +1,170 @@
+# Script - Trigger channel NPO1
+mediacenter_npo1:
+  alias: '[Woonkamer][MediaCenter][TV] - NPO 1'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: NPO 1 HD
+    service: media_player.select_source
+
+# Script - Trigger channel NPO2
+mediacenter_npo2:
+  alias: '[Woonkamer][MediaCenter][TV] - NPO 2'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: NPO 2 HD
+    service: media_player.select_source
+
+# Script - Trigger channel NPO3
+mediacenter_npo3:
+  alias: '[Woonkamer][MediaCenter][TV] - NPO 3'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: NPO 3 HD
+    service: media_player.select_source
+
+# Script - Trigger channel RTL4
+mediacenter_rtl4:
+  alias: '[Woonkamer][MediaCenter][TV] - RTL4'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: RTL 4 HD
+    service: media_player.select_source
+
+# Script - Trigger channel RTL5
+mediacenter_rtl5:
+  alias: '[Woonkamer][MediaCenter][TV] - RTL5'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: RTL 5 HD
+    service: media_player.select_source
+
+# Script - Trigger channel SBS6
+mediacenter_sbs6:
+  alias: '[Woonkamer][MediaCenter][TV] - SBS6'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: SBS6 HD
+    service: media_player.select_source
+
+# Script - Trigger channel RTL7
+mediacenter_rtl7:
+  alias: '[Woonkamer][MediaCenter][TV] - RTL7'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: RTL 7 HD
+    service: media_player.select_source
+
+# Script - Trigger channel Veronica
+mediacenter_veronica:
+  alias: '[Woonkamer][MediaCenter][TV] - Veronica'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: Veronica HD / Disney XD
+    service: media_player.select_source
+
+# Script - Trigger channel Net5
+mediacenter_rtl8:
+  alias: '[Woonkamer][MediaCenter][TV] - RTL8'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: RTL 8 HD
+    service: media_player.select_source
+
+# Script - Trigger channel Net5
+mediacenter_net5:
+  alias: '[Woonkamer][MediaCenter][TV] - Net5'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: Net5 HD
+    service: media_player.select_source
+
+# Script - Trigger channel FOX
+mediacenter_fox:
+  alias: '[Woonkamer][MediaCenter][TV] - FOX'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: FOX HD
+    service: media_player.select_source
+
+# Script - Trigger channel FOX
+mediacenter_rtlz:
+  alias: '[Woonkamer][MediaCenter][TV] - RTLZ'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: RTL Z HD
+    service: media_player.select_source
+
+# Script - Trigger channel ZiggoSport
+mediacenter_ziggosport:
+  alias: '[Woonkamer][MediaCenter][TV] - Ziggo Sport'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: Ziggo Sport HD
+    service: media_player.select_source
+
+# Script - Trigger channel ComedyCentral
+mediacenter_comedycentral:
+  alias: '[Woonkamer][MediaCenter][TV] - Comedy Central'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: Comedy Central HD
+    service: media_player.select_source
+
+# Script - Trigger channel Spike
+mediacenter_spike:
+  alias: '[Woonkamer][MediaCenter][TV] - Spike'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: Spike HD
+    service: media_player.select_source
+
+# Script - Trigger channel TLC
+mediacenter_tlc:
+  alias: '[Woonkamer][MediaCenter][TV] - TLC'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: TLC HD
+    service: media_player.select_source
+
+# Script - Trigger channel MTV
+mediacenter_mtv:
+  alias: '[Woonkamer][MediaCenter][TV] - MTV'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: MTV HD
+    service: media_player.select_source
+
+# Script - Trigger channel Discovery
+mediacenter_discovery:
+  alias: '[Woonkamer][MediaCenter][TV] - Discovery'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: Discovery HD
+    service: media_player.select_source
+
+# Script - Trigger channel Discovery
+mediacenter_ng:
+  alias: '[Woonkamer][MediaCenter][TV] - NG'
+  sequence:
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      source: National Geographic Channel HD
+    service: media_player.select_source

@@ -1,0 +1,10 @@
+  - platform: emby_upcoming_media
+    api_key: !secret emby_api_key
+    user_id: !secret emby_user_id
+    host: !secret emby_host
+    port: !secret emby_port
+    max: 5
+    include:
+      - TV series - Iedereen
+      - TV series - Peter
+      - TV series - Sharona

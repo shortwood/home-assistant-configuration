@@ -1,0 +1,5 @@
+  - name: Werk
+    latitude: !secret work_peter_lat
+    longitude: !secret work_peter_long
+    radius: 100
+    icon: mdi:account-multiple

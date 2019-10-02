@@ -1,0 +1,47 @@
+  - platform: mqtt
+    name: "Woonkamer TV"
+    state_topic: "woonkamer/cec/0"
+    command_topic: "woonkamer/cec/0/cmd"
+    availability_topic: "woonkamer/bridge/status"
+    payload_on: "on"
+    payload_off: "off"
+    state_on: "on"
+    state_off: "off"
+
+  - platform: mqtt
+    name: "Woonkamer Receiver"
+    state_topic: "woonkamer/cec/5"
+    command_topic: "woonkamer/cec/5/cmd"
+    availability_topic: "woonkamer/bridge/status"
+    payload_on: "on"
+    payload_off: "off"
+    state_on: "on"
+    state_off: "off"
+
+  - platform: mqtt
+    name: "Woonkamer Receiver Volumecontrol"
+    command_topic: "woonkamer/cec/cmd"
+    availability_topic: "woonkamer/bridge/status"
+    payload_on: "volup"
+    payload_off: "voldown"
+
+  - platform: mqtt
+    name: "Woonkamer Receiver Mute"
+    command_topic: "woonkamer/cec/cmd"
+    availability_topic: "woonkamer/bridge/status"
+    payload_on: "mute"
+    payload_off: "unmute"
+
+  - platform: mqtt
+    name: "Woonkamer Receiver HDMI1-2"
+    command_topic: "woonkamer/cec/tx"
+    availability_topic: "woonkamer/bridge/status"
+    payload_on: "1F:82:21:00"
+    payload_off: "1F:82:22:00"
+
+  - platform: mqtt
+    name: "Woonkamer Receiver HDMI3-4"
+    command_topic: "woonkamer/cec/tx"
+    availability_topic: "woonkamer/bridge/status"
+    payload_on: "1F:82:23:00"
+    payload_off: "1F:82:24:00"

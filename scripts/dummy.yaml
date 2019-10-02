@@ -1,0 +1,16 @@
+##
+# Dummy script for false triggers
+##
+
+dummy:
+  alias: '[Dummy] - Dummy'
+  sequence:
+  - delay: 00:00:00
+
+test_script:
+  alias: '[Test]'
+  sequence:
+    - service: tts.google_cloud_say
+      data_template:
+        message: "Goedemorgen Peter, het is {{states('sensor.time')}}, de temperatuur is {{state_attr('weather.huis','temperature')}} graden en de huidige reistijd naar jouw werk is: {{states('sensor.reistijd_peter_werk')}} minuten."
+        entity_id: media_player.woonkamer_2

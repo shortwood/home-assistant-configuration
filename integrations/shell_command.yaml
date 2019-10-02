@@ -1,0 +1,9 @@
+  set_avr_input_hdmi1: ssh hdmicec_woonkamer 'echo tx 1F:82:21:00 | cec-client -s'
+
+  set_avr_input_hdmi2: ssh hdmicec_woonkamer 'echo tx 1F:82:22:00 | cec-client -s'
+
+  set_avr_input_hdmi3: ssh hdmicec_woonkamer 'echo tx 1F:82:23:00 | cec-client -s'
+
+  set_avr_input_hdmi4: ssh hdmicec_woonkamer 'echo tx 1F:82:24:00 | cec-client -s'
+
+  set_avr_input_hdmi_cc: ssh hdmicec_woonkamer 'echo tx 1F:82:12:00 | cec-client -s'

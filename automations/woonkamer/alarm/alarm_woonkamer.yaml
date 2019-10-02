@@ -1,0 +1,84 @@
+
+# NOTIFY MOVEMENT WHEN ALARM IS ENGAGED
+- alias: '[Woonkamer][Alarm] - Beweging gedetecteerd'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00034ccb9a_occupancy
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.alarm_armed
+        state: 'on'
+      - condition: template
+        value_template: "{{ (states('input_select.house_mode') != 'Nacht') }}"
+  action:
+    - service: notify.ios_iedereen
+      data:
+        title: "Bewegingsmelding"
+        message: "Er is beweging geconstateerd in Woonkamer"
+        data:
+          push:
+            category: "alarm"
+    - service: script.sound_alarm
+
+- alias: '[Woonkamer][Alarm] - Achterdeur geopend'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00044b3dd1_contact
+      to: 'on'
+  condition:
+      - condition: state
+        entity_id: input_boolean.alarm_armed
+        state: 'on'
+      - condition: template
+        value_template: "{{ (states('input_select.house_mode') != 'Nacht') }}"
+  action:
+    - service: notify.ios_iedereen
+      data:
+        title: "Deur geopend"
+        message: "De achterdeur is geopend."
+        data:
+          push:
+            category: "alarm"
+    - service: script.sound_alarm
+
+- alias: '[Woonkamer][Alarm] - Melding achterdeur geopend'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00044b3dd1_contact
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: group.all_devices
+      state: 'home'
+    - condition: state
+      entity_id: input_boolean.alarm_armed
+      state: 'on'
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Nacht'
+  action:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.slaapkamer_2
+        volume_level: 0.9
+    - service: tts.google_cloud_say
+      data:
+        entity_id: media_player.slaapkamer_2
+        message: 'Achterdeur geopend'
+    - service: notify.ios_iedereen
+      data:
+        title: "Deur geopend"
+        message: "De achterdeur is geopend."
+        data:
+          push:
+            category: "alarm"
+    - delay:
+        seconds: 60
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.slaapkamer_2
+        volume_level: 0.4
+    - service: script.sound_alarm

@@ -1,0 +1,119 @@
+# When Chromecast starts playing
+- alias: '[Slaapkamer][Mediaplayer] - Start TV for Chromecast'
+  trigger:
+    - platform: state
+      entity_id: media_player.slaapkamer_tv
+      to: 'playing'
+      from: 'off'
+  action:
+    # - service: media_player.media_pause
+    #   data:
+    #     entity_id: media_player.slaapkamer_tv
+    - service: script.bedroom_watch_chromecast
+    # - wait_template: "{{ is_state('script.bedroom_watch_chromecast','off') }}"
+    # - service: media_player.media_play
+    #   data:
+    #     entity_id: media_player.slaapkamer_tv
+
+# When Emby/Kodi starts playing
+- alias: '[Slaapkamer][Mediaplayer] - Start TV for Kodi'
+  trigger:
+    - platform: state
+      entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
+      to: 'playing'
+      from: 'idle'
+  action:
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
+    - service: script.bedroom_watch_kodi
+    - wait_template: "{{ is_state('script.bedroom_watch_kodi','off') }}"
+    - service: media_player.media_play
+      data:
+        entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
+
+# Nothing playing for 15 minutes, turn off the TV!
+- alias: '[Slaapkamer][Mediaplayer] - TV Auto off'
+  trigger:
+    - platform: state
+      entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
+      to: 'idle'
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: media_player.slaapkamer_tv
+      to: 'off'
+      for:
+        minutes: 15
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: media_player.slaapkamer_tv
+        state: 'off'
+      - condition: state
+        entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
+        state: 'idle'
+      - condition: state
+        entity_id: media_player.3c36e4_eosstb_003898505601
+        state: 'off'
+      - condition: state
+        entity_id: switch.tv_lg
+        state: 'on'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.tv_lg
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_tv_input
+        option: 'False'
+
+# Continue watching TV programme
+- alias: '[Slaapkamer][Mediaplayer] - Continue watching'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CONTINUE_WATCHING_YES
+  action:
+    - service: script.bedroom_transfer
+    - condition: template
+      value_template: >-
+        {{ (is_state('input_boolean.sharona_inbed','on') and is_state('input_boolean.peter_inbed','on')) or
+           (is_state('input_boolean.sharona_inbed','on') and is_state('person.peter','not_home')) or
+           (is_state('input_boolean.peter_inbed','on') and is_state('person.sharona','not_home')) }}
+    - wait_template: "{{is_state('script.bedroom_transfer','off')}}"
+    - service: script.shutdown_mediacenter
+
+- alias: '[Slaapkamer][Mediaplayer] - Dont continue watching'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CONTINUE_WATCHING_NO
+  action:
+    - condition: template
+      value_template: >-
+        {{ (is_state('input_boolean.sharona_inbed','on') and is_state('input_boolean.peter_inbed','on')) or
+           (is_state('input_boolean.sharona_inbed','on') and is_state('person.peter','not_home')) or
+           (is_state('input_boolean.peter_inbed','on') and is_state('person.sharona','not_home')) }}
+    - service: script.shutdown_mediacenter
+
+- alias: '[Slaapkamer][Mediaplayer] - Continue watching Kodi'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CONTINUE_WATCHING_KODI
+  action:
+    - service: script.bedroom_watch_tvshow_kodi
+    - condition: template
+      value_template: >-
+        {{ (is_state('input_boolean.sharona_inbed','on') and is_state('input_boolean.peter_inbed','on')) or
+           (is_state('input_boolean.sharona_inbed','on') and is_state('person.peter','not_home')) or
+           (is_state('input_boolean.peter_inbed','on') and is_state('person.sharona','not_home')) }}
+    - service: script.shutdown_mediacenter

@@ -1,0 +1,116 @@
+smart_notify:
+  alias: "[Notifications][SmartNotify] - Smart notify"
+  sequence:
+    - service_template: >-
+        {% if is_state('person.peter','home') and is_state('person.sharona','home') %}
+          script.smart_notify_home_all
+        {% elif is_state('person.peter','home') and not is_state('person.sharona','home') %}
+          script.smart_notify_home_peter
+        {% elif is_state('person.sharona','home') and not is_state('person.sharona','home') %}
+          script.smart_notify_home_sharona
+        {% elif not is_state('group.all_devices','home') %}
+          script.smart_notify_away_all
+        {% else %}
+          script.dummy
+        {% endif %}
+
+      data_template:
+        title: "{{title}}"
+        message: "{{message}}"
+        category: "{{category}}"
+        speak: "{{speak}}"
+
+smart_notify_home_all:
+  alias: "[Notifications][SmartNotify] - Home all"
+  sequence:
+    - service: notify.ios_iedereen
+      data_template:
+        title: "{{title}}"
+        message: "{{message}}"
+        data:
+          push:
+            category: "{{category}}"
+    - condition: template
+      value_template: "{{speak}}"
+    - condition: time
+      after: "10:00:00"
+      before: "22:00:00"
+    - service_template: >-
+        {% if is_state('media_player.woonkamer_2','playing') or
+              is_state('media_player.slaapkamer_2','playing') or
+              is_state('media_player.badkamer','playing') or
+              is_state('media_player.keuken','playing')
+        %}
+          notify.google_home_broadcast
+        {% else %}
+          script.localized_announcement
+        {% endif %}
+      data_template:
+        message: "{{message}}"
+
+smart_notify_home_peter:
+  alias: "[Notifications][SmartNotify] - Home Peter"
+  sequence:
+    - service: notify.mobile_app_iphone_van_peter
+      data_template:
+        title: "{{title}}"
+        message: "{{message}}"
+        data:
+          push:
+            category: "{{category}}"
+    - condition: template
+      value_template: "{{speak}}"
+    - condition: time
+      after: "10:00:00"
+      before: "22:00:00"
+    - service_template: >-
+        {% if is_state('media_player.woonkamer_2','playing') or
+              is_state('media_player.slaapkamer_2','playing') or
+              is_state('media_player.badkamer','playing') or
+              is_state('media_player.keuken','playing')
+        %}
+          notify.google_home_broadcast
+        {% else %}
+          script.localized_announcement
+        {% endif %}
+      data_template:
+        message: "{{message}}"
+
+smart_notify_home_sharona:
+  alias: "[Notifications][SmartNotify] - Home Sharona"
+  sequence:
+    - service: notify.mobile_app_iphone_van_sharona
+      data_template:
+        title: "{{title}}"
+        message: "{{message}}"
+        data:
+          push:
+            category: "{{category}}"
+    - condition: template
+      value_template: "{{speak}}"
+    - condition: time
+      after: "10:00:00"
+      before: "22:00:00"
+    - service_template: >-
+        {% if is_state('media_player.woonkamer_2','playing') or
+              is_state('media_player.slaapkamer_2','playing') or
+              is_state('media_player.badkamer','playing') or
+              is_state('media_player.keuken','playing')
+        %}
+          notify.google_home_broadcast
+        {% else %}
+          script.localized_announcement
+        {% endif %}
+      data_template:
+        message: "{{message}}"
+
+smart_notify_away_all:
+  alias: "[Notifications][SmartNotify] - Away All"
+  sequence:
+    - service: notify.ios_iedereen
+      data_template:
+        title: "{{title}}"
+        message: "{{message}}"
+        data:
+          push:
+            category: "{{category}}"

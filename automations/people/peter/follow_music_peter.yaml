@@ -1,0 +1,146 @@
+# - alias: '[People][Peter] - Music plays in current room'
+#   initial_state: True
+#   trigger:
+#     - platform: state
+#       entity_id: media_player.alle_apparaten
+#       to: 'playing'
+#     - platform: state
+#       entity_id: media_player.alle_apparaten_2
+#       to: 'playing'
+#     - platform: state
+#       entity_id: media_player.alle_apparaten_3
+#       to: 'playing'
+#     - platform: state
+#       entity_id: media_player.alle_apparaten_4
+#       to: 'playing'
+#   action:
+#       - service: media_player.volume_set
+#         data_template:
+#           entity_id: media_player.woonkamer_2
+#           volume_level: >-
+#             {% if is_state('sensor.peter_room_presence','Woonkamer') %}
+#               0.7
+#             {% else %}
+#               0
+#             {% endif %}
+#       - service: media_player.volume_set
+#         data_template:
+#           entity_id: media_player.mediacenter
+#           volume_level: >-
+#             {% if is_state('sensor.peter_room_presence','Woonkamer') %}
+#               0.7
+#             {% else %}
+#               0
+#             {% endif %}
+#       - service: media_player.volume_set
+#         data_template:
+#           entity_id: media_player.keuken
+#           volume_level: >-
+#             {% if is_state('sensor.peter_room_presence','Woonkamer') %}
+#               0.7
+#             {% else %}
+#               0
+#             {% endif %}
+#       - service: media_player.volume_set
+#         data_template:
+#           entity_id: media_player.slaapkamer_tv
+#           volume_level: >-
+#             {% if is_state('sensor.peter_room_presence','Slaapkamer') %}
+#               0.7
+#             {% else %}
+#               0
+#             {% endif %}
+#       - service: media_player.volume_set
+#         data_template:
+#           entity_id: media_player.slaapkamer_2
+#           volume_level: >-
+#             {% if is_state('sensor.peter_room_presence','Slaapkamer') %}
+#               0.7
+#             {% else %}
+#               0
+#             {% endif %}
+#
+#
+# - alias: '[People][Peter] - Music following to bedroom'
+#   initial_state: True
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.peter_room_presence
+#       to: 'Slaapkamer'
+#     - platform: state
+#       entity_id: binary_sensor.0x00158d00041430f5_occupancy
+#       to: 'on'
+#   condition:
+#     - condition: or
+#       conditions:
+#         - condition: state
+#           entity_id: media_player.alle_apparaten
+#           state: 'playing'
+#         - condition: state
+#           entity_id: media_player.alle_apparaten_2
+#           state: 'playing'
+#         - condition: state
+#           entity_id: media_player.alle_apparaten_3
+#           state: 'playing'
+#         - condition: state
+#           entity_id: media_player.alle_apparaten_4
+#           state: 'playing'
+#     - condition: template
+#       value_template: "{{ states('input_boolean.sharona_inbed') != 'on' }}"
+#   action:
+#     - service: media_player.volume_set
+#       data:
+#         entity_id:
+#           - media_player.slaapkamer_tv
+#           - media_player.slaapkamer_2
+#         volume_level: 0.7
+#     - delay:
+#         seconds: 10
+#     - service: media_player.volume_set
+#       data:
+#         entity_id:
+#           - media_player.mediacenter
+#           - media_player.woonkamer_2
+#           - media_player.keuken
+#         volume_level: 0
+#
+# - alias: '[People][Peter] - Music following to livingroom'
+#   initial_state: True
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.peter_room_presence
+#       to: 'Woonkamer'
+#     - platform: state
+#       entity_id: binary_sensor.0x00158d00034ccb9a_occupancy
+#       to: 'on'
+#   condition:
+#     - condition: or
+#       conditions:
+#         - condition: state
+#           entity_id: media_player.alle_apparaten
+#           state: 'playing'
+#         - condition: state
+#           entity_id: media_player.alle_apparaten_2
+#           state: 'playing'
+#         - condition: state
+#           entity_id: media_player.alle_apparaten_3
+#           state: 'playing'
+#         - condition: state
+#           entity_id: media_player.alle_apparaten_4
+#           state: 'playing'
+#   action:
+#     - service: media_player.volume_set
+#       data:
+#         entity_id:
+#           - media_player.mediacenter
+#           - media_player.woonkamer_2
+#           - media_player.keuken
+#         volume_level: 0.7
+#     - delay:
+#         seconds: 10
+#     - service: media_player.volume_set
+#       data:
+#         entity_id:
+#           - media_player.slaapkamer_tv
+#           - media_player.slaapkamer_2
+#         volume_level: 0

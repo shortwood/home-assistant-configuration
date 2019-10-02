@@ -1,0 +1,17 @@
+- alias: '[People][Sharona] - Sharona leaves home'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: person.sharona
+      to: 'not_home'
+      for:
+        minutes: 1
+  condition:
+    - condition: state
+      entity_id: person.peter
+      state: 'home'
+    - condition: state
+      entity_id: input_boolean.peter_inbed
+      state: 'on'
+  action:
+    service: script.shutdown_livingroom

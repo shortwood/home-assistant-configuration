@@ -1,0 +1,69 @@
+- alias: '[Slaapkamer][Licht] - Licht uit inactiviteit'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00041430f5_occupancy
+      to: 'off'
+      for:
+        minutes: 5
+  condition:
+    - condition: state
+      entity_id: media_player.kodi_slaapkamer
+      state: 'idle'
+    - condition: state
+      entity_id: media_player.slaapkamer_tv
+      state: 'off'
+    - condition: state
+      entity_id: media_player.3c36e4_eosstb_003898505601
+      state: 'off'
+    - condition: state
+      entity_id: light.slaapkamer
+      state: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.slaapkamer
+        transition: 10
+
+- alias: '[Slaapkamer][Licht] - Licht uit in bed'
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi_slaapkamer
+      to: 'playing'
+  condition:
+    - condition: state
+      entity_id: input_boolean.peter_inbed
+      state: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.slaapkamer
+        transition: 10
+
+- alias: '[Slaapkamer][Licht] - Licht aan bij beweging'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00041430f5_occupancy
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.slaapkamer
+      state: 'off'
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "-00:30:00"
+        - condition: sun
+          before: sunrise
+          before_offset: "+00:30:00"
+    - condition: state
+      entity_id: input_boolean.sharona_inbed
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.peter_inbed
+      state: 'off'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.slaapkamer
+      brightness: 100

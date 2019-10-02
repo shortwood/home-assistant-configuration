@@ -1,0 +1,19 @@
+- alias: '[People][All] - Watch TV Livingroom'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: WATCHTV_LIVINGROOM
+  action:
+    - service: script.watch_tv
+
+- alias: '[People][All] - Watch TV Bedroom'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: WATCHTV_SLAAPKAMER
+  action:
+    - service: script.bedroom_watch_tv

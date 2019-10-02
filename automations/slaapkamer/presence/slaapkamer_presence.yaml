@@ -1,0 +1,13 @@
+# FORCE UPDATE OF BSSID
+- alias: '[Slaapkamer][Presence] - Do presence check'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00041430f5_occupancy
+      to: 'on'
+  # condition:
+  #   - condition: template
+  #     value_template: "{{(states('sensor.peter_room_presence') != 'Slaapkamer') or (states('sensor.sharona_room_presence') != 'Slaapkamer')}}"
+  action:
+    - service: notify.ios_iedereen
+      data:
+        message: "request_location_update"

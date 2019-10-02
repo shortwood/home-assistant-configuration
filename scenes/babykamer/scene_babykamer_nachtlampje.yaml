@@ -1,0 +1,6 @@
+  - name: "Babykamer - nachtlampje"
+    entities:
+      light.babykamer:
+        state: true
+        xy_color: [0.502,0.414]
+        brightness: 25

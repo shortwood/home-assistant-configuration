@@ -1,0 +1,30 @@
+  - name: "Woonkamer - helder"
+    entities:
+      light.woonkamerlamp_plafond_voor:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254
+      light.woonkamer_plafond_achter:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254
+      light.staande_lamp_links:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254
+      light.staande_lamp_rechts:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254
+      light.eettafel_lamp:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254
+      light.pianolamp:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254
+      light.woonkamer_muur:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254

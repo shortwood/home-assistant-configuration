@@ -1,0 +1,24 @@
+  - name: "Woonkamer - afwezig"
+    entities:
+      light.woonkamerlamp_plafond_voor:
+        state: false
+      light.woonkamer_plafond_achter:
+        state: false
+      light.staande_lamp_links:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 75
+      light.staande_lamp_rechts:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 75
+      light.eettafel_lamp:
+        state: false
+      light.pianolamp:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 75
+      light.woonkamer_muur:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 75

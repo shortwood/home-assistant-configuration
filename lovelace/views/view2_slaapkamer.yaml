@@ -1,0 +1,467 @@
+  - title: Slaapkamer
+    icon: mdi:bed-empty
+    panel: true
+    background: "right/auto rgba(242,242,242,1)"
+
+    popup_cards: !include ../popups/popup_view2_slaapkamer.yaml
+
+    cards:
+      - type: custom:layout-card
+        layout: vertical
+        max_columns: 2
+        max_width: [500px, 400px]
+        cards:
+
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:lightbulb-outline"></ha-icon> Verlichting
+                style: |
+                  ha-card {
+                    margin-top: 8px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: horizontal-stack
+                cards:
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.slaapkamer
+                      - name: Slaapkamer
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb-outline
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.slaapkamer_helder
+                      - name: Helder
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_helder
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_helder
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.slaapkamer_ontspannen
+                      - name: Ontspannen
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_ontspannen
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_ontspannen
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.slaapkamer_gedimd
+                      - name: Gedimd
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_gedimd
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_gedimd
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.slaapkamer_nachtlampje
+                      - name: Nachtlampje
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_nachtlampje
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.slaapkamer_nachtlampje
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                align_icon: left
+                align_header: left
+                entities:
+                  - entity: sensor.0x00158d00036bfe4d_temperature
+                    name: Temperatuur
+                    color: "#0F9D58"
+              - type: custom:mini-graph-card
+                align_icon: left
+                align_header: left
+                entities:
+                  - entity: sensor.0x00158d00036bfe4d_humidity
+                    name: Luchtvochtigheid
+                    color: "#0F9D58"
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                align_icon: left
+                align_header: left
+                entities:
+                  - entity: sensor.0x00158d00036bfe4d_pressure
+                    name: Luchtdruk
+                    color: "#0F9D58"
+              - type: custom:mini-graph-card
+                align_icon: left
+                align_header: left
+                entities:
+                  - entity: sensor.0x00158d00041430f5_illuminance
+                    name: Lichtsterkte
+                    color: "#F4B400"
+
+          - break
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:television"></ha-icon> Mediacenter
+                style: |
+                  ha-card {
+                    margin-top: 8px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: entities
+                show_header_toggle: false
+                entities:
+
+                  - type: custom:mini-media-player
+                    entity: media_player.mediacenter_slaapkamer
+                    name: Mediacenter
+                    icon: mdi:television-box
+                    info: scroll
+                    source: icon
+                    volume_stateless: true
+                    group: true
+                    artwork: cover
+                    idle_view:
+                      when_idle: true
+                      when_paused: false
+                      when_standby: true
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:library-music"></ha-icon> Muziek
+                style: |
+                  ha-card {
+                    margin-top: 0px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: conditional
+                conditions:
+                  - entity: media_player.slaapkamer_2
+                    state_not: 'playing'
+                  - entity: media_player.boven
+                    state_not: 'playing'
+                  - entity: media_player.alle_apparaten
+                    state_not: 'playing'
+                card:
+                  type: markdown
+                  content: |
+                     ### Er wordt geen muziek afgespeeld.
+                  style: |
+                    ha-card {
+                      background-color: rgba(231,230,221,0);
+                      font-family: 'Open Sans', sans-serif;
+                      font-size: 100%;
+                      -webkit-box-shadow: none;
+                      -moz-box-shadow: none;
+                      box-shadow: none;
+                      text-align: left;
+                    }
+                    h3 {
+                      font-weight: 100 !important;
+                      font-size: 14px;
+                      color: #666;
+                      text-align: center;
+                      padding-bottom: 15px;
+                    }
+
+
+              - type: conditional
+                conditions:
+                  - entity: media_player.slaapkamer_2
+                    state: 'playing'
+                  - entity: media_player.boven
+                    state_not: 'playing'
+                  - entity: media_player.alle_apparaten
+                    state_not: 'playing'
+                card:
+                    type: entities
+                    show_header_toggle: false
+                    entities:
+                      - type: custom:mini-media-player
+                        entity: media_player.slaapkamer_2
+                        name: Google Home
+                        icon: mdi:speaker
+                        group: true
+                        artwork: cover
+                        idle_view:
+                          when_idle: true
+                          when_paused: false
+                          when_standby: true
+
+              - type: conditional
+                conditions:
+                  - entity: media_player.boven
+                    state: 'playing'
+                card:
+                    type: entities
+                    show_header_toggle: false
+                    entities:
+                      - type: custom:mini-media-player
+                        entity: media_player.boven
+                        name: Groep - Boven
+                        icon: mdi:speaker
+                        group: true
+                        artwork: cover
+                        idle_view:
+                          when_idle: true
+                          when_paused: false
+                          when_standby: true
+
+              - type: conditional
+                conditions:
+                  - entity: media_player.alle_apparaten
+                    state: 'playing'
+                card:
+                    type: entities
+                    show_header_toggle: false
+                    entities:
+                      - type: custom:mini-media-player
+                        entity: media_player.alle_apparaten
+                        name: Groep - Alle apparaten
+                        icon: mdi:speaker
+                        group: true
+                        artwork: cover
+                        idle_view:
+                          when_idle: true
+                          when_paused: false
+                          when_standby: true
+
+          - type: horizontal-stack
+            cards:
+
+              - type: custom:vertical-stack-in-card
+                cards:
+
+                  - type: markdown
+                    content: |
+                       ## <ha-icon icon="mdi:window-closed"></ha-icon> Ramen
+                    style: |
+                      ha-card {
+                        background-color: rgba(231,230,221,0);
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 100%;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        text-align: left;
+                      }
+                      h2 {
+                        font-size: 16px;
+                        font-weight: 300 !important;
+                        color: #777;
+                      }
+                      h2 ha-icon {
+                        margin-top: -4px;
+                        padding-right: 5px;
+                        color: #999;
+                      }
+
+                  - type: markdown
+                    content: |
+                        ### Alle gesloten
+                    style: |
+                      ha-card {
+                        background-color: rgba(231,230,221,0);
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 100%;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        text-align: left;
+                      }
+                      h2, h3 {
+                        font-size: 18px;
+                        font-weight: 100 !important;
+                        text-align: center;
+                        padding-bottom: 15px;
+                      }
+                      h2 {
+                        color: rgb(229,115,104);
+                      }
+                      h3 {
+                        color: rgb(51,182,121);
+                      }
+
+              - type: custom:vertical-stack-in-card
+                cards:
+
+                  - type: markdown
+                    content: |
+                       ## <ha-icon icon="mdi:sleep"></ha-icon> Stille modus
+                    style: |
+                      ha-card {
+                        background-color: rgba(231,230,221,0);
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 100%;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        text-align: left;
+                      }
+                      h2 {
+                        font-size: 16px;
+                        font-weight: 300 !important;
+                        color: #777;
+                      }
+                      h2 ha-icon {
+                        margin-top: -4px;
+                        padding-right: 5px;
+                        color: #999;
+                      }
+
+                  - type: markdown
+                    content: |
+                       [[ if(input_boolean.sharona_inbed == "on", "## Aan", if(input_boolean.peter_inbed == "on", "## Aan", "### Uit")) ]]
+                    style: |
+                      ha-card {
+                        background-color: rgba(231,230,221,0);
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 100%;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        text-align: left;
+                      }
+                      h2, h3 {
+                        font-size: 18px;
+                        font-weight: 100 !important;
+                        text-align: center;
+                        padding-bottom: 15px;
+                      }
+                      h2 {
+                        color: rgb(229,115,104);
+                      }
+                      h3 {
+                        color: rgb(51,182,121);
+                      }

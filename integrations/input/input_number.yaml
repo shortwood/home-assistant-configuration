@@ -1,0 +1,17 @@
+  ##
+  # MEDIACENTER STARUPDELAY
+  # USECASE: If mediacenter is cold starting, delay before switching AVR
+  ##
+  mediacenter_startupdelay:
+    name: Mediacenter Startupdelay
+    initial: 0
+    min: 0
+    max: 12
+    step: 1
+
+  bedroom_startupdelay:
+    name: Bedroom Startupdelay
+    initial: 0
+    min: 0
+    max: 10
+    step: 1

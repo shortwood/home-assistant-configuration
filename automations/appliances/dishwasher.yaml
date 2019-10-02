@@ -1,0 +1,155 @@
+##
+# AUTOMATIONS FOR SETTING DISHWASHER STATUS
+##
+
+# Starting the dishwasher
+- alias: '[Appliances][Dishwasher] - Opstarten'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.vaatwasser_current_power
+    above: 1
+    below: 15
+    for:
+      seconds: 20
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Inactief'
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Schoon'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.vaatwasser_status
+        option: 'Opstarten'
+
+# Pre rinse program
+- alias: '[Appliances][Dishwasher] - Voorspoelen'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.vaatwasser_current_power
+    above: 15
+    below: 32
+  condition:
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Opstarten'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.vaatwasser_status
+      option: 'Voorspoelen'
+
+# Intense rinse program
+- alias: '[Appliances][Dishwasher] - Spoelen Intensief'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.vaatwasser_current_power
+    above: 1900
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Voorspoelen'
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Spoelen Eco'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.vaatwasser_status
+      option: 'Spoelen Intensief'
+
+# Eco rinse program
+- alias: '[Appliances][Dishwasher] - Spoelen Eco'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.vaatwasser_current_power
+    above: 5
+    below: 50
+  condition:
+    - condition: state
+      entity_id: input_select.vaatwasser_status
+      state: 'Spoelen Intensief'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.vaatwasser_status
+      option: 'Spoelen Eco'
+
+# Drying program
+- alias: '[Appliances][Dishwasher] - Drogen'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.vaatwasser_current_power
+    above: 2
+    below: 4
+    for:
+      minutes: 5
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Spoelen Intensief'
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Spoelen Eco'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.vaatwasser_status
+      option: 'Drogen'
+
+# Clean
+- alias: '[Appliances][Dishwasher] - Schoon'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.vaatwasser_current_power
+    below: 2
+    for:
+      minutes: 5
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Spoelen Intensief'
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Spoelen Eco'
+      - condition: state
+        entity_id: input_select.vaatwasser_status
+        state: 'Drogen'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.vaatwasser_status
+        option: 'Schoon'
+    - service: script.smart_notify
+      data:
+        title: 'Vaatwasser'
+        message: 'De vaatwasser is klaar.'
+        category: "vaatwasser_uitruimen"
+        speak: true
+
+# Clear out
+- alias: '[Appliances][Dishwasher] - Uitruimen'
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: DISHWASHER_CLEANED
+  condition:
+    - condition: state
+      entity_id: input_select.vaatwasser_status
+      state: 'Schoon'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.vaatwasser_status
+        option: 'Inactief'

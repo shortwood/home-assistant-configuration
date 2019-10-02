@@ -1,0 +1,34 @@
+  ##
+  # PETER IS IN BED
+  ##
+
+  peter_inbed:
+   name: If Peter is in bed
+   icon: mdi:hotel
+
+
+  ##
+  # SHARONA IS IN BED
+  ##
+
+  sharona_inbed:
+   name: If Sharona is in bed
+   icon: mdi:hotel
+
+
+  ##
+  # ALARM IS ARMED
+  ##
+
+  alarm_armed:
+   name: Alarm systeem
+   icon: mdi:alarm-light
+
+  ##
+  # PLAY GUESTMODE WELCOME MESSAGE
+  ##
+
+  play_guest_welcome:
+    name: Gast Welkomsbericht
+    initial: on
+    icon: mdi:account-multiple

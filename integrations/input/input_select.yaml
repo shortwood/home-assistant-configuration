@@ -1,0 +1,62 @@
+  ##
+  # HOUSE MODE
+  # USECASE: Used for setting the housemode
+  ##
+
+  house_mode:
+    name: Modus
+    initial: Thuis
+    options:
+      - Thuis
+      - Weg
+      - Nacht
+      - Vakantie
+      - Gast
+
+  woonkamer_receiver_input:
+    name: Woonkamer Receiver Input
+    initial: TV
+    options:
+      - TV
+      - HDMI1
+      - HDMI2
+      - HDMI3
+      - HDMI4
+
+  bedroom_tv_input:
+    name: Slaapkamer TV Input
+    initial: Off
+    options:
+      - Off
+      - Mediabox
+      - Kodi
+      - Chromecast
+
+  vaatwasser_status:
+    name: Vaatwasser Status
+    options:
+      - Inactief
+      - Opstarten
+      - Voorspoelen
+      - Spoelen Intensief
+      - Spoelen Eco
+      - Drogen
+      - Schoon
+
+  droger_status:
+    name: Droger Status
+    options:
+      - Inactief
+      - Opstarten
+      - Drogen
+      - Anti-kreuk
+      - Schoon
+
+  wasmachine_status:
+    name: Wasmachine Status
+    options:
+      - Inactief
+      - Opstarten
+      - Wassen
+      - Centrifugeren
+      - Schoon

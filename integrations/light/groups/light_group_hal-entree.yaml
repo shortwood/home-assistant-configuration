@@ -1,0 +1,7 @@
+  - platform: group
+    name: Hal - Entree
+    entities:
+      - light.hue_ambiance_spot_gang2
+      - light.hue_ambiance_spot_gang3
+      - light.hue_ambiance_spot_gang4
+      - light.0x001788010446d6eb_light

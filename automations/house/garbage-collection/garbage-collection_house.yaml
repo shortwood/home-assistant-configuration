@@ -1,0 +1,14 @@
+
+# Reminder to put the bin outside
+- alias: '[Huis][Afvalbeheer] - Melding afvalcollectie'
+  trigger:
+    - platform: time
+      at: "20:00:00"
+  condition:
+    - condition: template
+      value_template: "{{states('sensor.avalex_morgen') != 'None'}}"
+  action:
+    - service: notify.ios_iedereen
+      data_template:
+        title: "Herinnering"
+        message: "Morgen wordt de {{ (states('sensor.avalex_morgen') | upper) }} geleegd. Vergeet deze niet buiten te zetten."

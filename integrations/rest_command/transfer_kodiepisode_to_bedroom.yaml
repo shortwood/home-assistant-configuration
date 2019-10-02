@@ -1,0 +1,4 @@
+url: !secret kodi_play_episode
+method: POST
+payload: !secret kodi_slaapkamer_payload
+content_type:  'application/json; charset=utf-8'

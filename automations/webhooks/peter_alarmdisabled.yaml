@@ -1,0 +1,6 @@
+- alias: '[Webhook] - Peter morning alarm disabled'
+  trigger:
+    platform: webhook
+    webhook_id: peter_alarm_disabled
+  action:
+    service: script.peter_awake

@@ -1,0 +1,4 @@
+  - platform: group
+    name: Babykamer
+    entities:
+      - light.0x000d6ffffe01863a_light

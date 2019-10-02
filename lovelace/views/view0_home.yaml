@@ -1,0 +1,853 @@
+  - title: Home
+    panel: true
+    icon: mdi:home
+    background: "right/auto rgba(242,242,242,1)"
+    popup_cards: !include ../popups/popup_view0_home.yaml
+    path: overview
+    cards:
+
+      - type: custom:layout-card
+        layout: vertical
+        cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:shield-outline"></ha-icon> Status
+                style: |
+                  ha-card {
+                    margin-top: 8px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: horizontal-stack
+                cards:
+                  - type: custom:decluttering-card
+                    template: picture_button
+                    variables:
+                      - entity: person.peter
+                      - entity_picture: /local/img/pkorthout.jpg
+
+                  - type: custom:decluttering-card
+                    template: icon_button
+                    variables:
+                      - entity: input_select.house_mode
+                      - state:
+                        - value: 'Thuis'
+                          icon: mdi:home
+                          color: rgb(66,133,244)
+                        - value: 'Weg'
+                          icon: mdi:car
+                          color: rgb(244,180,0)
+                        - value: 'Nacht'
+                          icon: mdi:weather-night
+                          color: rgb(224,180,0)
+                        - value: 'Vakantie'
+                          icon: mdi:airplane
+                          color: rgb(224,180,0)
+                        - value: 'Gast'
+                          icon: mdi:account-multiple
+                          color: rgb(51,182,121)
+
+                  - type: custom:decluttering-card
+                    template: icon_button
+                    variables:
+                      - entity: input_boolean.alarm_armed
+                      - state:
+                        - value: 'on'
+                          icon: mdi:shield-lock
+                          color: rgb(229,115,104)
+                        - value: 'off'
+                          icon: mdi:shield-off
+                          color: rgb(51,182,121)
+
+                  - type: custom:decluttering-card
+                    template: picture_button
+                    variables:
+                      - entity: person.sharona
+                      - entity_picture: /local/img/skorthout.jpg
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:information-outline"></ha-icon> Omgeving
+                style: |
+                  ha-card {
+                    margin-top: 0px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: sensor.avalex_pmd
+                      - name: PMD
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - show_label: true
+                      - tap_action:
+                          action: more-info
+                      - state:
+                        - operator: default
+                          icon: mdi:recycle
+                          color: rgb(204,204,204)
+                          label: >
+                            [[[
+                              return (states['sensor.avalex_pmd'].state)
+                            ]]]
+                        - operator: template
+                          value: >
+                            [[[
+                              return (states['sensor.avalex_vandaag'].state == "pmd")
+                            ]]]
+                          icon: mdi:recycle
+                          color: "#0F9D58"
+                          label: "Vandaag"
+                        - operator: template
+                          value: >
+                            [[[
+                              return (states['sensor.avalex_morgen'].state == "pmd")
+                            ]]]
+                          icon: mdi:recycle
+                          color: "#0F9D58"
+                          label: "Morgen"
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: sensor.avalex_gft
+                      - name: GFT
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - show_label: true
+                      - tap_action:
+                          action: more-info
+                      - state:
+                        - operator: default
+                          icon: mdi:food-apple
+                          color: rgb(204,204,204)
+                          label: >
+                            [[[
+                              return (states['sensor.avalex_gft'].state)
+                            ]]]
+                        - operator: template
+                          value: >
+                            [[[
+                              return (states['sensor.avalex_vandaag'].state == "gft")
+                            ]]]
+                          icon: mdi:food-apple
+                          color: "#0F9D58"
+                          label: "Vandaag"
+                        - operator: template
+                          value: >
+                            [[[
+                              return (states['sensor.avalex_morgen'].state == "gft")
+                            ]]]
+                          icon: mdi:food-apple
+                          color: "#0F9D58"
+                          label: "Morgen"
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: sensor.avalex_papier
+                      - name: Papier
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - show_label: true
+                      - tap_action:
+                          action: more-info
+                      - state:
+                        - operator: default
+                          icon: mdi:file-document
+                          color: rgb(204,204,204)
+                          label: >
+                            [[[
+                              return (states['sensor.avalex_papier'].state)
+                            ]]]
+                        - operator: template
+                          value: >
+                            [[[
+                              return (states['sensor.avalex_vandaag'].state == "papier")
+                            ]]]
+                          icon: mdi:file-document
+                          color: "#0F9D58"
+                          label: "Vandaag"
+                        - operator: template
+                          value: >
+                            [[[
+                              return (states['sensor.avalex_morgen'].state == "papier")
+                            ]]]
+                          icon: mdi:file-document
+                          color: "#0F9D58"
+                          label: "Morgen"
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:washing-machine"></ha-icon> Huishoudelijk
+                style: |
+                  ha-card {
+                    margin-top: 0px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: input_select.vaatwasser_status
+                      - name: Vaatwasser
+                      - show_name: true
+                      - show_state: true
+                      - show_last_changed: false
+                      - show_label: false
+                      - tap_action:
+                          action: more-info
+                      - state:
+                        - value: 'Inactief'
+                          icon: mdi:dishwasher
+                          color: rgb(204,204,204)
+                        - value: 'Opstarten'
+                          icon: mdi:dishwasher
+                          color: rgb(244,180,0)
+                        - value: 'Voorspoelen'
+                          icon: mdi:dishwasher
+                          color: rgb(244,180,0)
+                        - value: 'Spoelen Intensief'
+                          icon: mdi:dishwasher
+                          color: rgb(244,180,0)
+                        - value: 'Spoelen Eco'
+                          icon: mdi:dishwasher
+                          color: rgb(244,180,0)
+                        - value: 'Drogen'
+                          icon: mdi:dishwasher
+                          color: rgb(244,180,0)
+                        - value: 'Schoon'
+                          icon: mdi:dishwasher
+                          color: "#0F9D58"
+
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: input_select.wasmachine_status
+                      - name: Wasmachine
+                      - show_name: true
+                      - show_state: true
+                      - show_last_changed: false
+                      - show_label: false
+                      - tap_action:
+                          action: more-info
+                      - state:
+                         - value: "Inactief"
+                           icon: mdi:washing-machine
+                           color: rgb(204,204,204)
+                         - value: "Opstarten"
+                           icon: mdi:washing-machine
+                           color: rgb(244,180,0)
+                         - value: "Wassen"
+                           icon: mdi:washing-machine
+                           color: rgb(244,180,0)
+                         - value: "Centrifugeren"
+                           icon: mdi:washing-machine
+                           color: rgb(244,180,0)
+                         - value: "Afpompen"
+                           icon: mdi:washing-machine
+                           color: rgb(244,180,0)
+                         - value: "Schoon"
+                           icon: mdi:washing-machine
+                           color: "#0F9D58"
+
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: input_select.droger_status
+                      - name: Droger
+                      - show_name: true
+                      - show_state: true
+                      - show_last_changed: false
+                      - show_label: false
+                      - tap_action:
+                          action: more-info
+                      - state:
+                        - value: "Inactief"
+                          icon: mdi:tumble-dryer
+                          color: rgb(204,204,204)
+                        - value: "Opstarten"
+                          icon: mdi:tumble-dryer
+                          color: rgb(244,180,0)
+                        - value: "Drogen"
+                          icon: mdi:tumble-dryer
+                          color: rgb(244,180,0)
+                        - value: "Afkoelen"
+                          icon: mdi:tumble-dryer
+                          color: rgb(244,180,0)
+                        - value: "Anti-kreuk"
+                          icon: mdi:tumble-dryer
+                          color: rgb(244,180,0)
+                        - value: "Schoon"
+                          icon: mdi:tumble-dryer
+                          color: "#0F9D58"
+
+
+          - break
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:lightbulb-outline"></ha-icon> Verlichting
+                style: |
+                  ha-card {
+                    margin-top: 8px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: horizontal-stack
+                cards:
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.hal_entree
+                      - name: Hal - Entree
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.hal_1e_verdieping
+                      - name: Hal - 1e verdieping
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.zolder
+                      - name: Hal - Zolder
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+              - type: horizontal-stack
+                cards:
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.keuken
+                      - name: Keuken
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.woonkamer
+                      - name: Woonkamer
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.slaapkamer
+                      - name: Slaapkamer
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.babykamer
+                      - name: Babykamer
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.studeerkamer
+                      - name: Studeerkamer
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+
+          - type: horizontal-stack
+            cards:
+
+              - type: custom:vertical-stack-in-card
+                cards:
+
+                  - type: markdown
+                    content: |
+                       ## <ha-icon icon="mdi:door"></ha-icon> Deuren
+                    style: |
+                      ha-card {
+                        margin-top: 0px;
+                        margin-bottom: -15px;
+                        background-color: rgba(231,230,221,0);
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 100%;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        text-align: left;
+                      }
+                      h2 {
+                        font-size: 16px;
+                        font-weight: 300 !important;
+                        color: #777;
+                      }
+                      h2 ha-icon {
+                        margin-top: -4px;
+                        padding-right: 5px;
+                        color: #999;
+                      }
+
+
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:decluttering-card
+                        template: icon_button_gray
+                        variables:
+                          - entity: binary_sensor.0x00158d00044b3df7_contact
+                          - name: Voordeur
+                          - show_name: true
+                          - show_state: false
+                          - show_last_changed: false
+                          - show_label: true
+                          - tap_action:
+                              action: more-info
+                          - hold_action:
+                              action: more-info
+                          - state:
+                            - value: 'on'
+                              icon: mdi:door
+                              color: rgb(66,133,244)
+                              label: 'Open'
+                            - value: 'off'
+                              icon: mdi:door
+                              color: rgb(204,204,204)
+                              label: 'Dicht'
+                      - type: custom:decluttering-card
+                        template: icon_button_gray
+                        variables:
+                          - entity: binary_sensor.0x00158d00044b3dd1_contact
+                          - name: Achterdeur
+                          - show_name: true
+                          - show_state: false
+                          - show_last_changed: false
+                          - show_label: true
+                          - tap_action:
+                              action: more-info
+                          - hold_action:
+                              action: more-info
+                          - state:
+                            - value: 'on'
+                              icon: mdi:door
+                              color: rgb(66,133,244)
+                              label: 'Open'
+                            - value: 'off'
+                              icon: mdi:door
+                              color: rgb(204,204,204)
+                              label: 'Dicht'
+
+              - type: custom:vertical-stack-in-card
+                cards:
+
+                  - type: markdown
+                    content: |
+                       ## <ha-icon icon="mdi:window-closed"></ha-icon> Ramen
+                    style: |
+                      ha-card {
+                        margin-top: 0px;
+                        margin-bottom: -15px;
+                        background-color: rgba(231,230,221,0);
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 100%;
+                        -webkit-box-shadow: none;
+                        -moz-box-shadow: none;
+                        box-shadow: none;
+                        text-align: left;
+                      }
+                      h2 {
+                        font-size: 16px;
+                        font-weight: 300 !important;
+                        color: #777;
+                      }
+                      h2 ha-icon {
+                        margin-top: -4px;
+                        padding-right: 5px;
+                        color: #999;
+                      }
+
+                  - type: horizontal-stack
+                    cards:
+
+                      - type: custom:decluttering-card
+                        template: icon_button_gray
+                        variables:
+                          - entity: binary_sensor.0x00158d00044da445_contact
+                          - name: Babykamer
+                          - show_name: true
+                          - show_state: false
+                          - show_last_changed: false
+                          - show_label: true
+                          - tap_action:
+                              action: more-info
+                          - hold_action:
+                              action: more-info
+                          - state:
+                            - value: 'on'
+                              icon: mdi:window-closed
+                              color: rgb(66,133,244)
+                              label: 'Open'
+                            - value: 'off'
+                              icon: mdi:window-closed
+                              color: rgb(204,204,204)
+                              label: 'Dicht'
+
+
+
+                      - type: custom:decluttering-card
+                        template: icon_button_gray
+                        variables:
+                          - entity: binary_sensor.0x00158d000444c094_contact
+                          - name: Zolderraam
+                          - show_name: true
+                          - show_state: false
+                          - show_last_changed: false
+                          - show_label: true
+                          - tap_action:
+                              action: more-info
+                          - hold_action:
+                              action: more-info
+                          - state:
+                            - value: 'on'
+                              icon: mdi:window-closed
+                              color: rgb(66,133,244)
+                              label: 'Open'
+                            - value: 'off'
+                              icon: mdi:window-closed
+                              color: rgb(204,204,204)
+                              label: 'Dicht'
+
+          # - break
+          #
+          # - type: markdown
+          #   content: |
+          #     ### Vandaag
+          #   style: |
+          #     ha-card {
+          #       margin-top: 40px;
+          #       margin-bottom: -15px;
+          #       background-color: rgba(0, 0, 0, 0);
+          #       font-family: 'Open Sans', sans-serif;
+          #       font-size: 100%;
+          #       -webkit-box-shadow: none;
+          #       -moz-box-shadow: none;
+          #       box-shadow: none;
+          #       text-align: left;
+          #     }
+          #     h1, h3 {
+          #       font-weight: 300 !important;
+          #     }
+          #
+          # - type: custom:vertical-stack-in-card
+          #   cards:
+          #
+          #     - type: "custom:atomic-calendar"
+          #       title: Afspraken vandaag
+          #       entities:
+          #         - entity: calendar.family_korthout
+          #           color: rgb(66,133,244)
+          #       fullDayEventText: 'Hele dag'
+          #       untilText: 'Tot'
+          #       noEventsForTodayText: 'Geen afpraken vandaag'
+          #       noEventsForNextDaysText: 'Geen afspraken gepland'
+          #       maxDaysToShow: 0
+          #       style: |
+          #         .cal-titleContainer {
+          #           display: none;
+          #         }
+          #         .event-right {
+          #           background-color: #f2f2f2;
+          #           padding: 10px;
+          #         }
+          #         .progress-container {
+          #           background-color: #f2f2f2;
+          #         }
+          #         .event-left {
+          #           padding: 0px !important;
+          #           width: 1px !important;
+          #           visibility: hidden;
+          #         }
+          #         .event-left div:first-child{
+          #           display: none;
+          #         }
+          #         .event-title {
+          #           font-weight: 600 !important;
+          #           text-transform: capitalize;
+          #         }
+          #         .event-main > div {
+          #           padding-top: 8px !important;
+          #           font-size: 95% !important;
+          #         }
+          #
+          #         .event-location {
+          #           padding-top: 13px;
+          #         }
+          #         ha-card {
+          #           background-color: rgba(0, 0, 0, 0);
+          #           font-family: 'Open Sans', sans-serif;
+          #           font-size: 100%;
+          #           -webkit-box-shadow: none;
+          #           -moz-box-shadow: none;
+          #           box-shadow: none;
+          #           text-align: left;
+          #         }
+          #
+          # - type: markdown
+          #   content: |
+          #     ### Morgen
+          #   style: |
+          #     ha-card {
+          #       margin-top: 10px;
+          #       margin-bottom: -15px;
+          #       background-color: rgba(0, 0, 0, 0);
+          #       font-family: 'Open Sans', sans-serif;
+          #       font-size: 100%;
+          #       -webkit-box-shadow: none;
+          #       -moz-box-shadow: none;
+          #       box-shadow: none;
+          #       text-align: left;
+          #     }
+          #     h1, h3 {
+          #       font-weight: 300 !important;
+          #     }
+          #
+          # - type: custom:vertical-stack-in-card
+          #   cards:
+          #
+          #     - type: "custom:atomic-calendar"
+          #       title: Afspraken morgen
+          #       entities:
+          #         - entity: calendar.family_korthout
+          #           color: rgb(66,133,244)
+          #       fullDayEventText: 'Hele dag'
+          #       untilText: 'Tot'
+          #       noEventsForTodayText: 'Geen afpraken vandaag'
+          #       noEventsForNextDaysText: 'Geen afspraken gepland'
+          #       maxDaysToShow: 0
+          #       startDaysAhead: 1
+          #       style: |
+          #         .cal-titleContainer {
+          #           display: none;
+          #         }
+          #         .event-right {
+          #           background-color: #f2f2f2;
+          #           padding: 10px;
+          #         }
+          #         .progress-container {
+          #           background-color: #f2f2f2;
+          #         }
+          #         .event-left {
+          #           padding: 0px !important;
+          #           width: 1px !important;
+          #           visibility: hidden;
+          #         }
+          #         .event-left div:first-child{
+          #           display: none;
+          #         }
+          #         .event-title {
+          #           font-weight: 600 !important;
+          #           text-transform: capitalize;
+          #         }
+          #         .event-main > div {
+          #           padding-top: 8px !important;
+          #           font-size: 95% !important;
+          #         }
+          #
+          #         .event-location {
+          #           padding-top: 13px;
+          #         }
+          #         ha-card {
+          #           background-color: rgba(0, 0, 0, 0);
+          #           font-family: 'Open Sans', sans-serif;
+          #           font-size: 100%;
+          #           -webkit-box-shadow: none;
+          #           -moz-box-shadow: none;
+          #           box-shadow: none;
+          #           text-align: left;
+          #         }
+          #
+          # - break

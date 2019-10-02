@@ -1,0 +1,4 @@
+  - platform: group
+    name: Studeerkamer
+    entities:
+      - light.0x000d6ffffe04c2b0_light

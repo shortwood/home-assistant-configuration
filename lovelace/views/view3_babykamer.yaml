@@ -1,0 +1,293 @@
+  - title: Babykamer
+    icon: mdi:baby
+    panel: true
+    background: "right/auto rgba(242,242,242,1)"
+
+    popup_cards: !include ../popups/popup_view3_babykamer.yaml
+
+    cards:
+      - type: custom:layout-card
+        layout: vertical
+        max_columns: 2
+        max_width: [500px, 250px]
+        cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:lightbulb-outline"></ha-icon> Verlichting
+                style: |
+                  ha-card {
+                    margin-top: 8px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: horizontal-stack
+                cards:
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.babykamer
+                      - name: Babykamer
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb-outline
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
+
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.babykamer_helder
+                      - name: Helder
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_helder
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_helder
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.babykamer_ontspannen
+                      - name: Ontspannen
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_ontspannen
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_ontspannen
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.babykamer_gedimd
+                      - name: Gedimd
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_gedimd
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_gedimd
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: scene.babykamer_nachtlampje
+                      - name: Nachtlampje
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_nachtlampje
+                      - hold_action:
+                          action: call-service
+                          service: scene.turn_on
+                          service_data:
+                            entity_id: scene.babykamer_nachtlampje
+                      - state:
+                        - value: 'scening'
+                          icon: mdi:microsoft
+                          color: rgb(66,133,244)
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                align_icon: left
+                align_header: left
+                entities:
+                  - entity: sensor.0x00158d00036bfe19_temperature
+                    name: Temperatuur
+                    color: "#0F9D58"
+
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                align_icon: left
+                align_header: left
+                entities:
+                  - entity: sensor.0x00158d00036bfe19_humidity
+                    name: Luchtvochtigheid
+                    color: "#0F9D58"
+              - type: custom:mini-graph-card
+                align_icon: left
+                align_header: left
+                entities:
+                  - entity: sensor.0x00158d00036bfe19_pressure
+                    name: Luchtdruk
+                    color: "#0F9D58"
+
+          - break
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:window-closed"></ha-icon> Raam
+                style: |
+                  ha-card {
+                    margin-top: 8px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: markdown
+                content: |
+                   [[ if(binary_sensor.0x00158d00044da445_contact == "on", "## Open", "### Gesloten") ]]
+                style: |
+                  ha-card {
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2, h3 {
+                    font-size: 18px;
+                    font-weight: 100 !important;
+                    text-align: center;
+                    padding-bottom: 15px;
+                  }
+                  h2 {
+                    color: rgb(229,115,104);
+                  }
+                  h3 {
+                    color: rgb(51,182,121);
+                  }
+
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:sleep"></ha-icon> Stille modus
+                style: |
+                  ha-card {
+                    margin-top: 0px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: markdown
+                content: |
+                   ## Aan
+                style: |
+                  ha-card {
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2, h3 {
+                    font-size: 18px;
+                    font-weight: 100 !important;
+                    text-align: center;
+                    padding-bottom: 15px;
+                  }
+                  h2 {
+                    color: rgb(229,115,104);
+                  }
+                  h3 {
+                    color: rgb(51,182,121);
+                  }

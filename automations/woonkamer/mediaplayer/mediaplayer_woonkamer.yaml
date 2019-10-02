@@ -1,0 +1,90 @@
+- alias: '[Woonkamer][Mediaplayer] - Auto Kodi Play'
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi_woonkamer
+      to: 'playing'
+      from: 'idle'
+  action:
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.kodi_woonkamer
+    - service: script.watch_kodi
+    - wait_template: "{{ is_state('script.watch_kodi','off') }}"
+    - service: media_player.media_play
+      data:
+        entity_id: media_player.kodi_woonkamer
+
+- alias: '[Woonkamer][Mediaplayer] - Auto AVR on Chromecast'
+  trigger:
+    - platform: state
+      entity_id: media_player.mediacenter
+      to: 'playing'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: switch.woonkamer_tv
+        state: 'off'
+      - condition: state
+        entity_id: switch.woonkamer_receiver
+        state: 'off'
+  action:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.mediacenter_woonkamer
+    - delay:
+        seconds: 12
+    - service: switch.turn_off
+      data:
+        entity_id: switch.woonkamer_receiver_hdmi3_4
+
+- alias: '[Woonkamer][Mediaplayer] - Auto other off on Chromecast'
+  trigger:
+    - platform: state
+      entity_id: media_player.mediacenter
+      to: 'playing'
+      for:
+        minutes: 1
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: media_player.3c36e4_eosstb_003766202901
+        state: 'playing'
+      - condition: state
+        entity_id: media_player.kodi_woonkamer
+        state: 'playing'
+  action:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.3c36e4_eosstb_003766202901
+    - service: media_player.media_stop
+      data:
+        entity_id: media_player.kodi_woonkamer
+
+- alias: '[Woonkamer][Mediaplayer] - Auto Off'
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi_woonkamer
+      to: 'idle'
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: media_player.mediacenter
+      to: 'off'
+      for:
+        minutes: 15
+  condition:
+    - condition: state
+      entity_id: media_player.mediacenter
+      state: 'off'
+    - condition: state
+      entity_id: media_player.kodi_woonkamer
+      state: 'idle'
+    - condition: state
+      entity_id: media_player.3c36e4_eosstb_003766202901
+      state: 'off'
+  action:
+  - data:
+      entity_id: media_player.mediacenter_woonkamer
+    service: media_player.turn_off

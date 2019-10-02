@@ -1,0 +1,57 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+  base_url: !secret ha_base_url
+
+# Lovelace
+lovelace:
+  mode: yaml
+
+# Themes
+frontend:
+  themes: !include_dir_named themes
+
+# Logging
+logger:
+  default: critical
+
+# Integrations
+binary_sensor: !include integrations/sensor_binary.yaml
+google: !include integrations/google.yaml
+homekit: !include integrations/homekit.yaml
+input_boolean: !include integrations/input/input_boolean.yaml
+input_datetime: !include integrations/input/input_datetime.yaml
+input_number: !include integrations/input/input_number.yaml
+input_select: !include integrations/input/input_select.yaml
+light: !include_dir_merge_list integrations/light/
+media_player: !include_dir_merge_list integrations/media_player/
+notify: !include_dir_merge_list integrations/notify/
+proximity: !include_dir_named integrations/proximity
+rest_command: !include_dir_named integrations/rest_command
+sensor: !include_dir_merge_list integrations/sensor/
+shell_command: !include integrations/shell_command.yaml
+spotcast: !include integrations/spotcast.yaml
+sonos: !include integrations/sonos.yaml
+switch: !include_dir_merge_list integrations/switch/
+tplink: !include integrations/tplink.yaml
+tts: !include integrations/tts.yaml
+zone: !include_dir_merge_list integrations/zone/
+
+# Configurations
+group: !include groups.yaml
+automation: !include_dir_merge_list automations/
+script: !include_dir_merge_named scripts/
+scene: !include_dir_merge_list scenes/
+
+# Monitoring
+influxdb:
+  host: !secret influx_host
+  port: !secret influx_port
+  database: !secret influx_db
+  username: !secret influx_user
+  password: !secret influx_pass
+  max_retries: 3
+  default_measurement: state

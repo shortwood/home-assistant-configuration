@@ -1,0 +1,94 @@
+##
+# SET HOUSE MODES
+##
+
+# SET MODE : HOME
+- alias: '[Huis][Modus] - Thuis'
+  trigger:
+    - platform: state
+      entity_id: group.all_devices
+      to: 'home'
+    - platform: state
+      entity_id: sensor.peter_sleepmode
+      to: 'off'
+    - platform: state
+      entity_id: sensor.sharona_sleepmode
+      to: 'off'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.house_mode
+      option: 'Thuis'
+
+# SET MODE : AWAY
+- alias: '[Huis][Modus] - Weg'
+  trigger:
+    - platform: state
+      entity_id: group.all_devices
+      to: 'not_home'
+      for:
+        minutes: 5
+  condition:
+    condition: template
+    value_template: "{{ (states('input_select.house_mode') != 'Vakantie') and (states('input_select.house_mode') != 'Weg') }}"
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.house_mode
+      option: 'Weg'
+
+# SET MODE : NIGHT
+- alias: '[Huis][Modus] - Nacht'
+  trigger:
+    - platform: state
+      entity_id: sensor.peter_sleepmode
+      to: 'on'
+    - platform: state
+      entity_id: sensor.sharona_sleepmode
+      to: 'on'
+  condition:
+     condition: and
+     conditions:
+       - condition: state
+         entity_id: sensor.sharona_sleepmode
+         state: 'on'
+       - condition: state
+         entity_id: sensor.peter_sleepmode
+         state: 'on'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.house_mode
+      option: 'Nacht'
+
+# SET MODE : VACATION
+- alias: '[Huis][Modus] - Vakantie'
+  trigger:
+    - platform: state
+      entity_id: group.all_devices
+      to: 'not_home'
+      for:
+        hours: 24
+  condition:
+    condition: template
+    value_template: "{{ (states('input_select.house_mode') != 'Vakantie') and (states('input_select.house_mode') != 'Weg') }}"
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.house_mode
+      option: 'Vakantie'
+
+# SET MODE : GUEST
+- alias: '[Huis][Modus] - Gast'
+  trigger:
+    - platform: state
+      entity_id: calendar.gasten
+      to: 'on'
+  action:
+    - service: script.disable_guest_mode
+      data_template:
+        current_mode: "{{ states('input_select.house_mode') }}"
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.house_mode
+        option: 'Gast'

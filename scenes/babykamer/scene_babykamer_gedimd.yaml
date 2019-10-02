@@ -1,0 +1,6 @@
+  - name: "Babykamer - gedimd"
+    entities:
+      light.babykamer:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 77

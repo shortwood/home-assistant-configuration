@@ -1,0 +1,416 @@
+  - title: Muziek
+    icon: mdi:library-music
+    panel: true
+    background: "right/auto rgba(242,242,242,1)"
+
+    cards:
+      - type: custom:layout-card
+        layout: vertical
+        max_columns: 2
+        max_width: [500px, 400px]
+        cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:spotify"></ha-icon> Spotify
+                style: |
+                  ha-card {
+                    margin-top: 8px;
+                    margin-bottom: -15px;
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: entities
+                show_header_toggle: false
+                entities:
+
+                  - type: custom:mini-media-player
+                    entity: media_player.spotify
+                    name: Peter's Spotify
+                    icon: mdi:spotify
+                    group: true
+                    artwork: cover
+                    idle_view:
+                      when_idle: true
+                      when_paused: false
+                      when_standby: true
+
+          - break
+
+          - type: conditional
+            conditions:
+              - entity: media_player.beneden
+                state_not: 'playing'
+              - entity: media_player.boven
+                state_not: 'playing'
+              - entity: media_player.alle_apparaten
+                state_not: 'playing'
+            card:
+
+              type: custom:vertical-stack-in-card
+              cards:
+
+                - type: markdown
+                  content: |
+                     ## <ha-icon icon="mdi:speaker"></ha-icon> Groepen
+                  style: |
+                    ha-card {
+                      margin-top: 8px;
+                      margin-bottom: -15px;
+                      background-color: rgba(231,230,221,0);
+                      font-family: 'Open Sans', sans-serif;
+                      font-size: 100%;
+                      -webkit-box-shadow: none;
+                      -moz-box-shadow: none;
+                      box-shadow: none;
+                      text-align: left;
+                    }
+                    h2 {
+                      font-size: 16px;
+                      font-weight: 300 !important;
+                      color: #777;
+                    }
+                    h2 ha-icon {
+                      margin-top: -4px;
+                      padding-right: 5px;
+                      color: #999;
+                    }
+
+                - type: markdown
+                  content: |
+                     ### Er wordt geen muziek afgespeeld op een groep.
+                  style: |
+                    ha-card {
+                      margin-top: 0px;
+                      margin-bottom: -15px;
+                      background-color: rgba(231,230,221,0);
+                      font-family: 'Open Sans', sans-serif;
+                      font-size: 100%;
+                      -webkit-box-shadow: none;
+                      -moz-box-shadow: none;
+                      box-shadow: none;
+                      text-align: left;
+                    }
+                    h3 {
+                      font-weight: 100 !important;
+                      font-size: 14px;
+                      color: #666;
+                      text-align: center;
+                      padding-bottom: 15px;
+                    }
+
+          - type: conditional
+            conditions:
+              - entity: media_player.alle_apparaten
+                state: 'playing'
+
+            card:
+
+              type: custom:vertical-stack-in-card
+              cards:
+
+                - type: markdown
+                  content: |
+                     ## <ha-icon icon="mdi:speaker"></ha-icon> Groep - Alle apparaten
+                  style: |
+                    ha-card {
+                      margin-top: 8px;
+                      margin-bottom: -15px;
+                      background-color: rgba(231,230,221,0);
+                      font-family: 'Open Sans', sans-serif;
+                      font-size: 100%;
+                      -webkit-box-shadow: none;
+                      -moz-box-shadow: none;
+                      box-shadow: none;
+                      text-align: left;
+                    }
+                    h2 {
+                      font-size: 16px;
+                      font-weight: 300 !important;
+                      color: #777;
+                    }
+                    h2 ha-icon {
+                      margin-top: -4px;
+                      padding-right: 5px;
+                      color: #999;
+                    }
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+
+                    - type: custom:mini-media-player
+                      entity: media_player.keuken
+                      name: Keuken
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+                    - type: custom:mini-media-player
+                      entity: media_player.woonkamer_2
+                      name: Woonkamer
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+                    - type: custom:mini-media-player
+                      entity: media_player.mediacenter
+                      name: Mediacenter
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+                    - type: custom:mini-media-player
+                      entity: media_player.slaapkamer_2
+                      name: Slaapkamer
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+                    - type: custom:mini-media-player
+                      entity: media_player.slaapkamer_tv
+                      name: Mediacenter Slaapkamer
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+          - type: conditional
+            conditions:
+              - entity: media_player.beneden
+                state: 'playing'
+
+            card:
+
+              type: custom:vertical-stack-in-card
+              cards:
+
+                - type: markdown
+                  content: |
+                     ## <ha-icon icon="mdi:speaker"></ha-icon> Groep - Beneden
+                  style: |
+                    ha-card {
+                      margin-top: 8px;
+                      margin-bottom: -15px;
+                      background-color: rgba(231,230,221,0);
+                      font-family: 'Open Sans', sans-serif;
+                      font-size: 100%;
+                      -webkit-box-shadow: none;
+                      -moz-box-shadow: none;
+                      box-shadow: none;
+                      text-align: left;
+                    }
+                    h2 {
+                      font-size: 16px;
+                      font-weight: 300 !important;
+                      color: #777;
+                    }
+                    h2 ha-icon {
+                      margin-top: -4px;
+                      padding-right: 5px;
+                      color: #999;
+                    }
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+
+                    - type: custom:mini-media-player
+                      entity: media_player.beneden
+                      name: Master
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+
+                    - type: custom:mini-media-player
+                      entity: media_player.keuken
+                      name: Keuken
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+                    - type: custom:mini-media-player
+                      entity: media_player.woonkamer_2
+                      name: Woonkamer
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+                    - type: custom:mini-media-player
+                      entity: media_player.mediacenter
+                      name: Mediacenter
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+          - type: conditional
+            conditions:
+              - entity: media_player.boven
+                state: 'playing'
+
+            card:
+
+              type: custom:vertical-stack-in-card
+              cards:
+
+                - type: markdown
+                  content: |
+                     ## <ha-icon icon="mdi:speaker"></ha-icon> Groep - Boven
+                  style: |
+                    ha-card {
+                      margin-top: 8px;
+                      margin-bottom: -15px;
+                      background-color: rgba(231,230,221,0);
+                      font-family: 'Open Sans', sans-serif;
+                      font-size: 100%;
+                      -webkit-box-shadow: none;
+                      -moz-box-shadow: none;
+                      box-shadow: none;
+                      text-align: left;
+                    }
+                    h2 {
+                      font-size: 16px;
+                      font-weight: 300 !important;
+                      color: #777;
+                    }
+                    h2 ha-icon {
+                      margin-top: -4px;
+                      padding-right: 5px;
+                      color: #999;
+                    }
+
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+
+                    - type: custom:mini-media-player
+                      entity: media_player.slaapkamer_2
+                      name: Slaapkamer
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true
+
+                    - type: custom:mini-media-player
+                      entity: media_player.slaapkamer_tv
+                      name: Mediacenter Slaapkamer
+                      icon: mdi:speaker
+                      group: true
+                      artwork: none
+                      idle_view:
+                        when_idle: true
+                        when_paused: false
+                        when_standby: true
+                      hide:
+                        info: true
+                        power: true
+                        controls: true
+                        progress: true

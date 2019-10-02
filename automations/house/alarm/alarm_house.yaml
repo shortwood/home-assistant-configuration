@@ -1,0 +1,41 @@
+##
+# ENGAGE ALARM WHEN MODE CHANGES
+##
+
+- alias: '[Huis][Alarm] - Alarm inschakelen'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: input_select.house_mode
+      from: 'Thuis'
+    - platform: state
+      entity_id: input_select.house_mode
+      from: 'Gast'
+  action:
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.alarm_armed
+
+
+##
+# DISENGAGE ALARM WHEN MODE CHANGES OR IOS DEACTIVATED
+##
+
+- alias: '[Huis][Alarm] - Alarm uitschakelen'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Thuis'
+    - platform: state
+      entity_id: input_select.house_mode
+      to: 'Gast'
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SILENCE_ALARM
+  action:
+    - service: script.sound_alarm_off
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.alarm_armed

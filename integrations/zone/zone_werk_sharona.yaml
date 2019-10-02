@@ -1,0 +1,5 @@
+  - name: Werk
+    latitude: !secret work_sharona_lat
+    longitude: !secret work_sharona_long
+    radius: 50
+    icon: mdi:account-multiple

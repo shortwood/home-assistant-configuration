@@ -1,0 +1,37 @@
+# Script - When everybody is going to bed
+to_bed:
+  alias: '[Huis] - Naar bed'
+  sequence:
+  - data:
+      entity_id: input_boolean.sharona_inbed
+    service: input_boolean.turn_on
+  - data:
+      entity_id: input_boolean.peter_inbed
+    service: input_boolean.turn_on
+  - service_template: >-
+        {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') or is_state('media_player.kodi_woonkamer','playing') %}
+          notify.ios_iedereen
+        {% else %}
+          script.dummy
+        {% endif %}
+    data_template:
+      title: 'Welterusten!'
+      message: >-
+        {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+          "Wil je {{state_attr('media_player.3c36e4_eosstb_003766202901','media_series_title')}} op {{state_attr('media_player.3c36e4_eosstb_003766202901','media_title')}} verder kijken in de slaapkamer?"
+        {% elif is_state('media_player.kodi_woonkamer','playing') and is_state_attr('media_player.kodi_woonkamer','media_content_type','tvshow') %}
+          "Wil je de aflevering {{state_attr('media_player.kodi_woonkamer','media_title')}} van {{state_attr('media_player.kodi_woonkamer','media_series_title')}} verder kijken in de slaapkamer?"
+        {% elif is_state('media_player.kodi_woonkamer','playing') and is_state_attr('media_player.kodi_woonkamer','media_content_type','movie') %}
+          "Wil je de film {{state_attr('media_player.kodi_woonkamer','media_title')}} verder kijken in de slaapkamer?"
+        {% else %}
+          "Slaap lekker"
+        {% endif %}
+      data:
+        push:
+          category: "continue_watching"
+  - wait_template: "{{is_state('binary_sensor.0x00158d0004142172_occupancy','on')}}"
+  - data:
+      group_name: Slaapkamer
+      scene_name: Gaan slapen
+    service: hue.hue_activate_scene
+  - service: script.lights_tobed_all

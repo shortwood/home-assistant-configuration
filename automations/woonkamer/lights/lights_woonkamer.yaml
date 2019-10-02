@@ -1,0 +1,188 @@
+##
+# TRIGGER LIGHTS ON 30 MINS BEFORE SUNSET
+##
+
+- alias: '[Woonkamer][Licht] - Avond'
+  trigger:
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: "{{ (states('input_select.house_mode') != 'Vakantie') }}"
+    - condition: state
+      entity_id: light.woonkamer
+      state: 'off'
+  action:
+  - data_template:
+      entity_id: >-
+        {% if is_state('sensor.woonkamer_moviemode', 'playing') %}
+          scene.woonkamer_media
+        {% elif is_state('group.all_devices', 'not_home') %}
+          scene.woonkamer_afwezig
+        {% else %}
+          scene.woonkamer_standaard_transition
+        {% endif %}
+    service: scene.turn_on
+
+
+##
+# TRIGGER LIGHTS IN NIGHTMODE
+##
+
+- alias: '[Woonkamer][Licht] - Nachtmodus'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00034ccb9a_occupancy
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.all_devices
+      state: home
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Nacht'
+    - condition: state
+      entity_id: light.woonkamer
+      state: 'off'
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "-00:30:00"
+        - condition: sun
+          before: sunrise
+          before_offset: "+00:30:00"
+  action:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: Woonkamer
+        scene_name: Nachtlampje
+    - service: hue.hue_activate_scene
+      data:
+        group_name: Keuken
+        scene_name: Nachtlampje
+
+##
+# TRIGGER LIGHTS OFF IN NIGHTMODE
+##
+
+- alias: '[Woonkamer][Licht] - Nachtmodus uitschakelen'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00034ccb9a_occupancy
+      to: 'off'
+      for:
+        minutes: 15
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.all_devices
+      state: home
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Nacht'
+    - condition: state
+      entity_id: light.woonkamer
+      state: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.woonkamer
+    - service: light.turn_off
+      data:
+        entity_id: light.keuken
+
+
+##
+# MORNING MODE
+##
+- alias: '[Woonkamer][Licht] - Ochtendmodus verlichting'
+  trigger:
+    - platform: state
+      entity_id: input_select.house_mode
+      from: 'Nacht'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.all_devices
+        state: home
+      - condition: or
+        conditions:
+          - condition: sun
+            after: sunset
+            after_offset: "-00:30:00"
+          - condition: sun
+            before: sunrise
+            before_offset: "+00:30:00"
+  action:
+    - wait_template: "{{ is_state('binary_sensor.0x00158d000349240c_occupancy','on') }}"
+      timeout: "01:00:00"
+      continue_on_timeout: false
+    - service: scene.turn_on
+      data:
+        entity_id: scene.woonkamer_gedimd
+    - service: light.turn_on
+      data:
+        entity_id: light.keuken
+        brightness: 100
+
+
+##
+# LIGHTS OFF AFTER SUNRISE
+##
+- alias: '[Woonkamer][Licht] - Uitschakelen 45 min na zonsopkomst'
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: "+00:45:00"
+  action:
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.woonkamer
+          - light.keuken
+
+##
+# CINEMA MODE
+##
+
+# CINEMA MODE LIGHTS - ON
+- alias: '[Woonkamer][Licht] - Bioscoopmodus AAN'
+  trigger:
+    - entity_id: sensor.woonkamer_moviemode
+      for: 00:00:02
+      from: not_playing
+      platform: state
+      to: playing
+  condition:
+    - condition: state
+      entity_id: light.woonkamer
+      state: 'on'
+  action:
+    - data:
+        entity_id: scene.woonkamer_media
+      service: scene.turn_on
+
+# CINEMAMODE LIGHTS - OFF
+- alias: '[Woonkamer][Licht] - Bioscoopmodus UIT'
+  trigger:
+    - entity_id: sensor.woonkamer_moviemode
+      for: 00:00:02
+      from: playing
+      platform: state
+      to: not_playing
+  condition:
+    - condition: state
+      entity_id: light.woonkamer
+      state: 'on'
+  action:
+    - data:
+        entity_id: scene.woonkamer_standaard
+      service: scene.turn_on

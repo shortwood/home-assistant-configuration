@@ -1,0 +1,11 @@
+  - platform: kodi
+    host: !secret kodi_ip_woonkamer
+    username: !secret kodi_username
+    password: !secret kodi_password
+    name: Kodi Woonkamer
+
+  - platform: kodi
+    host: !secret kodi_ip_slaapkamer
+    name: Kodi Slaapkamer
+    username: !secret kodi_username
+    password: !secret kodi_password

@@ -1,0 +1,132 @@
+##
+# AUTOMATIONS FOR SETTING DRYER STATUS
+##
+
+# Starting the washing-machine
+- alias: '[Appliances][Wasmachine] - Opstarten'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.wasmachine_current_power
+    above: 100
+    below: 200
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.wasmachine_status
+        state: 'Inactief'
+      - condition: state
+        entity_id: input_select.wasmachine_status
+        state: 'Schoon'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.wasmachine_status
+        option: 'Opstarten'
+
+# Washing program started
+- alias: '[Appliances][Wasmachine] - Wassen'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.wasmachine_current_power
+    above: 1500
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.wasmachine_status
+        state: 'Opstarten'
+      - condition: state
+        entity_id: input_select.wasmachine_status
+        state: 'Inactief'
+      - condition: state
+        entity_id: input_select.wasmachine_status
+        state: 'Schoon'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.wasmachine_status
+      option: 'Wassen'
+
+# Centrifugal program
+- alias: '[Appliances][Wasmachine] - Centrifugeren'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.wasmachine_current_power
+    below: 1000
+    above: 100
+    for:
+      minutes: 1
+      seconds: 30
+  condition:
+    - condition: state
+      entity_id: input_select.wasmachine_status
+      state: 'Wassen'
+  action:
+    service: input_select.select_option
+    data:
+      entity_id: input_select.wasmachine_status
+      option: 'Centrifugeren'
+
+# Pumping program
+- alias: '[Appliances][Wasmachine] - Wassen 2'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.wasmachine_current_power
+    below: 99
+    above: 5
+  condition:
+    - condition: state
+      entity_id: input_select.wasmachine_status
+      state: 'Centrifugeren'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.wasmachine_status
+        option: 'Wassen'
+
+# Clean
+- alias: '[Appliances][Wasmachine] - Schoon'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.wasmachine_current_power
+    below: 5
+    for:
+      minutes: 2
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_select.wasmachine_status
+        state: 'Wassen'
+      - condition: state
+        entity_id: input_select.wasmachine_status
+        state: 'Centrifureren'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.wasmachine_status
+        option: 'Schoon'
+    - service: script.smart_notify
+      data:
+        title: 'Wasmachine'
+        message: 'De wasmachine is klaar.'
+        category: "wasmachine_leeghalen"
+        speak: true
+
+# Clear out
+- alias: '[Appliances][Wasmachine] - Leeghalen'
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: WASHINGMACHINE_CLEARED
+  condition:
+    - condition: state
+      entity_id: input_select.wasmachine_status
+      state: 'Schoon'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.wasmachine_status
+        option: 'Inactief'

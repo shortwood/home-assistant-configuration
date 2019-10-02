@@ -1,0 +1,45 @@
+- alias: '[People][Peter] - Wake up detected'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: sensor.peter_room_presence
+      to: 'Woonkamer'
+  condition:
+    - condition: state
+      entity_id: input_boolean.peter_inbed
+      state: 'on'
+    - condition: time
+      after: '05:00:00'
+      before: '13:00:00'
+  action:
+    - service: script.peter_awake
+
+- alias: '[People][Peter] - Morningroutine with TV'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: PETER_WAKEUP_LIVINGROOMTV
+  action:
+    - service: script.watch_tv
+    - wait_template: "{{ is_state('script.watch_tv','off') }}"
+    - service: script.mediacenter_npo1
+
+- alias: '[People][Peter] - Morningroutine with Playlist'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: PETER_WAKEUP_PLAYLIST
+  action:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.beneden
+        volume_level: 0.6
+    - service: spotcast.start
+      data:
+        entity_id: media_player.beneden
+        uri: 'spotify:playlist:37i9dQZF1DWYPwGkJoztcR'
+        random_song: true

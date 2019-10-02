@@ -1,0 +1,6 @@
+  - name: "Studeerkamer - nachtlampje"
+    entities:
+      light.studeerkamer:
+        state: true
+        xy_color: [0.502,0.414]
+        brightness: 25

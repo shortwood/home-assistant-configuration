@@ -1,0 +1,50 @@
+- alias: '[Routine][Ochtend] - Wakker worden [di-vr]'
+  trigger:
+    - platform: time
+      at: "06:00:00"
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        weekday:
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.hue_ambiance_candle_1
+          - light.hue_ambiance_candle_2
+        xy_color: [0.457, 0.41]
+        brightness: 254
+        transition: 2700
+
+- alias: '[Routine][Ochtend] - Wakker worden [ma]'
+  trigger:
+    - platform: time
+      at: "06:00:00"
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        weekday:
+          - mon
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.hue_ambiance_candle_2
+        xy_color: [0.457, 0.41]
+        brightness: 254
+        transition: 2700
+    - wait_template: "{{ is_state('sensor.sharona_room_presence','Woonkamer') }}"
+    - service: light.turn_off
+      data:
+        entity_id: light.hue_ambiance_candle_2

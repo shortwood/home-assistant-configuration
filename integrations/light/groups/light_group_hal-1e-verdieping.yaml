@@ -1,0 +1,7 @@
+  - platform: group
+    name: Hal - 1e Verdieping
+    entities:
+      - light.hue_ambiance_spot_hb2
+      - light.hue_ambiance_spot_hb3
+      - light.hue_ambiance_spot_hb4
+      - light.0x00178801048493b4_light

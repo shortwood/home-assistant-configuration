@@ -1,0 +1,24 @@
+- alias: '[People][Sharona] - Wake up detected'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: sensor.sharona_room_presence
+      to: 'Woonkamer'
+  condition:
+    - condition: state
+      entity_id: input_boolean.sharona_inbed
+      state: 'on'
+  action:
+    - service: script.sharona_awake
+
+- alias: '[People][Sharona] - Morningroutine with TV'
+  initial_state: True
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SHARONA_WAKEUP_LIVINGROOMTV
+  action:
+    - service: script.watch_tv
+    - wait_template: "{{ is_state('script.watch_tv','off') }}"
+    - service: script.mediacenter_npo1

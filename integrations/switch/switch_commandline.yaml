@@ -1,0 +1,32 @@
+  # - platform: command_line
+  #   scan_interval: 60
+  #   switches:
+  #
+  #     ##
+  #     # Commandline switch for Raspberry PI in Livingroom
+  #     ##
+  #
+  #     woonkamer_tv:
+  #       command_on: >-
+  #         ssh hdmicec_woonkamer 'echo on 0 | cec-client -s -d 1'
+  #       command_off: >-
+  #         ssh hdmicec_woonkamer 'echo standby 0 | cec-client -s -d 1'
+  #       command_state: >-
+  #         ssh hdmicec_woonkamer 'echo pow 0 | cec-client -s -d 1' | grep -Po 'power status: \K(.+)'
+  #       value_template: >-
+  #         {{ value == 'on' }}
+  #
+  #
+  #     ##
+  #     # Commandline switch for Raspberry PI in Livingroom
+  #     ##
+  #
+  #     woonkamer_receiver:
+  #       command_on: >-
+  #         ssh hdmicec_woonkamer 'echo on 5 | cec-client -s -d 1'
+  #       command_off: >-
+  #         ssh hdmicec_woonkamer 'echo standby 5 | cec-client -s -d 1'
+  #       command_state: >-
+  #         ssh hdmicec_woonkamer 'echo pow 5 | cec-client -s -d 1' | grep -Po 'power status: \K(.+)'
+  #       value_template: >-
+  #         {{ value == 'on' }}

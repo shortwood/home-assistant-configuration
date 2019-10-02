@@ -1,0 +1,12 @@
+      light.babykamer:
+        title: Verlichting - Babykamer
+        card:
+          type: entities
+          entities:
+            - type: custom:fold-entity-row
+              head:
+                entity: light.0x000d6ffffe01863a_light
+                name: Plafond
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.0x000d6ffffe01863a_light

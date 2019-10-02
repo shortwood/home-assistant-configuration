@@ -1,0 +1,233 @@
+##
+# Set Mediacenter in TV Mode
+##
+
+watch_tv:
+  alias: '[Woonkamer][MediaCenter] - TV Kijken'
+  sequence:
+  - data_template:
+      entity_id: input_number.mediacenter_startupdelay
+      value: >-
+        {% if is_state('switch.woonkamer_tv','off') %}
+          12
+        {% else %}
+          0
+        {% endif %}
+    service: input_number.set_value
+  - data:
+      entity_id: media_player.mediacenter_woonkamer
+    service: media_player.turn_on
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+    service_template: >-
+      {% if is_state('media_player.3c36e4_eosstb_003766202901','off') %}
+        media_player.turn_on
+      {% else %}
+        script.dummy
+      {% endif %}
+  - delay:
+      seconds: "{{ states('input_number.mediacenter_startupdelay') | int }}"
+  - service: switch.turn_on
+    data:
+      entity_id: switch.woonkamer_receiver_hdmi3_4
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.mediacenter
+  - service: media_player.media_stop
+    data:
+      entity_id: media_player.kodi_woonkamer
+
+
+##
+# Set Mediacenter in Moviemode Kodi
+##
+
+watch_movie_kodi:
+  alias: '[Woonkamer][MediaCenter] - Film kijken (KODI)'
+  sequence:
+  - data_template:
+      entity_id: input_number.mediacenter_startupdelay
+      value: >-
+        {% if is_state('switch.woonkamer_tv','off') %}
+          12
+        {% else %}
+          0
+        {% endif %}
+    service: input_number.set_value
+  - data:
+      entity_id: media_player.mediacenter_woonkamer
+    service: media_player.turn_on
+  - service: kodi.call_method
+    data:
+      entity_id: kodi.woonkamer
+      method: GUI.ActivateWindow
+      window: videos
+      parameters:
+        - MovieTitles
+  - delay:
+      seconds: "{{ states('input_number.mediacenter_startupdelay') | int }}"
+  - service: switch.turn_on
+    data:
+      entity_id: switch.woonkamer_receiver_hdmi1_2
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+    service_template: >-
+      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+  - data:
+      entity_id: media_player.mediacenter
+    service_template: >-
+      {% if not is_state('media_player.mediacenter','off') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+
+
+##
+# Set Mediacenter in TVShowMode Kodi
+##
+
+watch_tvshow_kodi:
+  alias: '[Woonkamer][MediaCenter] - Serie kijken (KODI)'
+  sequence:
+  - data_template:
+      entity_id: input_number.mediacenter_startupdelay
+      value: >-
+        {% if is_state('switch.woonkamer_tv','off') %}
+          12
+        {% else %}
+          0
+        {% endif %}
+    service: input_number.set_value
+  - data:
+      entity_id: media_player.mediacenter_woonkamer
+    service_template: media_player.turn_on
+  - service: kodi.call_method
+    data:
+      entity_id: kodi.woonkamer
+      method: GUI.ActivateWindow
+      window: videos
+      parameters:
+        - TVShowTitles
+  - delay:
+      seconds: "{{ states('input_number.mediacenter_startupdelay') | int }}"
+  - service: switch.turn_on
+    data:
+      entity_id: switch.woonkamer_receiver_hdmi1_2
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+    service_template: >-
+      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+  - data:
+      entity_id: media_player.mediacenter
+    service_template: >-
+      {% if not is_state('media_player.mediacenter','off') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+
+##
+# Set Mediacenter in TVShowMode Kodi
+##
+
+watch_kodi:
+  alias: '[Woonkamer][MediaCenter] - Kodi kijken'
+  sequence:
+  - data_template:
+      entity_id: input_number.mediacenter_startupdelay
+      value: >-
+        {% if is_state('switch.woonkamer_tv','off') %}
+          12
+        {% else %}
+          0
+        {% endif %}
+    service: input_number.set_value
+  - data:
+      entity_id: media_player.mediacenter_woonkamer
+    service: media_player.turn_on
+  - delay:
+      seconds: "{{ states('input_number.mediacenter_startupdelay') | int }}"
+  - service: switch.turn_on
+    data:
+      entity_id: switch.woonkamer_receiver_hdmi1_2
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+    service_template: >-
+      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+  - data:
+      entity_id: media_player.mediacenter
+    service_template: >-
+      {% if not is_state('media_player.mediacenter','off') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+
+##
+# Set Mediacenter in Musicmode
+##
+
+listen_music:
+  alias: '[Woonkamer][MediaCenter] - Muziek luisteren'
+  sequence:
+  - data_template:
+      entity_id: input_number.mediacenter_startupdelay
+      value: >-
+        {% if is_state('switch.woonkamer_tv','off') %}
+          12
+        {% else %}
+          0
+        {% endif %}
+    service: input_number.set_value
+  - data:
+      entity_id: media_player.mediacenter_woonkamer
+    service: media_player.turn_on
+  - data:
+      entity_id: media_player.mediacenter
+    service: media_player.turn_on
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+    service_template: >-
+      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+
+##
+# Shutdown Mediacenter
+##
+
+shutdown_mediacenter:
+  alias: '[Woonkamer][MediaCenter] - Afsluiten'
+  sequence:
+  - data:
+      entity_id: media_player.mediacenter_woonkamer
+    service_template: media_player.turn_off
+  - data:
+      entity_id: media_player.mediacenter
+    service: media_player.turn_off
+  - data:
+      entity_id: media_player.3c36e4_eosstb_003766202901
+    service_template: >-
+      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+        media_player.turn_off
+      {% else %}
+        script.dummy
+      {% endif %}
+  - data:
+      entity_id: media_player.kodi_woonkamer
+    service: media_player.media_stop

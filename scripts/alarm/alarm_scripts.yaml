@@ -1,0 +1,45 @@
+##
+# ALARM SCRIPTS
+##
+
+# SOUND THE ALARM
+sound_alarm:
+  alias: '[Huis][Alarm] - Alarm activeren'
+  sequence:
+  - condition: state
+    entity_id: input_boolean.alarm_armed
+    state: 'on'
+  - service: media_player.volume_set
+    data:
+      entity_id:
+        - media_player.woonkamer_2
+        - media_player.slaapkamer_2
+        - media_player.keuken
+      volume_level: 1.0
+  - service: media_player.play_media
+    data:
+      entity_id:
+        - media_player.woonkamer_2
+        - media_player.slaapkamer_2
+        - media_player.keuken
+      media_content_type: 'audio/mp3'
+      media_content_id: !secret alarm_sound
+
+
+# TURN OFF ALARM SOUND
+sound_alarm_off:
+  alias: '[Huis][Alarm] - Alarm uitzetten'
+  sequence:
+  - service: media_player.media_stop
+    data:
+      entity_id:
+        - media_player.woonkamer_2
+        - media_player.slaapkamer_2
+        - media_player.keuken
+  - service: media_player.volume_set
+    data:
+      entity_id:
+        - media_player.woonkamer_2
+        - media_player.slaapkamer_2
+        - media_player.keuken
+      volume_level: 0.5

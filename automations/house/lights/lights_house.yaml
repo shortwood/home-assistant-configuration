@@ -1,0 +1,20 @@
+##
+# TRIGGER LIGHTS ON DURING VACATIONMODE
+##
+
+- alias: '[Huis][Licht] - Vakantiemodus'
+  trigger:
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Vakantie'
+    - condition: state
+      entity_id: light.woonkamer
+      state: 'off'
+  action:
+  - service: script.mockupancy

@@ -1,0 +1,61 @@
+      light.woonkamer:
+        title: Verlichting - Woonkamer
+        card:
+          type: entities
+          entities:
+            - type: custom:fold-entity-row
+              head:
+                entity: light.woonkamerlamp_plafond_voor
+                name: Plafond Voorzijde
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.woonkamerlamp_plafond_voor
+            - type: custom:fold-entity-row
+              head:
+                entity: light.woonkamer_plafond_achter
+                name: Plafond Achterzijde
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.woonkamer_plafond_achter
+            - type: custom:fold-entity-row
+              head:
+                entity: light.staande_lamp_links
+                name: Staande lamp links
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.staande_lamp_links
+            - type: custom:fold-entity-row
+              head:
+                entity: light.staande_lamp_rechts
+                name: Staande lamp rechts
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.staande_lamp_rechts
+            - type: custom:fold-entity-row
+              head:
+                entity: light.eettafel_lamp
+                name: Eettafel lamp
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.eettafel_lamp
+            - type: custom:fold-entity-row
+              head:
+                entity: light.woonkamer_muur
+                name: Muurlamp
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.woonkamer_muur
+            - type: custom:fold-entity-row
+              head:
+                entity: light.pianolamp
+                name: Pianolamp
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.pianolamp
+
+
+      media_player.mediabox_woonkamer:
+        title: Mediabox woonkamer
+        card:
+          type: media-control
+          entity: media_player.mediabox_woonkamer

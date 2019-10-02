@@ -1,0 +1,15 @@
+  # - platform: ziggo-mediabox-next
+  #   username: !secret ziggo_username
+  #   password: !secret ziggo_password
+  #   device_id: !secret ziggo_mediabox_woonkamer
+  #   name: Mediabox Woonkamer
+  #
+  # - platform: ziggo-mediabox-next
+  #   username: !secret ziggo_username
+  #   password: !secret ziggo_password
+  #   device_id: !secret ziggo_mediabox_slaapkamer
+  #   name: Mediabox Slaapkamer
+
+  - platform: ziggo_mediabox_next
+    username: !secret ziggo_username
+    password: !secret ziggo_password

@@ -1,0 +1,14 @@
+
+# DISABLE GUEST MODE WITH PRESERVATION OF THE MODE
+
+disable_guest_mode:
+  alias: '[Huis][Modus] - Gastmodus beeindigen'
+  sequence:
+    - wait_template: "{{ is_state('calendar.gasten', 'off') }}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.house_mode
+        option: "{{ current_mode }}"
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.play_guest_welcome

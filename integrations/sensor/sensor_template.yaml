@@ -1,0 +1,225 @@
+  - platform: template
+    sensors:
+
+     ##
+     # LIVINGROOM MOVIEMODE SENSOR
+     ##
+     woonkamer_moviemode:
+       friendly_name: "A movie/tv-show is playing"
+       value_template: >-
+         {% if is_state('media_player.mediacenter','playing') and is_state_attr('media_player.mediacenter','app_name','Netflix') %}
+           playing
+         {% elif is_state('media_player.emby_kodi_kodi_libreelec_woonkamer','playing') %}
+           playing
+         {% else %}
+           not_playing
+         {% endif %}
+
+
+     ##
+     # PETER SLEEPMODE SENSOR
+     ##
+
+     peter_sleepmode:
+       friendly_name: "Peter is in bed"
+       value_template: >
+         {% if is_state('input_boolean.peter_inbed','on') %}
+           on
+         {% else %}
+           off
+         {% endif %}
+       icon_template: >
+         {% if is_state('input_boolean.peter_inbed','on') %}
+           mdi:sleep
+         {% else %}
+           mdi:sleep-off
+         {% endif %}
+
+
+     ##
+     # SHARONA SLEEPMODE SENSOR
+     ##
+
+     sharona_sleepmode:
+       friendly_name: "Sharona is in bed"
+       value_template: >
+         {% if is_state('input_boolean.sharona_inbed','on') %}
+           on
+         {% else %}
+           off
+         {% endif %}
+       icon_template: >
+         {% if is_state('input_boolean.sharona_inbed','on') %}
+           mdi:sleep
+         {% else %}
+           mdi:sleep-off
+         {% endif %}
+
+     ##
+     # DISHWASHER SENSORS
+     ##
+
+     vaatwasser_current_power:
+        friendly_name: "Vaatwasser: Verbruik huidig"
+        value_template: '{{ states.switch.vaatwasser.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+
+     vaatwasser_today_energy:
+        friendly_name: "Vaatwasser: Verbruik vandaag"
+        value_template: '{{ states.switch.vaatwasser.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+     vaatwasser_total_energy:
+        friendly_name: "Vaatwasser: Verbruik totaal"
+        value_template: '{{ states.switch.vaatwasser.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+     ##
+     # WASHINGMACHINE SENSORS
+     ##
+
+     wasmachine_current_power:
+        friendly_name: "Wasmachine: Verbruik huidig"
+        value_template: '{{ states.switch.wasmachine.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+
+     wasmachine_today_energy:
+        friendly_name: "Wasmachine: Verbruik vandaag"
+        value_template: '{{ states.switch.wasmachine.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+     wasmachine_total_energy:
+        friendly_name: "Wasmachine: Verbruik totaal"
+        value_template: '{{ states.switch.wasmachine.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+     ##
+     # DRYER SENSORS
+     ##
+
+     droger_current_power:
+        friendly_name: "Droger: Verbruik huidig"
+        value_template: '{{ states.switch.droger.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+
+     droger_today_energy:
+        friendly_name: "Droger: Verbruik vandaag"
+        value_template: '{{ states.switch.droger.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+     droger_total_energy:
+        friendly_name: "Droger: Verbruik totaal"
+        value_template: '{{ states.switch.droger.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+
+    ##
+    # PETER HOUSE LOCATION SENSOR
+    ##
+
+     peter_room_presence:
+        friendly_name: "Peter: Positie in huis"
+        value_template: >-
+          {% if is_state('person.peter','not_home') %}
+            Afwezig
+          {% elif is_state('sensor.bssid','70:3a:cb:f6:12:90') or
+                is_state('sensor.bssid','70:3a:cb:f6:12:94') or
+                is_state('sensor.bssid','e4:f0:42:ea:93:e1') or
+                is_state('sensor.bssid','e4:f0:42:ea:93:dd')
+          %}
+            Woonkamer
+          {% elif is_state('sensor.bssid','70:3a:cb:f5:3d:c8') or
+                  is_state('sensor.bssid','70:3a:cb:f5:3d:cc')
+          %}
+            Slaapkamer
+          {% elif is_state('sensor.bssid_2','3c:28:6d:9a:a1:55') or
+                  is_state('sensor.bssid_2','3c:28:6d:9a:a1:51')
+          %}
+            Babykamer / Studeerkamer
+          {% elif is_state('sensor.bssid','70:3a:cb:f6:11:60') or
+                  is_state('sensor.bssid','70:3a:cb:f6:11:5c')
+          %}
+            Zolder
+          {% else %}
+            Onbekend
+          {% endif %}
+
+    ##
+    # SHARONA HOUSE LOCATION SENSOR
+    ##
+
+     sharona_room_presence:
+        friendly_name: "Sharona: Positie in huis"
+        value_template: >-
+          {% if is_state('person.sharona','not_home') %}
+            Afwezig
+          {% elif is_state('sensor.bssid_2','70:3a:cb:f6:12:90') or
+                is_state('sensor.bssid_2','70:3a:cb:f6:12:94') or
+                is_state('sensor.bssid_2','e4:f0:42:ea:93:e1') or
+                is_state('sensor.bssid_2','e4:f0:42:ea:93:dd')
+          %}
+            Woonkamer
+          {% elif is_state('sensor.bssid_2','70:3a:cb:f5:3d:c8') or
+                  is_state('sensor.bssid_2','70:3a:cb:f5:3d:cc')
+          %}
+            Slaapkamer
+          {% elif is_state('sensor.bssid_2','3c:28:6d:9a:a1:55') or
+                  is_state('sensor.bssid_2','3c:28:6d:9a:a1:51')
+          %}
+            Babykamer / Studeerkamer
+          {% elif is_state('sensor.bssid_2','70:3a:cb:f6:11:60') or
+                  is_state('sensor.bssid_2','70:3a:cb:f6:11:5c')
+          %}
+            Zolder
+          {% else %}
+            Afwezig
+          {% endif %}
+
+    ##
+    # ROOM OCCUPANCY SENSORS
+    ##
+
+     woonkamer_occupancy:
+      friendly_name: "Woonkamer Occupancy"
+      value_template: >-
+        {% if is_state('sensor.peter_room_presence','Woonkamer') and
+              is_state('sensor.sharona_room_presence','Woonkamer')
+        %}
+          2
+        {% elif is_state('sensor.peter_room_presence','Woonkamer') or
+              is_state('sensor.sharona_room_presence','Woonkamer')
+        %}
+          1
+        {% else %}
+          0
+        {% endif %}
+
+     slaapkamer_occupancy:
+      friendly_name: "Slaapkamer Occupancy"
+      value_template: >-
+        {% if is_state('sensor.peter_room_presence','Slaapkamer') and
+              is_state('sensor.sharona_room_presence','Slaapkamer')
+        %}
+          2
+        {% elif is_state('sensor.peter_room_presence','Slaapkamer') or
+              is_state('sensor.sharona_room_presence','Slaapkamer')
+        %}
+          1
+        {% else %}
+          0
+        {% endif %}
+
+     zolder_occupancy:
+      friendly_name: "Zolder Occupancy"
+      value_template: >-
+        {% if is_state('sensor.peter_room_presence','Zolder') and
+              is_state('sensor.sharona_room_presence','Zolder')
+        %}
+          2
+        {% elif is_state('sensor.peter_room_presence','Zolder') or
+              is_state('sensor.sharona_room_presence','Zolder')
+        %}
+          1
+        {% else %}
+          0
+        {% endif %}

@@ -1,0 +1,5 @@
+all_devices:
+  name: All devices
+  entities:
+    - !secret owntracks_peter
+    - !secret owntracks_sharona

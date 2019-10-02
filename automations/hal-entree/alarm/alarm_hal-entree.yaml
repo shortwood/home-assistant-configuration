@@ -1,0 +1,104 @@
+###
+# NOTIFY MOVEMENT WHEN ALARM IS ENGAGED
+###
+
+- alias: '[Hal Entree][Alarm] - Beweging gedetecteerd'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d000349240c_occupancy
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.alarm_armed
+        state: 'on'
+      - condition: template
+        value_template: "{{ (states('input_select.house_mode') != 'Nacht') }}"
+  action:
+    - service: notify.ios_iedereen
+      data:
+        title: "Bewegingsmelding"
+        message: "Er is beweging geconstateerd in Hal - Entree."
+        data:
+          push:
+            category: "alarm"
+    - service: script.sound_alarm
+
+- alias: '[Hal Entree][Alarm] - Voordeur geopend'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00044b3df7_contact
+      to: 'on'
+  condition:
+      - condition: state
+        entity_id: input_boolean.alarm_armed
+        state: 'on'
+      - condition: template
+        value_template: "{{ (states('input_select.house_mode') != 'Nacht') }}"
+  action:
+    - service: notify.ios_iedereen
+      data:
+        title: "Deur geopend"
+        message: "De voordeur is geopend."
+        data:
+          push:
+            category: "alarm"
+    - service: script.sound_alarm
+
+- alias: '[Hal Entree][Alarm] - Melding voordeur geopend'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d00044b3df7_contact
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: group.all_devices
+      state: 'home'
+    - condition: or
+      conditions:
+        - condition: and
+          conditions:
+            - condition: template
+              value_template: "{{ states('sensor.peter_room_presence') != 'Woonkamer' }}"
+            - condition: template
+              value_template: "{{ states('sensor.peter_room_presence') != 'Afwezig' }}"
+            - condition: template
+              value_template: "{{ states('sensor.sharona_room_presence') != 'Woonkamer' }}"
+            - condition: template
+              value_template: "{{ states('sensor.sharona_room_presence') != 'Afwezig' }}"
+        - condition: and
+          conditions:
+            - condition: state
+              entity_id: input_boolean.alarm_armed
+              state: 'on'
+            - condition: state
+              entity_id: input_select.house_mode
+              state: 'Nacht'
+  action:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.slaapkamer_2
+        volume_level: 0.9
+    - service: tts.google_cloud_say
+      data:
+        entity_id: media_player.slaapkamer_2
+        message: 'Voordeur geopend'
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.slaapkamer_2
+        volume_level: 0.4
+    - service: notify.ios_iedereen
+      data:
+        title: "Deur geopend"
+        message: "De voordeur is geopend."
+        data:
+          push:
+            category: "alarm"
+    - delay:
+        seconds: 15
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.slaapkamer_2
+        volume_level: 0.4
+    - service: script.sound_alarm

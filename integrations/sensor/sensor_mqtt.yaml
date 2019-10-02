@@ -1,0 +1,5 @@
+- platform: mqtt
+  name: "Woonkamer Volumelevel"
+  state_topic: "woonkamer/cec/volume"
+  availability_topic: "woonkamer/bridge/status"
+  value_template: "{{ value | float / 100}}"

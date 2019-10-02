@@ -1,0 +1,50 @@
+
+# TURN LIGHTS ON IN HALLWAY WHEN MOTION DETECTED
+- alias: '[Hal Entree][Licht] - Auto aan'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d000349240c_occupancy
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.all_devices
+      state: home
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "-00:30:00"
+        - condition: sun
+          before: sunrise
+          before_offset: "+00:30:00"
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.hal_entree
+      brightness: >-
+        {% if is_state('input_select.house_mode', 'Nacht') %}
+          25
+        {% else %}
+          200
+        {% endif %}
+
+# TURN LIGHTS OF AFTER 30 SECONDS NO MOTION
+- alias: '[Hal Entree][Licht] - Auto uit'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.0x00158d000349240c_occupancy
+      to: 'off'
+      for:
+        seconds: 30
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: light.hal_entree
+        state: 'on'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.hal_entree

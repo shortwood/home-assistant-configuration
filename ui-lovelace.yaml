@@ -1,0 +1,60 @@
+resources:
+  - url: /local/js/mini-media-player-bundle.js?v=1.2.2
+    type: module
+  - url: /local/js/card-tools.js
+    type: js
+  - url: /local/js/popup-card.js
+    type: js
+  - url: /local/js/fold-entity-row.js
+    type: module
+  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/weather-card/weather-card.min.js
+    type: module
+  - url: /local/js/button-card.js
+    type: module
+  - url: https://fonts.googleapis.com/css?family=Open+Sans&display=swap
+    type: css
+  - url: /local/js/decluttering-card.js
+    type: module
+  - url: /local/js/card-mod.js
+    type: module
+  - url: /local/js/layout-card.js
+    type: js
+  - url: /local/js/markdown-mod.js
+    type: module
+  - url: /local/js/compact-custom-header.js?v=0.0.1
+    type: module
+  - url: /local/js/vertical-stack-in-card.js?v=0.1.3
+    type: js
+  - url: /local/js/lovelace-home-feed-card.js?v=0.0.0
+    type: js
+  - url: /local/js/upcoming-media-card.js
+    type: js
+  - url: /local/js/multiple-entity-row.js?v=1.2.1
+    type: js
+  - url: /local/js/slider-entity-row.js
+    type: module
+  - url: /local/js/mini-graph-card-bundle.js?v=0.5.0
+    type: module
+  - url: /local/js/atomic_calendar.js
+    type: module
+  - url: /local/css/custom-css.css
+    type: css
+  - type: module
+    url: >-
+      https://cdn.jsdelivr.net/gh/custom-cards/spotify-card@1.8/dist/spotify-card.umd.js
+
+decluttering_templates: !include_dir_named lovelace/decluttering_templates/
+
+title: Eijgenraamtuinen 15
+
+cch:
+  # disable_sidebar: true
+  compact_header: true
+  options: clock
+  background: "#fff"
+  all_tabs_color: "#999"
+  active_tab_color: rgb(66,133,244)
+  tab_indicator_color: rgb(66,133,244)
+  all_buttons_color: "#999"
+
+views: !include_dir_merge_list lovelace/views/

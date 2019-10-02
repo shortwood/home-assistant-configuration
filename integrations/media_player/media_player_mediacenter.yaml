@@ -1,0 +1,90 @@
+- platform: universal
+  name: Mediacenter Woonkamer
+  children:
+    - media_player.kodi_woonkamer
+    - media_player.3c36e4_eosstb_003766202901
+    - media_player.mediacenter
+  state_template: >-
+    {% if is_state('switch.woonkamer_tv','off') %}
+      off
+    {% elif is_state('media_player.kodi_woonkamer','playing') %}
+      playing
+    {% elif is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+      playing
+    {% elif is_state('media_player.mediacenter','playing') %}
+      playing
+    {% elif is_state('switch.woonkamer_tv','on') %}
+      idle
+    {% endif %}
+  commands:
+    turn_on:
+      service: switch.turn_on
+      data:
+        entity_id:
+          - switch.woonkamer_tv
+          - switch.woonkamer_receiver
+    turn_off:
+      service: switch.turn_off
+      data:
+        entity_id:
+          - switch.woonkamer_tv
+          - switch.woonkamer_receiver
+    volume_up:
+      service: switch.turn_on
+      data:
+        entity_id: switch.woonkamer_receiver_volumecontrol
+    volume_down:
+      service: switch.turn_off
+      data:
+        entity_id: switch.woonkamer_receiver_volumecontrol
+    volume_mute:
+      service: switch.toggle
+      data:
+        entity_id: switch.woonkamer_receiver_mute
+    select_source:
+      service: script.set_mediacenter_input
+      data_template:
+        source: '{{ source }}'
+    volume_set:
+      service: script.set_mediacenter_volume
+      data_template:
+        volume_level: '{{ volume_level }}'
+
+  attributes:
+    state: switch.woonkamer_tv
+    is_volume_muted: switch.woonkamer_receiver_mute
+    volume_level: sensor.woonkamer_volumelevel
+    source: input_select.woonkamer_receiver_input
+    source_list: 'TV,HDMI1,HDMI2,HDMI3,HDMI4'
+
+- platform: universal
+  name: Mediacenter Slaapkamer
+  children:
+    - media_player.kodi_slaapkamer
+    - media_player.3c36e4_eosstb_003898505601
+    - media_player.slaapkamer_tv
+  commands:
+    turn_on:
+      service: switch.turn_on
+      data:
+        entity_id: switch.tv_lg
+    turn_off:
+      service: switch.turn_off
+      data:
+        entity_id: switch.tv_lg
+    volume_up:
+      service: switch.turn_on
+      data:
+        entity_id: switch.tv_lg_volume
+    volume_down:
+      service: switch.turn_off
+      data:
+        entity_id: switch.tv_lg_volume
+    volume_mute:
+      service: switch.toggle
+      data:
+        entity_id: switch.tv_lg_mute
+
+  attributes:
+    state: switch.tv_lg
+    is_volume_muted: switch.tv_lg_mute

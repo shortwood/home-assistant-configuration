@@ -1,0 +1,11 @@
+  - platform: afvalbeheer
+    wastecollector: Avalex
+    resources:
+      - gft
+      - papier
+      - pmd
+    postcode: !secret home_zipcode
+    streetnumber: !secret home_housenumber
+    upcomingsensor: 1
+    dateonly: 1
+    builtinicons: 0

@@ -1,0 +1,17 @@
+localized_announcement:
+  alias: '[Huis][Omroepbericht] - Lokaal omroepbericht'
+  sequence:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.omroepen
+        volume_level: 0.8
+    - service: tts.google_cloud_say
+      data_template:
+        entity_id: media_player.omroepen
+        message: "{{message}}"
+    - delay:
+        seconds: 10
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.omroepen
+        volume_level: 0.4

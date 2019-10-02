@@ -1,0 +1,53 @@
+- alias: '[People][All] - Coming home'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: group.all_devices
+      to: 'home'
+  action:
+    - wait_template: "{{ is_state('binary_sensor.0x00158d00044b3df7_contact', 'on') }}"
+      timeout: "00:10:00"
+      continue_on_timeout: 'false'
+    - condition: state
+      entity_id: light.woonkamer
+      state: 'on'
+    - service: scene.turn_on
+      data:
+        entity_id: scene.woonkamer_standaard
+    - service: light.turn_on
+      data:
+        entity_id: light.keuken
+        brightness: 100
+
+- alias: '[People][All] - Coming home while sleepmode on'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: person.peter
+      to: 'home'
+    - platform: state
+      entity_id: person.sharona
+      to: 'home'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_boolean.sharona_inbed
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.peter_inbed
+          state: 'on'
+  action:
+    - wait_template: "{{ is_state('binary_sensor.0x00158d00044b3df7_contact', 'on') }}"
+      timeout: "00:10:00"
+      continue_on_timeout: 'false'
+    - service: scene.turn_on
+      data:
+        entity_id: scene.woonkamer_standaard
+    - service: light.turn_on
+      data:
+        entity_id: light.keuken
+        brightness: 100

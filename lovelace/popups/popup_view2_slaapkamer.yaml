@@ -1,0 +1,33 @@
+      light.slaapkamer:
+        title: Verlichting - Slaapkamer
+        card:
+          type: entities
+          entities:
+            - type: custom:fold-entity-row
+              head:
+                entity: light.hue_white_lamp_1
+                name: Plafond
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.hue_white_lamp_1
+            - type: custom:fold-entity-row
+              head:
+                entity: light.hue_ambiance_candle_3
+                name: Dressoir
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.hue_ambiance_candle_3
+            - type: custom:fold-entity-row
+              head:
+                entity: light.hue_ambiance_candle_1
+                name: Nachtkastje Peter
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.hue_ambiance_candle_1
+            - type: custom:fold-entity-row
+              head:
+                entity: light.hue_ambiance_candle_2
+                name: Nachtkastje Sharona
+              items:
+                - type: custom:slider-entity-row
+                  entity: light.hue_ambiance_candle_2
