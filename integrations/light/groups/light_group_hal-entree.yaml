@@ -1,7 +1,10 @@
-  - platform: group
+  - platform: mqtt
+    schema: json
     name: Hal - Entree
-    entities:
-      - light.hue_ambiance_spot_gang2
-      - light.hue_ambiance_spot_gang3
-      - light.hue_ambiance_spot_gang4
-      - light.0x001788010446d6eb_light
+    command_topic: "zigbee2mqtt/hal_entree/set"
+    state_topic: "zigbee2mqtt/hal_entree"
+
+    # Modify according to features supported by all devices in group
+    color_temp: true
+    brightness: true
+    rgb: false

@@ -5,7 +5,7 @@
       entity_id: group.all_devices
       to: 'home'
   action:
-    - wait_template: "{{ is_state('binary_sensor.0x00158d00044b3df7_contact', 'on') }}"
+    - wait_template: "{{ is_state('binary_sensor.hal_entree_voordeur_contact', 'on') }}"
       timeout: "00:10:00"
       continue_on_timeout: 'false'
     - condition: state
@@ -41,7 +41,7 @@
           entity_id: input_boolean.peter_inbed
           state: 'on'
   action:
-    - wait_template: "{{ is_state('binary_sensor.0x00158d00044b3df7_contact', 'on') }}"
+    - wait_template: "{{ is_state('binary_sensor.hal_entree_voordeur_contact', 'on') }}"
       timeout: "00:10:00"
       continue_on_timeout: 'false'
     - service: scene.turn_on

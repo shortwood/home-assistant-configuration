@@ -3,3 +3,23 @@
   state_topic: "woonkamer/cec/volume"
   availability_topic: "woonkamer/bridge/status"
   value_template: "{{ value | float / 100}}"
+
+- platform: mqtt
+  name: "Roompresence Peter"
+  state_topic: "owntracks/pkorthout/3CD38954-05D8-4C2A-8CDF-7257D9452128/event"
+  value_template: >-
+    {% if (value_json.event == 'enter') %}
+      {{ value_json.desc | string | regex_replace(find='-', replace='', ignorecase=False) }}
+    {% else %}
+      {{ states('sensor.roompresence_peter') }}
+    {% endif %}
+
+- platform: mqtt
+  name: "Roompresence Sharona"
+  state_topic: "owntracks/skorthout/F4602191-C579-4D80-8762-52B67E7FEEBE/event"
+  value_template: >-
+    {% if (value_json.event == 'enter') %}
+      {{ value_json.desc | string | regex_replace(find='-', replace='', ignorecase=False) }}
+    {% else %}
+      {{ states('sensor.roompresence_sharona') }}
+    {% endif %}

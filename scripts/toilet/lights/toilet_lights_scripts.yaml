@@ -1,0 +1,13 @@
+# Toilet light routine
+toilet_light:
+  alias: '[Toilet][Lights] - Light routine'
+  sequence:
+    - data:
+        entity_id: switch.toilet
+      service: switch.turn_on
+    - delay: 00:00:15
+    - wait_template: "{{ is_state('binary_sensor.toilet_deur_contact','on')}}"
+      timeout: '00:20:00'
+    - data:
+        entity_id: switch.toilet
+      service: switch.turn_off

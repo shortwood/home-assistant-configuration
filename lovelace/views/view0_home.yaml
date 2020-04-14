@@ -540,6 +540,28 @@
                         - value: 'off'
                           icon: mdi:lightbulb-off-outline
                           color: rgb(204,204,204)
+                          
+              - type: horizontal-stack
+                cards:
+                  - type: custom:decluttering-card
+                    template: icon_button_gray
+                    variables:
+                      - entity: light.badkamer
+                      - name: Badkamer
+                      - show_name: true
+                      - show_state: false
+                      - show_last_changed: false
+                      - tap_action:
+                          action: toggle
+                      - hold_action:
+                          action: more-info
+                      - state:
+                        - value: 'on'
+                          icon: mdi:lightbulb
+                          color: rgb(244,180,0)
+                        - value: 'off'
+                          icon: mdi:lightbulb-off-outline
+                          color: rgb(204,204,204)
 
           - type: horizontal-stack
             cards:

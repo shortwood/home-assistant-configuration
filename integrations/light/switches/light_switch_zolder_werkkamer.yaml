@@ -1,0 +1,3 @@
+  - platform: switch
+    name: zolder_werkkamer_light
+    entity_id: switch.zolder_werkkamer

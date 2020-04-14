@@ -5,7 +5,7 @@
 - alias: '[Hal Entree][Alarm] - Beweging gedetecteerd'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d000349240c_occupancy
+      entity_id: binary_sensor.hal_entree_beweging_occupancy
       to: 'on'
   condition:
     condition: and
@@ -25,10 +25,15 @@
             category: "alarm"
     - service: script.sound_alarm
 
+
+###
+# NOTIFY FRONT DOOR OPENED WHEN ALARM IS ENGAGED
+###
+
 - alias: '[Hal Entree][Alarm] - Voordeur geopend'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d00044b3df7_contact
+      entity_id: binary_sensor.hal_entree_voordeur_contact
       to: 'on'
   condition:
       - condition: state
@@ -49,32 +54,18 @@
 - alias: '[Hal Entree][Alarm] - Melding voordeur geopend'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d00044b3df7_contact
+      entity_id: binary_sensor.hal_entree_voordeur_contact
       to: 'on'
   condition:
     - condition: state
       entity_id: group.all_devices
       state: 'home'
-    - condition: or
-      conditions:
-        - condition: and
-          conditions:
-            - condition: template
-              value_template: "{{ states('sensor.peter_room_presence') != 'Woonkamer' }}"
-            - condition: template
-              value_template: "{{ states('sensor.peter_room_presence') != 'Afwezig' }}"
-            - condition: template
-              value_template: "{{ states('sensor.sharona_room_presence') != 'Woonkamer' }}"
-            - condition: template
-              value_template: "{{ states('sensor.sharona_room_presence') != 'Afwezig' }}"
-        - condition: and
-          conditions:
-            - condition: state
-              entity_id: input_boolean.alarm_armed
-              state: 'on'
-            - condition: state
-              entity_id: input_select.house_mode
-              state: 'Nacht'
+    - condition: state
+      entity_id: input_boolean.alarm_armed
+      state: 'on'
+    - condition: state
+      entity_id: input_select.house_mode
+      state: 'Nacht'
   action:
     - service: media_player.volume_set
       data:

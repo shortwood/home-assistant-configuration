@@ -3,7 +3,7 @@ mediacenter_npo1:
   alias: '[Woonkamer][MediaCenter][TV] - NPO 1'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: NPO 1 HD
     service: media_player.select_source
 
@@ -12,7 +12,7 @@ mediacenter_npo2:
   alias: '[Woonkamer][MediaCenter][TV] - NPO 2'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: NPO 2 HD
     service: media_player.select_source
 
@@ -21,7 +21,7 @@ mediacenter_npo3:
   alias: '[Woonkamer][MediaCenter][TV] - NPO 3'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: NPO 3 HD
     service: media_player.select_source
 
@@ -30,7 +30,7 @@ mediacenter_rtl4:
   alias: '[Woonkamer][MediaCenter][TV] - RTL4'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: RTL 4 HD
     service: media_player.select_source
 
@@ -39,7 +39,7 @@ mediacenter_rtl5:
   alias: '[Woonkamer][MediaCenter][TV] - RTL5'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: RTL 5 HD
     service: media_player.select_source
 
@@ -48,7 +48,7 @@ mediacenter_sbs6:
   alias: '[Woonkamer][MediaCenter][TV] - SBS6'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: SBS6 HD
     service: media_player.select_source
 
@@ -57,7 +57,7 @@ mediacenter_rtl7:
   alias: '[Woonkamer][MediaCenter][TV] - RTL7'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: RTL 7 HD
     service: media_player.select_source
 
@@ -66,7 +66,7 @@ mediacenter_veronica:
   alias: '[Woonkamer][MediaCenter][TV] - Veronica'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: Veronica HD / Disney XD
     service: media_player.select_source
 
@@ -75,7 +75,7 @@ mediacenter_rtl8:
   alias: '[Woonkamer][MediaCenter][TV] - RTL8'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: RTL 8 HD
     service: media_player.select_source
 
@@ -84,7 +84,7 @@ mediacenter_net5:
   alias: '[Woonkamer][MediaCenter][TV] - Net5'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: Net5 HD
     service: media_player.select_source
 
@@ -93,7 +93,7 @@ mediacenter_fox:
   alias: '[Woonkamer][MediaCenter][TV] - FOX'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: FOX HD
     service: media_player.select_source
 
@@ -102,7 +102,7 @@ mediacenter_rtlz:
   alias: '[Woonkamer][MediaCenter][TV] - RTLZ'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: RTL Z HD
     service: media_player.select_source
 
@@ -111,7 +111,7 @@ mediacenter_ziggosport:
   alias: '[Woonkamer][MediaCenter][TV] - Ziggo Sport'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: Ziggo Sport HD
     service: media_player.select_source
 
@@ -120,7 +120,7 @@ mediacenter_comedycentral:
   alias: '[Woonkamer][MediaCenter][TV] - Comedy Central'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: Comedy Central HD
     service: media_player.select_source
 
@@ -129,7 +129,7 @@ mediacenter_spike:
   alias: '[Woonkamer][MediaCenter][TV] - Spike'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: Spike HD
     service: media_player.select_source
 
@@ -138,7 +138,7 @@ mediacenter_tlc:
   alias: '[Woonkamer][MediaCenter][TV] - TLC'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: TLC HD
     service: media_player.select_source
 
@@ -147,7 +147,7 @@ mediacenter_mtv:
   alias: '[Woonkamer][MediaCenter][TV] - MTV'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: MTV HD
     service: media_player.select_source
 
@@ -156,7 +156,7 @@ mediacenter_discovery:
   alias: '[Woonkamer][MediaCenter][TV] - Discovery'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: Discovery HD
     service: media_player.select_source
 
@@ -165,6 +165,6 @@ mediacenter_ng:
   alias: '[Woonkamer][MediaCenter][TV] - NG'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       source: National Geographic Channel HD
     service: media_player.select_source

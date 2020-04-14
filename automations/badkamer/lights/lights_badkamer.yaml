@@ -1,0 +1,59 @@
+####
+# TURN LIGHTS ON WHEN MOTION DETECTED
+####
+
+- alias: '[Badkamer][Licht] - Auto aan'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.badkamer_beweging_occupancy
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.all_devices
+      state: home
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "-00:30:00"
+        - condition: sun
+          before: sunrise
+          before_offset: "+00:30:00"
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.badkamer_plafond_light
+      brightness: >-
+        {% if is_state('input_select.house_mode', 'Nacht') or
+              is_state('input_boolean.peter_inbed', 'on') or
+              is_state('input_boolean.sharona_inbed', 'on')
+        %}
+          5
+        {% else %}
+          200
+        {% endif %}
+
+
+####
+# TURN LIGHTS OF AFTER 5 MINUTES NO MOTION
+####
+
+- alias: '[Badkamer][Licht] - Auto uit'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.badkamer_beweging_occupancy
+      to: 'off'
+      for:
+        minutes: 5
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: light.badkamer_plafond_light
+        state: 'on'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.badkamer_plafond_light

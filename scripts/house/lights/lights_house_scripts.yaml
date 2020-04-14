@@ -6,18 +6,16 @@
 lights_tobed_all:
   alias: '[Huis][Lights] - To bed routine all persons'
   sequence:
-  - data:
-      group_name: Woonkamer
-      scene_name: Nachtlampje
-    service: hue.hue_activate_scene
-  - data:
-      entity_id: light.keuken
-    service: light.turn_off
-  - delay: 00:05:00
-  - data:
-      entity_id: light.woonkamer
-    service: light.turn_off
-
+    - service: scene.turn_on
+      data:
+        entity_id: scene.woonkamer_gedimd
+    - data:
+        entity_id: light.keuken
+      service: light.turn_off
+    - delay: 00:05:00
+    - data:
+        entity_id: light.woonkamer
+      service: light.turn_off
 
 # Script - Light routine when one person goes to bed
 lights_tobed_single:
@@ -46,65 +44,60 @@ mockupancy:
 downstairs_lighting:
   alias: '[Huis][Lights] - Mockupancy Downstairs'
   sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Woonkamer
-      scene_name: Lake Placid
-  - wait_template: "{{ states('sensor.time') == (((state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')) - (60 * 60))|timestamp_custom('%H:%M', false)) }}"
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Keuken
-      scene_name: Ontspannen
-  - delay: "00:{{ (range(0, 15)|random|int) }}:00"
-  - service: light.turn_off
-    data:
-      entity_id: light.keuken
-  - wait_template: "{{ states('sensor.time') == (((state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')) - (20 * 60))|timestamp_custom('%H:%M', false)) }}"
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Keuken
-      scene_name: Ontspannen
-  - delay: "00:{{ (range(0, 15)|random|int) }}:00"
-  - service: light.turn_off
-    data:
-      entity_id: light.keuken
-  - wait_template: "{{ states('sensor.time') == (state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')|int|timestamp_custom('%H:%M', False)) }}"
-  - service: script.lights_tobed_all
+    - service: scene.turn_on
+      data:
+        entity_id: scene.woonkamer_standaard_transition
+    - wait_template: "{{ states('sensor.time') == (((state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')) - (60 * 60))|timestamp_custom('%H:%M', false)) }}"
+    - service: scene.turn_on
+      data:
+        entity_id: scene.keuken_standaard
+    - delay: "00:{{ (range(0, 15)|random|int) }}:00"
+    - service: light.turn_off
+      data:
+        entity_id: light.keuken
+    - wait_template: "{{ states('sensor.time') == (((state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')) - (20 * 60))|timestamp_custom('%H:%M', false)) }}"
+    - service: scene.turn_on
+      data:
+        entity_id: scene.keuken_standaard
+    - delay: "00:{{ (range(0, 15)|random|int) }}:00"
+    - service: light.turn_off
+      data:
+        entity_id: light.keuken
+    - wait_template: "{{ states('sensor.time') == (state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')|int|timestamp_custom('%H:%M', False)) }}"
+    - service: script.lights_tobed_all
 
 upstairs_lighting:
   alias: '[Huis][Lights] - Mockupancy Upstairs'
   sequence:
-  - wait_template: "{{ states('sensor.time') == (((state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')) - (75 * 60))|timestamp_custom('%H:%M', false)) }}"
-  - service: light.turn_on
-    data:
-      entity_id: light.babykamer
-      brightness: 144
-  - delay: "00:{{ (range(0, 30)|random|int) }}:00"
-  - service: light.turn_on
-    data:
-      entity_id: light.studeerkamer
-      brightness: 144
-  - delay: "00:{{ (range(0, 40)|random|int) }}:00"
-  - service: light.turn_off
-    data:
-      entity_id:
-        - light.studeerkamer
-        - light.babykamer
-  - wait_template: "{{ states('sensor.time') == (state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')|int|timestamp_custom('%H:%M', False)) }}"
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Slaapkamer
-      scene_name: Gaan slapen
-  - delay: "00:{{ (range(0, 25)|random|int) }}:00"
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Slaapkamer
-      scene_name: Gaan slapen Peter
-  - delay: "00:{{ (range(0, 59)|random|int) }}:00"
-  - service: light.turn_off
-    data:
-      entity_id: light.slaapkamer
-  - service: notify.ios_iedereen
-    data:
-      title: Vakantiemodus
-      message: "Lichtplan beeindigd, alle lampen staan uit."
+    - wait_template: "{{ states('sensor.time') == (((state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')) - (75 * 60))|timestamp_custom('%H:%M', false)) }}"
+    - service: light.turn_on
+      data:
+        entity_id: light.babykamer
+        brightness: 144
+    - delay: "00:{{ (range(0, 30)|random|int) }}:00"
+    - service: light.turn_on
+      data:
+        entity_id: light.studeerkamer
+        brightness: 144
+    - delay: "00:{{ (range(0, 40)|random|int) }}:00"
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.studeerkamer
+          - light.babykamer
+    - wait_template: "{{ states('sensor.time') == (state_attr('input_datetime.mockupancy_bedtime' , 'timestamp')|int|timestamp_custom('%H:%M', False)) }}"
+    - service: scene.turn_on
+      data:
+        entity_id: scene.slaapkamer_helder
+    - delay: "00:{{ (range(0, 25)|random|int) }}:00"
+    - service: scene.turn_on
+      data:
+        entity_id: scene.slaapkamer_nachtlampje
+    - delay: "00:{{ (range(0, 59)|random|int) }}:00"
+    - service: light.turn_off
+      data:
+        entity_id: light.slaapkamer
+    - service: notify.ios_iedereen
+      data:
+        title: Vakantiemodus
+        message: "Lichtplan beeindigd, alle lampen staan uit."

@@ -11,6 +11,9 @@
     - platform: state
       entity_id: input_select.house_mode
       from: 'Gast'
+  condition:
+    condition: template
+    value_template: "{{ (states('input_select.house_mode') != 'Gast') and (states('input_select.house_mode') != 'Thuis') }}"
   action:
     service: input_boolean.turn_on
     data:
@@ -30,6 +33,9 @@
     - platform: state
       entity_id: input_select.house_mode
       to: 'Gast'
+    - platform: state
+      entity_id: input_boolean.alarm_armed
+      to: 'off'
     - platform: event
       event_type: ios.notification_action_fired
       event_data:

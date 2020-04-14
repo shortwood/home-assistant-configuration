@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
+
+html, body {
+  font-family: 'Varela', sans-serif;
+}
+
+/* SUBMENU */
+.item.-submenu-button {
+  background-color: transparent;
+  border-radius: 50px !important;
+  opacity: 0.9;
+}
+
+.item.-submenu-button-active {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.item.-submenu-button .item-clickable {
+  display: none;
+}
+
+.item.-submenu-button .item-title {
+  width: 250px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  top: 50%;
+  font-size: 18px;
+  margin-top: -9px;
+}
+
+/* NO TRIANGLE */
+.item.-no-triangle .item-triangle {
+  display: none;
+}
+
+/* SMALL ROUND ICON */
+.item.-small-round-icon {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 100px;
+}
+
+.item.-small-round-icon .item-entity--icon {
+  line-height: 85px;
+}
+
+.item.-small-round-icon .item-title,
+.item.-small-round-value .item-title {
+  width: 150px;
+  height: 25px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  font-size: 14px;
+}
+
+.item.-small-round-icon .item-subtitle {
+  width: 150px;
+  height: 20px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  font-size: 12px;
+}
+
+.item.-small-round-icon .item-clickable {
+  display: none;
+}
+
+/* BIG ROUND ICON */
+.item.-big-round-icon,
+.item.-big-round-value {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 100px;
+}
+
+.item.-big-round-icon.-green,
+.item.-big-round-icon.-schoon,
+.item.-big-round-icon.-light.-on,
+.item.-big-round-icon.-recycle.-on {
+  background-color: #20bf6b;
+}
+
+.item.-big-round-icon.-orange,
+.item.-big-round-icon.-door.-on,
+.item.-small-round-icon.-door.-on,
+.item.-big-round-icon.-wassen,
+.item.-big-round-icon.-drogen,
+.item.-big-round-icon.-gast,
+.item.-big-round-icon.-weg,
+.item.-big-round-icon.-vakantie,
+.item.-big-round-icon.-nacht {
+  background-color: #f7b731;
+}
+
+.item.-big-round-icon.-alarm.-on {
+  background-color: #eb3b5a;
+}
+
+.item.-big-round-icon .item-clickable {
+  display: none;
+}
+
+.item.-big-round-icon .item-state,
+.item.-big-round-value .item-state {
+  display: none;
+}
+
+.item.-big-round-icon .item-title,
+.item.-big-round-value .item-title {
+  width: 200px;
+  height: 28px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  font-size: 22px;
+}
+
+.item.-big-round-icon .item-subtitle,
+.item.-big-round-value .item-subtitle {
+  width: 200px;
+  height: 22px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: -70px;
+  font-size: 18px;
+}
+
+.item.-big-round-icon .item-entity--icon {
+  font-size: 60px;
+  line-height: 100px;
+}
+
+.item.-big-round-icon .item-button.-center-right {
+  bottom: 72.5px;
+  right: 10px;
+  font-size: 32px;
+}
+
+.item.-big-round-icon .item-button.-bottom-right {
+  bottom: 72.5px;
+  right: 138px;
+  font-size: 32px;
+}
+
+.item.-big-round-value .item-entity--value,
+.item.-big-round-value .item-entity--unit {
+  line-height: 100px;
+}
+
+/* BIG ROUND IMAGE */
+
+.item.-big-round-img {
+  background-color: transparent !important;
+}
+
+.item.-big-round-img .item-clickable {
+  display: none;
+}
+
+.item.-big-round-img .item-background {
+  border-radius: 100px !important;
+}
+
+.item.-big-round-img .item-title {
+  width: 200px;
+  height: 28px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  font-size: 22px;
+}
+
+.item.-big-round-img .item-subtitle {
+  width: 200px;
+  height: 20px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: -70px;
+  font-size: 18px;
+}
+
+/* BIG ROUND GAUGE */
+.item.-big-round-gauge {
+  background-color: transparent;
+}
+
+.item.-big-round-gauge .item-title {
+  width: 200px;
+  height: 28px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  font-size: 22px;
+}
+
+.item.-big-round-gauge .item-subtitle {
+  width: 200px;
+  height: 20px;
+  text-align: center;
+  padding: 0;
+  left: 0;
+  right: 0;
+  bottom: -70px;
+  font-size: 18px;
+}
+
+/* ICON NR */
+.item.-round-icon-number {
+    border-radius: 50px;
+}
+
+.item.-round-icon-number .item-clickable {
+  display: none;
+}
+
+.item.-round-icon-number .item-subtitle {
+  background-color: #f7b731;
+  text-align: center;
+  font-size: 18px;
+  width: 15px;
+  height: 25px;
+  border-radius: 20px;
+  bottom: 0;
+  right: 5px;
+  left: auto;
+}
+
+.item.-round-icon-number .item-icon {
+  opacity: 0.7;
+}
+
+
+/* ACTION BUTTON */
+.item.-action-btn,
+.item.-discriptive-btn {
+  border-radius: 100px;
+}
+
+.item.-action-btn.-on,
+.item.-action-btn.-action-guest.-gast,
+.item.-discriptive-btn.-door-window.-on {
+  background-color: #f7b731;
+}
+
+.item.-action-btn.-active {
+  background-color: #20bf6b;
+}
+
+.item.-action-btn.-action-red {
+  background-color: #eb3b5a;
+}
+
+.item.-action-btn .item-clickable,
+.item.-discriptive-btn .item-clickable {
+  display: none;
+}
+
+.item.-action-btn .item-title {
+  width: 400px;
+  text-align: center;
+  font-size: 20px;
+  bottom: 35px;
+}
+
+.item.-action-btn.-inline .item-title {
+  width: 360px;
+  bottom: 20px;
+}
+
+.item.-discriptive-btn .item-title {
+  font-size: 20px;
+  bottom: 35px;
+  left: 25px;
+}
+
+.item.-discriptive-btn .item-subtitle {
+  font-size: 18px;
+  bottom: 35px;
+  right: 25px;
+  left: auto;
+}
+
+.item.-discriptive-btn.-half .item-title {
+  font-size: 20px;
+  bottom: 11px;
+  left: 25px;
+}
+
+.item.-discriptive-btn.-half .item-subtitle {
+  font-size: 18px;
+  bottom: 11px;
+  right: 25px;
+  left: auto;
+}
+
+/* CUSTOM ITEMS */
+.item {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.item.-on {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.item.-custom-media_player {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 15px;
+}
+
+.item.-custom-media_player .item-clickable {
+  display: none;
+}
+
+.item.-custom-media_player .item-title {
+  text-align: center;
+  bottom: 50px;
+  font-size: 20px;
+}
+
+.item.-custom-media_player .item-subtitle {
+  text-align: center;
+  bottom: 20px;
+  font-size: 18px;
+}
+
+.item.-custom-media_player .media-player-table table tbody tr:first-child td,
+.item.-custom-media_player .media-player-table table tbody tr:last-child td {
+  background-color: rgba(0,0,0,0.7);
+}
+
+.item.-custom-media_player .media-player-table td.media-player-table--td-main-button {
+  border-top-left-radius: 15px;
+}
+
+.item.-custom-media_player .media-player-table td.media-player-table--td-buttons {
+  border-top-right-radius: 15px;
+}
+
+.item.-custom-media_player .media-player-table table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+.item.-custom-media_player .media-player-table table tbody tr:last-child td:last-child {
+  padding-top: 10px;
+  border-bottom-right-radius: 15px;
+}
+
+.item.-custom-media_player-placeholder,
+.item.-custom-music_player-placeholder {
+  border-radius: 15px;
+}
+
+.item.-custom-media_player-placeholder .item-clickable,
+.item.-custom-music_player-placeholder .item-clickable {
+  display: none;
+}
+
+.item.-custom-media_player-placeholder .item-title {
+  width: 400px;
+  font-size: 20px;
+  text-align: center;
+  bottom: 10px;
+}
+
+.item.-custom-media_player-placeholder .item-subtitle {
+  width: 400px;
+  font-size: 18px;
+  text-align: center;
+  bottom: 193px;
+}
+
+.item.-custom-music_player-placeholder .item-subtitle {
+  width: 400px;
+  font-size: 18px;
+  text-align: center;
+  bottom: -40px;
+}
+
+.item.-custom-music_player {
+  background-color: transparent;
+}
+
+.item.-custom-music_player .item-clickable {
+  display: none;
+}
+
+.item.-custom-music_player .item-title {
+  width: 400px;
+  text-align: center;
+  bottom: -40px;
+  font-size: 20px;
+  height: 25px;
+}
+
+.item.-custom-music_player .item-subtitle {
+  width: 400px;
+  text-align: center;
+  bottom: -65px;
+  font-size: 16px;
+  height: 25px;
+}
+
+.item.-custom-media_player .item-background {
+  border-radius: 15px;
+}
+
+.item.-custom-music_player-control {
+  background-color: transparent;
+  opacity: 0.8;
+}
+
+.item.-custom-music_player-control .item-clickable {
+  display: none;
+}
+
+.item.-custom-volume_slider {
+  background-color: transparent;
+  border-radius: 15px;
+}
+
+.item.-custom-volume_slider.-group {
+  background-color: rgba(255,255,255,0.08);
+}
+
+.item.-custom-volume_slider .item-title {
+  text-align: left;
+  font-size: 16px;
+  bottom: 15px;
+  left: -125px;
+}
+
+.item.-custom-volume_slider .item-entity {
+  display: none;
+}
+
+.item.-custom-volume_slider.-off {
+  opacity: 0.1
+}

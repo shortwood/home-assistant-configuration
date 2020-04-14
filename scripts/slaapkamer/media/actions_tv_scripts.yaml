@@ -5,7 +5,7 @@ bedroom_watch_tv:
         entity_id: input_number.bedroom_startupdelay
         value: >-
           {% if is_state('switch.tv_lg','off') %}
-            10
+            12
           {% else %}
             0
           {% endif %}
@@ -14,21 +14,13 @@ bedroom_watch_tv:
         entity_id: media_player.mediacenter_slaapkamer
       service: media_player.turn_on
     - data:
-        entity_id: media_player.3c36e4_eosstb_003898505601
-      service_template: >-
-            {% if is_state('media_player.3c36e4_eosstb_003898505601','off') %}
-              media_player.turn_on
-            {% else %}
-              script.dummy
-            {% endif %}
+        entity_id: media_player.stb_arris_uhd_2
+      service: media_player.turn_on
     - condition: or
       conditions:
         - condition: state
           entity_id: input_select.bedroom_tv_input
           state: 'False'
-        - condition: state
-          entity_id: input_select.bedroom_tv_input
-          state: 'Kodi'
         - condition: state
           entity_id: input_select.bedroom_tv_input
           state: 'Chromecast'
@@ -42,160 +34,6 @@ bedroom_watch_tv:
         entity_id: input_select.bedroom_tv_input
         option: 'Mediabox'
 
-bedroom_watch_movie_kodi:
-  alias: '[Slaapkamer][Mediacenter] - Film kijken'
-  sequence:
-    - data_template:
-        entity_id: input_number.bedroom_startupdelay
-        value: >-
-          {% if is_state('switch.tv_lg','off') %}
-            10
-          {% else %}
-            0
-          {% endif %}
-      service: input_number.set_value
-    - data:
-        entity_id: media_player.mediacenter_slaapkamer
-      service: media_player.turn_on
-    - data:
-        entity_id: media_player.3c36e4_eosstb_003898505601
-      service_template: >-
-        {% if is_state('media_player.3c36e4_eosstb_003898505601','playing') %}
-          media_player.turn_off
-        {% else %}
-          script.dummy
-        {% endif %}
-    - service: kodi.call_method
-      data:
-        entity_id: kodi.slaapkamer
-        method: GUI.ActivateWindow
-        window: videos
-        parameters:
-          - MovieTitles
-    - service: kodi.call_method
-      data:
-        entity_id: kodi.slaapkamer
-        method: Input.Right
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: input_select.bedroom_tv_input
-          state: 'False'
-        - condition: state
-          entity_id: input_select.bedroom_tv_input
-          state: 'Mediabox'
-        - condition: state
-          entity_id: input_select.bedroom_tv_input
-          state: 'Chromecast'
-    - delay:
-        seconds: "{{ states('input_number.bedroom_startupdelay') | int }}"
-    - service: switch.turn_off
-      data:
-        entity_id: switch.tv_lg_hdmi1_hdmi2
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_tv_input
-        option: 'Kodi'
-
-bedroom_watch_tvshow_kodi:
-  alias: '[Slaapkamer][Mediacenter] - TV Serie kijken'
-  sequence:
-    - data_template:
-        entity_id: input_number.bedroom_startupdelay
-        value: >-
-          {% if is_state('switch.tv_lg','off') %}
-            10
-          {% else %}
-            0
-          {% endif %}
-      service: input_number.set_value
-    - data:
-        entity_id: media_player.mediacenter_slaapkamer
-      service: media_player.turn_on
-    - data:
-        entity_id: media_player.3c36e4_eosstb_003898505601
-      service_template: >-
-        {% if is_state('media_player.3c36e4_eosstb_003898505601','playing') %}
-          media_player.turn_off
-        {% else %}
-          script.dummy
-        {% endif %}
-    - delay:
-        seconds: "{{ states('input_number.bedroom_startupdelay') | int }}"
-    - service: kodi.call_method
-      data:
-        entity_id: kodi.slaapkamer
-        method: GUI.ActivateWindow
-        window: videos
-        parameters:
-          - TVShowTitles
-    - service: kodi.call_method
-      data:
-        entity_id: kodi.slaapkamer
-        method: Input.Right
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: input_select.bedroom_tv_input
-          state: 'False'
-        - condition: state
-          entity_id: input_select.bedroom_tv_input
-          state: 'Mediabox'
-        - condition: state
-          entity_id: input_select.bedroom_tv_input
-          state: 'Chromecast'
-    - service: switch.turn_off
-      data:
-        entity_id: switch.tv_lg_hdmi1_hdmi2
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_tv_input
-        option: 'Kodi'
-
-bedroom_watch_kodi:
-    alias: '[Slaapkamer][Mediacenter] - Kodi kijken'
-    sequence:
-      - data_template:
-          entity_id: input_number.bedroom_startupdelay
-          value: >-
-            {% if is_state('switch.tv_lg','off') %}
-              10
-            {% else %}
-              0
-            {% endif %}
-        service: input_number.set_value
-      - data:
-          entity_id: media_player.mediacenter_slaapkamer
-        service: media_player.turn_on
-      - data:
-          entity_id: media_player.3c36e4_eosstb_003898505601
-        service_template: >-
-          {% if is_state('media_player.3c36e4_eosstb_003898505601','playing') %}
-            media_player.turn_off
-          {% else %}
-            script.dummy
-          {% endif %}
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: input_select.bedroom_tv_input
-            state: 'False'
-          - condition: state
-            entity_id: input_select.bedroom_tv_input
-            state: 'Mediabox'
-          - condition: state
-            entity_id: input_select.bedroom_tv_input
-            state: 'Chromecast'
-      - delay:
-          seconds: "{{ states('input_number.bedroom_startupdelay') | int }}"
-      - service: switch.turn_off
-        data:
-          entity_id: switch.tv_lg_hdmi1_hdmi2
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.bedroom_tv_input
-          option: 'Kodi'
-
 bedroom_watch_chromecast:
     alias: '[Slaapkamer][Mediacenter] - Chromecast kijken'
     sequence:
@@ -203,7 +41,7 @@ bedroom_watch_chromecast:
           entity_id: input_number.bedroom_startupdelay
           value: >-
             {% if is_state('switch.tv_lg','off') %}
-              10
+              12
             {% else %}
               0
             {% endif %}
@@ -212,9 +50,9 @@ bedroom_watch_chromecast:
           entity_id: media_player.mediacenter_slaapkamer
         service: media_player.turn_on
       - data:
-          entity_id: media_player.3c36e4_eosstb_003898505601
+          entity_id: media_player.stb_arris_uhd_2
         service_template: >-
-          {% if is_state('media_player.3c36e4_eosstb_003898505601','playing') %}
+          {% if is_state('media_player.stb_arris_uhd_2','playing') %}
             media_player.turn_off
           {% else %}
             script.dummy
@@ -227,9 +65,6 @@ bedroom_watch_chromecast:
           - condition: state
             entity_id: input_select.bedroom_tv_input
             state: 'Mediabox'
-          - condition: state
-            entity_id: input_select.bedroom_tv_input
-            state: 'Kodi'
       - delay:
           seconds: "{{ states('input_number.bedroom_startupdelay') | int }}"
       - service: switch.turn_on
@@ -244,19 +79,11 @@ shutdown_bedroom_mediacenter:
   alias: '[Slaapkamer][MediaCenter] - Afsluiten'
   sequence:
     - data:
-        entity_id: media_player.mediacenter_slaapkamer
+        entity_id: switch.tv_lg
+      service: switch.turn_off
+    - data:
+        entity_id: media_player.stb_arris_uhd_2
       service: media_player.turn_off
-    - data:
-        entity_id: media_player.kodi_slaapkamer
-      service: media_player.media_stop
-    - data:
-        entity_id: media_player.3c36e4_eosstb_003898505601
-      service_template: >-
-        {% if is_state('media_player.3c36e4_eosstb_003898505601','playing') %}
-          media_player.turn_off
-        {% else %}
-          script.dummy
-        {% endif %}
     - data:
         entity_id: media_player.slaapkamer_tv
       service: media_player.turn_off

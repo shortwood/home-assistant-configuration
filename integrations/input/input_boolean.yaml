@@ -15,6 +15,13 @@
    name: If Sharona is in bed
    icon: mdi:hotel
 
+  ##
+  # JULIE IS IN BED
+  ##
+
+  julie_inbed:
+    name: If Julie is in bed
+    icon: mdi:hotel
 
   ##
   # ALARM IS ARMED

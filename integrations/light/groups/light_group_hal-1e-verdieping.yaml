@@ -1,7 +1,10 @@
-  - platform: group
+  - platform: mqtt
+    schema: json
     name: Hal - 1e Verdieping
-    entities:
-      - light.hue_ambiance_spot_hb2
-      - light.hue_ambiance_spot_hb3
-      - light.hue_ambiance_spot_hb4
-      - light.0x00178801048493b4_light
+    command_topic: "zigbee2mqtt/hal_1e_verdieping/set"
+    state_topic: "zigbee2mqtt/hal_1e_verdieping"
+
+    # Modify according to features supported by all devices in group
+    color_temp: true
+    brightness: true
+    rgb: false

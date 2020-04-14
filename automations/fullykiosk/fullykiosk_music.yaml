@@ -1,0 +1,18 @@
+- alias: '[Fullykiosk][Music] - Switch to Musicpage'
+  trigger:
+    - platform: state
+      entity_id: media_player.beneden
+      to: 'playing'
+    - platform: state
+      entity_id: media_player.boven
+      to: 'playing'
+    - platform: state
+      entity_id: media_player.keuken
+      to: 'playing'
+    - platform: state
+      entity_id: media_player.woonkamer_2
+      to: 'playing'
+  action:
+    - event: tileboard
+      event_data:
+        command: 'music_playing'

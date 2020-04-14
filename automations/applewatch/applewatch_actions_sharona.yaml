@@ -22,4 +22,44 @@
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.sharona_inbed
-      - service: script.sharona_awake  
+      - service: script.sharona_awake
+
+  - alias: "[AppleWatch][Sharona] - TV kijken"
+    initial_state: true
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: 'TV kijken - Sharona'
+    action:
+      - data:
+          title: 'TV kijken'
+          message: 'In welke ruimte wil je TV kijken?'
+          data:
+            push:
+              category: media_rooms
+        service_template: >-
+            {% if is_state('sensor.roompresence_sharona','Woonkamer') %}
+              script.watch_tv
+            {% elif is_state('sensor.roompresence_sharona','Slaapkamer') %}
+              script.bedroom_watch_tv
+            {% else %}
+              notify.mobile_app_iphone_van_sharona
+            {% endif %}
+
+  - alias: "[AppleWatch][Sharona] - Kamer afsluiten"
+    initial_state: true
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: 'Kamer afsluiten - Sharona'
+    action:
+        service_template: >-
+            {% if is_state('sensor.roompresence_sharona','Woonkamer') %}
+              script.shutdown_livingroom
+            {% elif is_state('sensor.roompresence_sharona','Slaapkamer') %}
+              script.shutdown_bedroom
+            {% else %}
+              script.dummy
+            {% endif %}

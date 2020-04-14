@@ -112,114 +112,52 @@
         value_template: '{{ states.switch.droger.attributes["total_energy_kwh"] | float }}'
         unit_of_measurement: 'kWh'
 
-
     ##
-    # PETER HOUSE LOCATION SENSOR
-    ##
-
-     peter_room_presence:
-        friendly_name: "Peter: Positie in huis"
-        value_template: >-
-          {% if is_state('person.peter','not_home') %}
-            Afwezig
-          {% elif is_state('sensor.bssid','70:3a:cb:f6:12:90') or
-                is_state('sensor.bssid','70:3a:cb:f6:12:94') or
-                is_state('sensor.bssid','e4:f0:42:ea:93:e1') or
-                is_state('sensor.bssid','e4:f0:42:ea:93:dd')
-          %}
-            Woonkamer
-          {% elif is_state('sensor.bssid','70:3a:cb:f5:3d:c8') or
-                  is_state('sensor.bssid','70:3a:cb:f5:3d:cc')
-          %}
-            Slaapkamer
-          {% elif is_state('sensor.bssid_2','3c:28:6d:9a:a1:55') or
-                  is_state('sensor.bssid_2','3c:28:6d:9a:a1:51')
-          %}
-            Babykamer / Studeerkamer
-          {% elif is_state('sensor.bssid','70:3a:cb:f6:11:60') or
-                  is_state('sensor.bssid','70:3a:cb:f6:11:5c')
-          %}
-            Zolder
-          {% else %}
-            Onbekend
-          {% endif %}
-
-    ##
-    # SHARONA HOUSE LOCATION SENSOR
+    # TOTALS SENSORS
     ##
 
-     sharona_room_presence:
-        friendly_name: "Sharona: Positie in huis"
-        value_template: >-
-          {% if is_state('person.sharona','not_home') %}
-            Afwezig
-          {% elif is_state('sensor.bssid_2','70:3a:cb:f6:12:90') or
-                is_state('sensor.bssid_2','70:3a:cb:f6:12:94') or
-                is_state('sensor.bssid_2','e4:f0:42:ea:93:e1') or
-                is_state('sensor.bssid_2','e4:f0:42:ea:93:dd')
-          %}
-            Woonkamer
-          {% elif is_state('sensor.bssid_2','70:3a:cb:f5:3d:c8') or
-                  is_state('sensor.bssid_2','70:3a:cb:f5:3d:cc')
-          %}
-            Slaapkamer
-          {% elif is_state('sensor.bssid_2','3c:28:6d:9a:a1:55') or
-                  is_state('sensor.bssid_2','3c:28:6d:9a:a1:51')
-          %}
-            Babykamer / Studeerkamer
-          {% elif is_state('sensor.bssid_2','70:3a:cb:f6:11:60') or
-                  is_state('sensor.bssid_2','70:3a:cb:f6:11:5c')
-          %}
-            Zolder
-          {% else %}
-            Afwezig
-          {% endif %}
-
-    ##
-    # ROOM OCCUPANCY SENSORS
-    ##
-
-     woonkamer_occupancy:
-      friendly_name: "Woonkamer Occupancy"
+     total_lights_on:
       value_template: >-
-        {% if is_state('sensor.peter_room_presence','Woonkamer') and
-              is_state('sensor.sharona_room_presence','Woonkamer')
-        %}
-          2
-        {% elif is_state('sensor.peter_room_presence','Woonkamer') or
-              is_state('sensor.sharona_room_presence','Woonkamer')
-        %}
-          1
-        {% else %}
-          0
-        {% endif %}
+        {% set lights = [
+          states.light.babykamer_plafond_light,
+          states.light.badkamer_plafond_light,
+          states.light.badkamer_doucheverlichting_light,
+          states.light.hal_entree,
+          states.light.hal_1e_verdieping,
+          states.light.keuken,
+          states.light.slaapkamer_dressoir_light,
+          states.light.slaapkamer_bedlamp_peter_light,
+          states.light.slaapkamer_bedlamp_sharona_light,
+          states.light.slaapkamer_plafond,
+          states.light.studeerkamer_plafond_light,
+          states.light.toilet_plafond_light,
+          states.light.woonkamer_piano_light,
+          states.light.woonkamer_spot_links_light,
+          states.light.woonkamer_spot_rechts_light,
+          states.light.woonkamer_eettafel_light,
+          states.light.woonkamer_muurspot_light,
+          states.light.woonkamer_plafond_achter_light,
+          states.light.woonkamer_plafond_voor_light,
+          states.light.woonkamer_voorraadkast_light,
+          states.light.zolder_overloop_light,
+          states.light.zolder_washok_light,
+          states.light.zolder_werkkamer
+        ] %}
+        {{ lights | selectattr('state','eq','on') | list | count }}
 
-     slaapkamer_occupancy:
-      friendly_name: "Slaapkamer Occupancy"
+     total_doors_open:
       value_template: >-
-        {% if is_state('sensor.peter_room_presence','Slaapkamer') and
-              is_state('sensor.sharona_room_presence','Slaapkamer')
-        %}
-          2
-        {% elif is_state('sensor.peter_room_presence','Slaapkamer') or
-              is_state('sensor.sharona_room_presence','Slaapkamer')
-        %}
-          1
-        {% else %}
-          0
-        {% endif %}
+        {% set doors = [
+          states.binary_sensor.hal_entree_voordeur_contact,
+          states.binary_sensor.woonkamer_achterdeur_contact
+        ] %}
+        {{ doors | selectattr('state','eq','on') | list | count }}
 
-     zolder_occupancy:
-      friendly_name: "Zolder Occupancy"
-      value_template: >-
-        {% if is_state('sensor.peter_room_presence','Zolder') and
-              is_state('sensor.sharona_room_presence','Zolder')
-        %}
-          2
-        {% elif is_state('sensor.peter_room_presence','Zolder') or
-              is_state('sensor.sharona_room_presence','Zolder')
-        %}
-          1
-        {% else %}
-          0
-        {% endif %}
+     total_windows_open:
+       value_template: >-
+         {% set windows = [
+           states.binary_sensor.babykamer_raam_contact,
+           states.binary_sensor.studeerkamer_raam_contact,
+           states.binary_sensor.zolder_raam_contact
+         ] %}
+         {{ windows | selectattr('state','eq','on') | list | count }}

@@ -1,0 +1,28 @@
+- alias: '[Woonkamer][Licht] - Licht voorraadkast aan bij deur open'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.woonkamer_voorraadkast_deur_contact
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.woonkamer_voorraadkast_light
+      state: 'off'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.woonkamer_voorraadkast_light
+      brightness: 200
+
+- alias: '[Woonkamer][Licht] - Licht voorraadkast uit bij deur dicht'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.woonkamer_voorraadkast_deur_contact
+      to: 'off'
+  condition:
+    - condition: state
+      entity_id: light.woonkamer_voorraadkast_light
+      state: 'on'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.woonkamer_voorraadkast_light

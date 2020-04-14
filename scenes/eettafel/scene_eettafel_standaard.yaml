@@ -1,0 +1,6 @@
+  - name: "Eettafel - standaard"
+    entities:
+      light.woonkamer_eettafel_light:
+        state: true
+        xy_color: [0.402, 0.332]
+        brightness: 99

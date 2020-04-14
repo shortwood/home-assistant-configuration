@@ -1,0 +1,5 @@
+  - platform: group
+    name: Badkamer
+    entities:
+      - light.badkamer_plafond_light
+      - light.badkamer_doucheverlichting_light

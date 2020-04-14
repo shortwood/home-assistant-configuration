@@ -1,0 +1,6 @@
+  - name: "Keuken - gedimd"
+    entities:
+      light.keuken:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 77

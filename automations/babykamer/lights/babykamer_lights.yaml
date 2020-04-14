@@ -1,0 +1,41 @@
+- alias: '[Babykamer][Licht] - Licht aan bij beweging'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.babykamer_beweging_occupancy
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.babykamer
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.julie_inbed
+      state: 'off'
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "-00:30:00"
+        - condition: sun
+          before: sunrise
+          before_offset: "+00:30:00"
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.babykamer
+      brightness: 150
+
+- alias: '[Babykamer][Licht] - Licht uit bij inactiviteit'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.babykamer_beweging_occupancy
+      to: 'off'
+      for:
+        minutes: 5
+  condition:
+    - condition: state
+      entity_id: light.babykamer
+      state: 'on'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.babykamer

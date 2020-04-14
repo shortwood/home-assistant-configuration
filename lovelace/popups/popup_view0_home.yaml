@@ -9,7 +9,7 @@
                   name: Locatie
                   icon: mdi:map-marker-circle
                   secondary_info: last-changed
-                - entity: sensor.peter_room_presence
+                - entity: sensor.roompresence_peter
                   name: Ruimte
                   icon: mdi:location-enter
                   secondary_info: last-changed
@@ -54,7 +54,7 @@
                   name: Locatie
                   icon: mdi:map-marker-circle
                   secondary_info: last-changed
-                - entity: sensor.sharona_room_presence
+                - entity: sensor.roompresence_sharona
                   name: Ruimte
                   icon: mdi:location-enter
                   secondary_info: last-changed

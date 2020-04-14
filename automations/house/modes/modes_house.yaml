@@ -30,7 +30,7 @@
         minutes: 5
   condition:
     condition: template
-    value_template: "{{ (states('input_select.house_mode') != 'Vakantie') and (states('input_select.house_mode') != 'Weg') }}"
+    value_template: "{{ (states('input_select.house_mode') != 'Gast') and (states('input_select.house_mode') != 'Vakantie') and (states('input_select.house_mode') != 'Weg') }}"
   action:
     service: input_select.select_option
     data:

@@ -45,3 +45,48 @@
     availability_topic: "woonkamer/bridge/status"
     payload_on: "1F:82:23:00"
     payload_off: "1F:82:24:00"
+
+  - platform: mqtt
+    name: "Douchelicht"
+    command_topic: "shellies/douchelicht/relay/0/command"
+    state_topic: "shellies/douchelicht/relay/0"
+    availability_topic: "shellies/douchelicht/online"
+    qos: 1
+    retain: false
+    payload_on: "on"
+    payload_off: "off"
+    payload_available: "true"
+    payload_not_available: "false"
+    state_on: "on"
+    state_off: "off"
+    optimistic: false
+
+  - platform: mqtt
+    name: "Toilet"
+    command_topic: "shellies/toilet/relay/0/command"
+    state_topic: "shellies/toilet/relay/0"
+    availability_topic: "shellies/toilet/online"
+    qos: 1
+    retain: false
+    payload_on: "on"
+    payload_off: "off"
+    payload_available: "true"
+    payload_not_available: "false"
+    state_on: "on"
+    state_off: "off"
+    optimistic: false
+
+  - platform: mqtt
+    name: "Zolder - Werkkamer"
+    command_topic: "shellies/zolder-werkkamer/relay/0/command"
+    state_topic: "shellies/zolder-werkkamer/relay/0"
+    availability_topic: "shellies/zolder-werkkamer/online"
+    qos: 1
+    retain: false
+    payload_on: "on"
+    payload_off: "off"
+    payload_available: "true"
+    payload_not_available: "false"
+    state_on: "on"
+    state_off: "off"
+    optimistic: false

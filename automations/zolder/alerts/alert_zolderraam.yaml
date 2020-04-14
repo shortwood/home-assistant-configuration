@@ -7,7 +7,7 @@
         minutes: 1
   condition:
     - condition: state
-      entity_id: binary_sensor.0x00158d000444c094_contact
+      entity_id: binary_sensor.zolder_raam_contact
       state: 'on'
   action:
     - service: script.smart_notify

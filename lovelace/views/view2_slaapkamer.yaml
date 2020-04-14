@@ -465,3 +465,85 @@
                       h3 {
                         color: rgb(51,182,121);
                       }
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+              - type: markdown
+                content: |
+                   ## <ha-icon icon="mdi:account-circle-outline"></ha-icon> Personen
+                style: |
+                  ha-card {
+                    background-color: rgba(231,230,221,0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 100%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: left;
+                  }
+                  h2 {
+                    font-size: 16px;
+                    font-weight: 300 !important;
+                    color: #777;
+                  }
+                  h2 ha-icon {
+                    margin-top: -4px;
+                    padding-right: 5px;
+                    color: #999;
+                  }
+
+              - type: horizontal-stack
+                cards:
+
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.roompresence_peter
+                        state_not: 'Slaapkamer'
+                      - entity: sensor.roompresence_sharona
+                        state_not: 'Slaapkamer'
+                    card:
+                      type: markdown
+                      content: |
+                         ## Niemand aanwezig
+                      style: |
+                        ha-card {
+                          background-color: rgba(231,230,221,0);
+                          font-family: 'Open Sans', sans-serif;
+                          font-size: 100%;
+                          -webkit-box-shadow: none;
+                          -moz-box-shadow: none;
+                          box-shadow: none;
+                          text-align: left;
+                        }
+                        h2, h3 {
+                          font-size: 14px;
+                          font-weight: 100 !important;
+                          text-align: center;
+                          padding-bottom: 15px;
+                        }
+                        h2 {
+                          color: #666;
+                        }
+
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.roompresence_peter
+                        state: 'Slaapkamer'
+                    card:
+                      type: custom:decluttering-card
+                      template: picture_button_small
+                      variables:
+                        - entity: person.peter
+                        - entity_picture: /local/img/pkorthout.jpg
+
+                  - type: conditional
+                    conditions:
+                      - entity: sensor.roompresence_sharona
+                        state: 'Slaapkamer'
+                    card:
+                      type: custom:decluttering-card
+                      template: picture_button_small
+                      variables:
+                        - entity: person.sharona
+                        - entity_picture: /local/img/skorthout.jpg

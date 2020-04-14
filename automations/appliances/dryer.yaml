@@ -2,13 +2,12 @@
 # AUTOMATIONS FOR SETTING DRYER STATUS
 ##
 
-# Starting the dryer
-- alias: '[Appliances][Droger] - Opstarten'
+# Drying program
+- alias: '[Appliances][Droger] - Drogen'
   trigger:
     platform: numeric_state
     entity_id: sensor.droger_current_power
-    above: 100
-    below: 200
+    above: 250
   condition:
     condition: or
     conditions:
@@ -19,58 +18,22 @@
         entity_id: input_select.droger_status
         state: 'Schoon'
   action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.droger_status
-        option: 'Opstarten'
-
-# Drying program
-- alias: '[Appliances][Droger] - Drogen'
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.droger_current_power
-    above: 250
-  condition:
-    - condition: state
-      entity_id: input_select.droger_status
-      state: 'Opstarten'
-  action:
     service: input_select.select_option
     data:
       entity_id: input_select.droger_status
       option: 'Drogen'
-
-# Anti-creese / Ending
-- alias: '[Appliances][Droger] - Anti-kreuk'
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.droger_current_power
-    below: 100
-    above: 1
-  condition:
-    - condition: state
-      entity_id: input_select.droger_status
-      state: 'Drogen'
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.droger_status
-        option: 'Anti-kreuk'
 
 # Clean
 - alias: '[Appliances][Droger] - Schoon'
   trigger:
     platform: numeric_state
     entity_id: sensor.droger_current_power
-    below: 1
+    below: 100
     for:
       minutes: 5
   condition:
     condition: or
     conditions:
-      - condition: state
-        entity_id: input_select.droger_status
-        state: 'Anti-kreuk'
       - condition: state
         entity_id: input_select.droger_status
         state: 'Drogen'

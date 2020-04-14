@@ -1,3 +1,16 @@
+enable_guest_mode:
+  alias: '[Huis][Modus] - Gastmodes activeren'
+  sequence:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.house_mode
+        option: >-
+          {% if is_state('input_select.house_mode', 'Gast') %}
+            Thuis
+          {% else %}
+            Gast
+          {% endif %}
+
 
 # DISABLE GUEST MODE WITH PRESERVATION OF THE MODE
 

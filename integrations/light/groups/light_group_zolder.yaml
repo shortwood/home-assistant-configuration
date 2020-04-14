@@ -1,5 +1,6 @@
   - platform: group
     name: Zolder
     entities:
-      - light.0x000d6ffffe016196_light
-      - light.0xd0cf5efffeff6a43_light
+      - light.zolder_overloop_light
+      - light.zolder_washok_light
+      - light.zolder_werkkamer_light

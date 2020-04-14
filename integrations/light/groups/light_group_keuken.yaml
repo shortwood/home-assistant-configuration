@@ -1,0 +1,10 @@
+- platform: mqtt
+  schema: json
+  name: keuken
+  command_topic: "zigbee2mqtt/keuken/set"
+  state_topic: "zigbee2mqtt/keuken"
+
+  # Modify according to features supported by all devices in group
+  color_temp: true
+  brightness: true
+  rgb: false

@@ -1,9 +1,11 @@
-
+####
 # NOTIFY MOVEMENT WHEN ALARM IS ENGAGED
+####
+
 - alias: '[Woonkamer][Alarm] - Beweging gedetecteerd'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d00034ccb9a_occupancy
+      entity_id: binary_sensor.woonkamer_beweging_occupancy
       to: 'on'
   condition:
     condition: and
@@ -23,10 +25,15 @@
             category: "alarm"
     - service: script.sound_alarm
 
+
+#####
+# NOTIFY BACKDOOR OPENED WHEN ALARM ENGAGED
+#####
+
 - alias: '[Woonkamer][Alarm] - Achterdeur geopend'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d00044b3dd1_contact
+      entity_id: binary_sensor.woonkamer_achterdeur_contact
       to: 'on'
   condition:
       - condition: state
@@ -44,10 +51,15 @@
             category: "alarm"
     - service: script.sound_alarm
 
+
+#####
+# NOTIFY BACKDOOR OPENED WHEN ALARM ENGAGED [NIGHTMODE]
+#####
+
 - alias: '[Woonkamer][Alarm] - Melding achterdeur geopend'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d00044b3dd1_contact
+      entity_id: binary_sensor.woonkamer_achterdeur_contact
       to: 'on'
   condition:
     - condition: state

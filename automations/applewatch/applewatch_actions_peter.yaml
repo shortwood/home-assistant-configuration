@@ -6,6 +6,9 @@
         event_data:
           actionName: 'Sleepmode On - Peter'
     action:
+      - service: automation.turn_on
+        data:
+          entity_id: automation.routine_sleepmode_av_mediacenter_slaapkamer_auto_off
       - service: input_boolean.turn_on
         data:
           entity_id: input_boolean.peter_inbed
@@ -39,79 +42,13 @@
             push:
               category: media_rooms
         service_template: >-
-            {% if is_state('sensor.peter_room_presence','Woonkamer') %}
+            {% if is_state('sensor.roompresence_peter','Woonkamer') %}
               script.watch_tv
-            {% elif is_state('sensor.peter_room_presence','Slaapkamer') %}
+            {% elif is_state('sensor.roompresence_peter','Slaapkamer') %}
               script.bedroom_watch_tv
             {% else %}
               notify.mobile_app_iphone_van_peter
             {% endif %}
-
-  - alias: "[AppleWatch][Peter] - Muziek luisteren"
-    initial_state: true
-    trigger:
-      - platform: event
-        event_type: ios.action_fired
-        event_data:
-          actionName: 'Muziek luisteren - Peter'
-    action:
-      - service: media_player.volume_set
-        data_template:
-          entity_id: media_player.woonkamer_2
-          volume_level: >-
-            {% if is_state('sensor.peter_room_presence','Woonkamer') %}
-              0.7
-            {% else %}
-              0
-            {% endif %}
-      - service: media_player.volume_set
-        data_template:
-          entity_id: media_player.woonkamer_cc
-          volume_level: >-
-            {% if is_state('sensor.peter_room_presence','Woonkamer') %}
-              0.7
-            {% else %}
-              0
-            {% endif %}
-      - service: media_player.volume_set
-        data_template:
-          entity_id: media_player.keuken
-          volume_level: >-
-            {% if is_state('sensor.peter_room_presence','Woonkamer') %}
-              0.7
-            {% else %}
-              0
-            {% endif %}
-      - service: media_player.volume_set
-        data_template:
-          entity_id: media_player.slaapkamer_tv
-          volume_level: >-
-            {% if is_state('sensor.peter_room_presence','Slaapkamer') %}
-              0.7
-            {% else %}
-              0
-            {% endif %}
-      - service: media_player.volume_set
-        data_template:
-          entity_id: media_player.slaapkamer_2
-          volume_level: >-
-            {% if is_state('sensor.peter_room_presence','Slaapkamer') %}
-              0.7
-            {% else %}
-              0
-            {% endif %}
-      - service: spotcast.start
-        data:
-          entity_id: media_player.alle_apparaten_2
-          uri: 'spotify:playlist:7B9EXUACaF7uZVLpdnaMaX'
-          random_song: true
-          transfer_playback: true
-      - delay:
-          seconds: 30
-      - service: media_player.shuffle_set
-        data:
-          entity_id: media_player.spotify
-          shuffle: true
 
   - alias: "[AppleWatch][Peter] - Kamer afsluiten"
     initial_state: true
@@ -122,9 +59,9 @@
           actionName: 'Kamer afsluiten - Peter'
     action:
         service_template: >-
-            {% if is_state('sensor.peter_room_presence','Woonkamer') %}
+            {% if is_state('sensor.roompresence_peter','Woonkamer') %}
               script.shutdown_livingroom
-            {% elif is_state('sensor.peter_room_presence','Slaapkamer') %}
+            {% elif is_state('sensor.roompresence_peter','Slaapkamer') %}
               script.shutdown_bedroom
             {% else %}
               script.dummy

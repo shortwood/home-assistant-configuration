@@ -7,7 +7,7 @@ slaapkamer_npo1:
   alias: '[Slaapkamer][MediaCenter][TV] - NPO 1'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: NPO 1 HD
     service: media_player.select_source
 
@@ -16,7 +16,7 @@ slaapkamer_npo2:
   alias: '[Slaapkamer][MediaCenter][TV] - NPO 2'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: NPO 2 HD
     service: media_player.select_source
 
@@ -25,7 +25,7 @@ slaapkamer_npo3:
   alias: '[Slaapkamer][MediaCenter][TV] - NPO 3'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: NPO 3 HD
     service: media_player.select_source
 
@@ -34,7 +34,7 @@ slaapkamer_rtl4:
   alias: '[Slaapkamer][MediaCenter][TV] - RTL4'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: RTL 4 HD
     service: media_player.select_source
 
@@ -43,7 +43,7 @@ slaapkamer_rtl5:
   alias: '[Slaapkamer][MediaCenter][TV] - RTL5'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: RTL 5 HD
     service: media_player.select_source
 
@@ -52,7 +52,7 @@ slaapkamer_sbs6:
   alias: '[Slaapkamer][MediaCenter][TV] - SBS6'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: SBS6 HD
     service: media_player.select_source
 
@@ -61,7 +61,7 @@ slaapkamer_rtl7:
   alias: '[Slaapkamer][MediaCenter][TV] - RTL7'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: RTL 7 HD
     service: media_player.select_source
 
@@ -70,7 +70,7 @@ slaapkamer_rtl8:
   alias: '[Slaapkamer][MediaCenter][TV] - RTL8'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: RTL 8 HD
     service: media_player.select_source
 
@@ -79,7 +79,7 @@ slaapkamer_comedycentral:
   alias: '[Slaapkamer][MediaCenter][TV] - Comedy Central'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: Comedy Central HD
     service: media_player.select_source
 
@@ -88,7 +88,7 @@ slaapkamer_tlc:
   alias: '[Slaapkamer][MediaCenter][TV] - TLC'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: TLC HD
     service: media_player.select_source
 
@@ -96,6 +96,6 @@ slaapkamer_mtv:
   alias: '[Slaapkamer][MediaCenter][TV] - MTV'
   sequence:
   - data:
-      entity_id: media_player.3c36e4_eosstb_003898505601
+      entity_id: media_player.stb_arris_uhd_2
       source: MTV HD
     service: media_player.select_source

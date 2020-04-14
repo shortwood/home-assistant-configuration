@@ -5,31 +5,25 @@ peter_tobed:
   - data:
       entity_id: input_boolean.peter_inbed
     service: input_boolean.turn_on
-  - service_template: >-
-        {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') or is_state('media_player.kodi_woonkamer','playing') %}
-          notify.mobile_app_iphone_van_peter
-        {% elif as_timestamp(now()) - states.input_boolean.sharona_inbed.last_changed | as_timestamp  > 5400 %}
-          script.bedroom_watch_tvshow_kodi
-        {% else %}
-          script.dummy
-        {% endif %}
+  - service: notify.mobile_app_iphone_van_peter
     data_template:
       title: 'Welterusten!'
       message: >-
-        {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
-          "Wil je {{state_attr('media_player.3c36e4_eosstb_003766202901','media_series_title')}} op {{state_attr('media_player.3c36e4_eosstb_003766202901','media_title')}} verder kijken in de slaapkamer?"
-        {% elif is_state('media_player.kodi_woonkamer','playing') and is_state_attr('media_player.kodi_woonkamer','media_content_type','tvshow') %}
-          "Wil je de aflevering {{state_attr('media_player.kodi_woonkamer','media_title')}} van {{state_attr('media_player.kodi_woonkamer','media_series_title')}} verder kijken in de slaapkamer?"
-        {% elif is_state('media_player.kodi_woonkamer','playing') and is_state_attr('media_player.kodi_woonkamer','media_content_type','movie') %}
-          "Wil je de film {{state_attr('media_player.kodi_woonkamer','media_title')}} verder kijken in de slaapkamer?"
+        {% if is_state('media_player.stb_arris_uhd','playing') and is_state('media_player.stb_arris_uhd_2','off') %}
+          Wil je {{state_attr('media_player.stb_arris_uhd','media_title')}} op {{state_attr('media_player.stb_arris_uhd','source')}} verder kijken in de slaapkamer?
         {% else %}
-          "Slaap lekker"
+          Slaap lekker
         {% endif %}
       data:
         push:
-          category: "continue_watching"
+          category: >-
+            {% if is_state('media_player.stb_arris_uhd','playing') and is_state('media_player.stb_arris_uhd_2','off') %}
+              "continue_watching"
+            {% else %}
+              "none"
+            {% endif %}
   - service_template: >-
-        {% if is_state('input_boolean.sharona_inbed','on') %}
+        {% if (is_state('input_boolean.sharona_inbed','on') or (states('person.sharona') != 'home')) %}
           script.lights_tobed_all
         {% else %}
           script.lights_tobed_single
@@ -42,26 +36,16 @@ peter_tobed:
         {% endif %}
     data:
       entity_id: media_player.woonkamer
-  - wait_template: "{{is_state('binary_sensor.0x00158d0004142172_occupancy','on')}}"
-  - data_template:
-      group_name: Slaapkamer
-      scene_name: >-
-        {% if is_state('input_boolean.sharona_inbed','on') %}
-          Gaan slapen Peter
-        {% else %}
-          Gaan slapen
-        {% endif %}
-    service: hue.hue_activate_scene
-  - condition: and
-    conditions:
-      - condition: state
-        entity_id: input_boolean.sharona_inbed
-        state: 'off'
-      - condition: template
-        value_template: "{{ (states('person.sharona') != 'home') }}"
-  - service: scene.turn_on
-    data:
-      entity_id: scene.woonkamer_gedimd
+  - condition: template
+    value_template:  "{{ states('media_player.mediacenter_woonkamer') != 'off' }}"
+  - wait_template: "{{ is_state('media_player.stb_arris_uhd_2','playing') }}"
+    timeout: "00:00:20"
+  - service_template: >-
+      {% if (is_state('input_boolean.sharona_inbed','on') or (states('person.sharona') != 'home')) %}
+        script.shutdown_mediacenter
+      {% else %}
+        script.dummy
+      {% endif %}
 
 #Script - Peter wakes up
 peter_awake:
@@ -77,14 +61,14 @@ peter_awake:
       data:
         push:
           category: "peter_awake"
-  - wait_template: "{{ is_state('sensor.peter_room_presence','Woonkamer') }}"
+  - wait_template: "{{ is_state('sensor.roompresence_peter','Woonkamer') }}"
     timeout: "00:30:00"
     continue_on_timeout: false
   - service: media_player.volume_set
     data:
-      entity_id: media_player.woonkamer_2
+      entity_id: media_player.woonkamer
       volume_level: 0.5
   - service: tts.google_cloud_say
     data_template:
       message: "Goedemorgen Peter, het is {{states('sensor.time')}}, de temperatuur is {{state_attr('weather.huis','temperature')}} graden en de huidige reistijd naar jouw werk is: {{states('sensor.reistijd_peter_werk')}} minuten."
-      entity_id: media_player.woonkamer_2
+      entity_id: media_player.woonkamer

@@ -3,7 +3,7 @@
 - alias: '[Hal Entree][Licht] - Auto aan'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d000349240c_occupancy
+      entity_id: binary_sensor.hal_entree_beweging_occupancy
       to: 'on'
   condition:
     condition: and
@@ -34,7 +34,7 @@
 - alias: '[Hal Entree][Licht] - Auto uit'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d000349240c_occupancy
+      entity_id: binary_sensor.hal_entree_beweging_occupancy
       to: 'off'
       for:
         seconds: 30
@@ -44,6 +44,9 @@
       - condition: state
         entity_id: light.hal_entree
         state: 'on'
+      - condition: state
+        entity_id: binary_sensor.hal_entree_voordeur_contact
+        state: 'off'
   action:
     service: light.turn_off
     data:

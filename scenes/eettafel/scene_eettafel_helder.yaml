@@ -1,0 +1,6 @@
+  - name: "Eettafel - helder"
+    entities:
+      light.woonkamer_eettafel_light:
+        state: true
+        xy_color: [0.457, 0.41]
+        brightness: 254

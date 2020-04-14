@@ -1,13 +1,19 @@
-# FORCE UPDATE OF BSSID
-- alias: '[Slaapkamer][Presence] - Do presence check'
+####
+# SHUTDOWN BEDROOM WHEN EVERYBODY LEAVES
+####
+
+- alias: '[Slaapkamer][Presence] - Shutdown bedroom'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d00041430f5_occupancy
-      to: 'on'
-  # condition:
-  #   - condition: template
-  #     value_template: "{{(states('sensor.peter_room_presence') != 'Slaapkamer') or (states('sensor.sharona_room_presence') != 'Slaapkamer')}}"
+      entity_id: sensor.roompresence_peter
+      from: 'Slaapkamer'
+    - platform: state
+      entity_id: sensor.roompresence_sharona
+      from: 'Slaapkamer'
+  condition:
+    - condition: template
+      value_template: "{{ states('sensor.roompresence_peter') != 'Slaapkamer'}}"
+    - condition: template
+      value_template: "{{ states('sensor.roompresence_sharona') != 'Slaapkamer'}}"
   action:
-    - service: notify.ios_iedereen
-      data:
-        message: "request_location_update"
+    - service: script.shutdown_bedroom

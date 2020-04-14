@@ -14,6 +14,16 @@
       data:
         entity_id: media_player.kodi_woonkamer
 
+- alias: '[Woonkamer][Mediaplayer] - Auto Chromecast Play'
+  trigger:
+    - platform: state
+      entity_id: media_player.mediacenter
+      to: 'playing'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.woonkamer_receiver_hdmi3_4
+
 - alias: '[Woonkamer][Mediaplayer] - Auto AVR on Chromecast'
   trigger:
     - platform: state
@@ -49,7 +59,7 @@
     condition: or
     conditions:
       - condition: state
-        entity_id: media_player.3c36e4_eosstb_003766202901
+        entity_id: media_player.stb_arris_uhd
         state: 'playing'
       - condition: state
         entity_id: media_player.kodi_woonkamer
@@ -57,7 +67,7 @@
   action:
     - service: media_player.turn_off
       data:
-        entity_id: media_player.3c36e4_eosstb_003766202901
+        entity_id: media_player.stb_arris_uhd
     - service: media_player.media_stop
       data:
         entity_id: media_player.kodi_woonkamer
@@ -82,7 +92,7 @@
       entity_id: media_player.kodi_woonkamer
       state: 'idle'
     - condition: state
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
       state: 'off'
   action:
   - data:

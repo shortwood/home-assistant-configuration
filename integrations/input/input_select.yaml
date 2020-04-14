@@ -36,27 +36,19 @@
     name: Vaatwasser Status
     options:
       - Inactief
-      - Opstarten
-      - Voorspoelen
-      - Spoelen Intensief
-      - Spoelen Eco
-      - Drogen
+      - Wassen
       - Schoon
 
   droger_status:
     name: Droger Status
     options:
       - Inactief
-      - Opstarten
       - Drogen
-      - Anti-kreuk
       - Schoon
 
   wasmachine_status:
     name: Wasmachine Status
     options:
       - Inactief
-      - Opstarten
       - Wassen
-      - Centrifugeren
       - Schoon

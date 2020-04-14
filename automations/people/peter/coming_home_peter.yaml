@@ -14,14 +14,7 @@
         message: 'Kan ik iets voor je aanzetten?'
         data:
           push:
-            category: >-
-              {% if is_state('media_player.spotify','playing') or
-                    is_state('media_player.spotify','paused')
-              %}
-                peter_cominghome_wt
-              {% else %}
-                peter_cominghome
-              {% endif %}
+            category: peter_cominghome
 
 - alias: '[People][Peter] - Coming home TV'
   initial_state: True
@@ -32,23 +25,6 @@
         actionName: PETER_COMINGHOME_TV
   action:
     - service: script.watch_tv
-
-- alias: '[People][Peter] - Coming home transfer spotify'
-  initial_state: True
-  trigger:
-    - platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: PETER_COMINGHOME_SPOTIFY
-  action:
-    - service: media_player.volume_set
-      data:
-        entity_id: media_player.beneden
-        volume_level: 0.6
-    - service: spotcast.start
-      data_template:
-        entity_id: media_player.beneden
-        uri: "{{ state_attr('media_player.spotify','media_content_id') }}"
 
 - alias: '[People][Peter] - Coming home playlist'
   initial_state: True

@@ -1,24 +1,24 @@
   - name: "Woonkamer - media"
     entities:
-      light.woonkamerlamp_plafond_voor:
+      light.woonkamer_plafond_voor_light:
         state: false
-      light.woonkamer_plafond_achter:
+      light.woonkamer_plafond_achter_light:
         state: false
-      light.staande_lamp_links:
+      light.woonkamer_spot_links_light:
         state: true
         xy_color: [0.459,0.408]
-        brightness: 100
-      light.staande_lamp_rechts:
+        brightness: 70
+      light.woonkamer_spot_rechts_light:
         state: true
         xy_color: [0.459,0.408]
-        brightness: 100
-      light.eettafel_lamp:
+        brightness: 70
+      light.woonkamer_eettafel_light:
         state: false
-      light.pianolamp:
+      light.woonkamer_piano_light:
         state: true
         xy_color: [0.459,0.408]
-        brightness: 100
-      light.woonkamer_muur:
+        brightness: 70
+      light.woonkamer_muurspot_light:
         state: true
         xy_color: [0.459,0.408]
-        brightness: 100
+        brightness: 70

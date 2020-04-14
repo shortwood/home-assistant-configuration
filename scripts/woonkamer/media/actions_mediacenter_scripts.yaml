@@ -18,9 +18,9 @@ watch_tv:
       entity_id: media_player.mediacenter_woonkamer
     service: media_player.turn_on
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
     service_template: >-
-      {% if is_state('media_player.3c36e4_eosstb_003766202901','off') %}
+      {% if is_state('media_player.stb_arris_uhd','off') %}
         media_player.turn_on
       {% else %}
         script.dummy
@@ -70,9 +70,9 @@ watch_movie_kodi:
     data:
       entity_id: switch.woonkamer_receiver_hdmi1_2
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
     service_template: >-
-      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+      {% if is_state('media_player.stb_arris_uhd','playing') %}
         media_player.turn_off
       {% else %}
         script.dummy
@@ -119,9 +119,9 @@ watch_tvshow_kodi:
     data:
       entity_id: switch.woonkamer_receiver_hdmi1_2
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
     service_template: >-
-      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+      {% if is_state('media_player.stb_arris_uhd','playing') %}
         media_player.turn_off
       {% else %}
         script.dummy
@@ -160,9 +160,9 @@ watch_kodi:
     data:
       entity_id: switch.woonkamer_receiver_hdmi1_2
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
     service_template: >-
-      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+      {% if is_state('media_player.stb_arris_uhd','playing') %}
         media_player.turn_off
       {% else %}
         script.dummy
@@ -199,9 +199,9 @@ listen_music:
       entity_id: media_player.mediacenter
     service: media_player.turn_on
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
     service_template: >-
-      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+      {% if is_state('media_player.stb_arris_uhd','playing') %}
         media_player.turn_off
       {% else %}
         script.dummy
@@ -221,9 +221,9 @@ shutdown_mediacenter:
       entity_id: media_player.mediacenter
     service: media_player.turn_off
   - data:
-      entity_id: media_player.3c36e4_eosstb_003766202901
+      entity_id: media_player.stb_arris_uhd
     service_template: >-
-      {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+      {% if is_state('media_player.stb_arris_uhd','playing') %}
         media_player.turn_off
       {% else %}
         script.dummy

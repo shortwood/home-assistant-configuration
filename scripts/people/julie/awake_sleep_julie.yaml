@@ -1,0 +1,21 @@
+# Script - When Julie is going to bed
+julie_tobed:
+  alias: '[Huis] - Julie naar bed'
+  sequence:
+  - data:
+      entity_id: input_boolean.julie_inbed
+    service: input_boolean.turn_on
+  - data:
+      entity_id: light.babykamer
+    service: light.turn_off
+
+julie_awake:
+  alias: '[Huis] - Julie wakker'
+  sequence:
+  - data:
+      entity_id: input_boolean.julie_inbed
+    service: input_boolean.turn_off
+  - data:
+      entity_id: light.babykamer
+      brightness: 150
+    service: light.turn_on

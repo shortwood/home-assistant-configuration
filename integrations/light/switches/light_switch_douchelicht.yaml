@@ -1,0 +1,3 @@
+  - platform: switch
+    name: badkamer_doucheverlichting_light
+    entity_id: switch.douchelicht

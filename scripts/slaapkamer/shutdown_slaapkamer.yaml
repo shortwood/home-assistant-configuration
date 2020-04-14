@@ -5,3 +5,7 @@ shutdown_bedroom:
       data:
         entity_id: light.slaapkamer
     - service: script.shutdown_bedroom_mediacenter
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_tv_input
+        option: 'False'

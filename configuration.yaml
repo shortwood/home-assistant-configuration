@@ -15,8 +15,8 @@ frontend:
   themes: !include_dir_named themes
 
 # Logging
-logger:
-  default: critical
+# logger:
+  # default: critical
 
 # Integrations
 binary_sensor: !include integrations/sensor_binary.yaml
@@ -33,18 +33,32 @@ proximity: !include_dir_named integrations/proximity
 rest_command: !include_dir_named integrations/rest_command
 sensor: !include_dir_merge_list integrations/sensor/
 shell_command: !include integrations/shell_command.yaml
+spotify: !include integrations/spotify.yaml
 spotcast: !include integrations/spotcast.yaml
 sonos: !include integrations/sonos.yaml
 switch: !include_dir_merge_list integrations/switch/
 tplink: !include integrations/tplink.yaml
 tts: !include integrations/tts.yaml
 zone: !include_dir_merge_list integrations/zone/
+ziggonext:
+  username: !secret ziggo_username
+  password: !secret ziggo_password
 
 # Configurations
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
 scene: !include_dir_merge_list scenes/
+
+# Customization
+homeassistant:
+  customize: !include_dir_merge_named customize/
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - !secret trusted_ip_range
+      allow_bypass_login: true
+    - type: homeassistant
 
 # Monitoring
 influxdb:

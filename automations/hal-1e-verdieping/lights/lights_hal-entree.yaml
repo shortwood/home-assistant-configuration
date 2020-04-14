@@ -3,7 +3,7 @@
 - alias: '[Hal 1e - Verdieping][Licht] - Auto aan'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d0004142172_occupancy
+      entity_id: binary_sensor.hal_1e_verdieping_beweging_occupancy
       to: 'on'
   condition:
     condition: and
@@ -26,7 +26,8 @@
       brightness: >-
         {% if is_state('input_select.house_mode', 'Nacht') or
               is_state('input_boolean.peter_inbed', 'on') or
-              is_state('input_boolean.sharona_inbed', 'on')
+              is_state('input_boolean.sharona_inbed', 'on') or
+              is_state('input_boolean.julie_inbed','on')
         %}
           5
         {% else %}
@@ -37,7 +38,7 @@
 - alias: '[Hal 1e - Verdieping][Licht] - Auto uit'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d0004142172_occupancy
+      entity_id: binary_sensor.hal_1e_verdieping_beweging_occupancy
       to: 'off'
       for:
         seconds: 30

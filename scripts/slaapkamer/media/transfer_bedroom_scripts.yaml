@@ -2,7 +2,7 @@ bedroom_transfer:
   alias: '[Slaapkamer][Mediacenter] - Verder kijken'
   sequence:
     - service_template: >-
-        {% if is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+        {% if is_state('media_player.stb_arris_uhd','playing') %}
           script.bedroom_transfer_tv
         {% elif is_state('media_player.kodi_woonkamer','playing') or
                 is_state('media_player.kodi_woonkamer','paused')
@@ -19,8 +19,8 @@ bedroom_transfer_tv:
     - wait_template: "{{ is_state('script.bedroom_watch_tv','off') }}"
     - service: media_player.select_source
       data_template:
-        entity_id: media_player.3c36e4_eosstb_003898505601
-        source: "{{state_attr('media_player.3c36e4_eosstb_003766202901','media_title')}}"
+        entity_id: media_player.stb_arris_uhd_2
+        source: "{{state_attr('media_player.stb_arris_uhd','source')}}"
 
 bedroom_transfer_kodi:
   alias: '[Slaapkamer][Mediacenter] - Kodi verder Kijken'

@@ -1,0 +1,11 @@
+- alias: '[Toilet][Licht] - Auto aan'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.toilet_deur_contact
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: switch.toilet
+      state: 'off'
+  action:
+    - service: script.toilet_light

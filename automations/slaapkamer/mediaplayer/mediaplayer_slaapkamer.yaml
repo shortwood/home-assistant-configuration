@@ -1,45 +1,52 @@
+# Handle TV input changes
+- alias: '[Slaapkamer][Mediaplayer] - Handle TV input changes'
+  trigger:
+    - platform: state
+      entity_id: media_player.slaapkamer_tv
+      to: 'playing'
+      from: 'off'
+      for: '00:01:00'
+    - platform: state
+      entity_id: media_player.stb_arris_uhd_2
+      to: 'playing'
+      from: 'off'
+      for: '00:01:00'
+  action:
+    # HANDLE THE INPUT CHANGE
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_tv_input
+        option: >-
+          {% if (trigger.entity_id == 'media_player.slaapkamer_tv') %}
+            Chromecast
+          {% elif (trigger.entity_id == 'media_player.stb_arris_uhd_2') %}
+            Mediabox
+          {% endif %}
+    # HANDLE TV STATE (SAFEGAURD FOR MANUAL CONTROL)
+    - service: switch.turn_on
+      data:
+        entity_id: switch.tv_lg
+
 # When Chromecast starts playing
 - alias: '[Slaapkamer][Mediaplayer] - Start TV for Chromecast'
   trigger:
     - platform: state
       entity_id: media_player.slaapkamer_tv
       to: 'playing'
-      from: 'off'
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.slaapkamer_tv
+          state: 'off'
+        - condition: template
+          value_template: "{{ states('input_select.bedroom_tv_input') != 'Chromecast' }}"
   action:
-    # - service: media_player.media_pause
-    #   data:
-    #     entity_id: media_player.slaapkamer_tv
     - service: script.bedroom_watch_chromecast
-    # - wait_template: "{{ is_state('script.bedroom_watch_chromecast','off') }}"
-    # - service: media_player.media_play
-    #   data:
-    #     entity_id: media_player.slaapkamer_tv
-
-# When Emby/Kodi starts playing
-- alias: '[Slaapkamer][Mediaplayer] - Start TV for Kodi'
-  trigger:
-    - platform: state
-      entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
-      to: 'playing'
-      from: 'idle'
-  action:
-    - service: media_player.media_pause
-      data:
-        entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
-    - service: script.bedroom_watch_kodi
-    - wait_template: "{{ is_state('script.bedroom_watch_kodi','off') }}"
-    - service: media_player.media_play
-      data:
-        entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
 
 # Nothing playing for 15 minutes, turn off the TV!
 - alias: '[Slaapkamer][Mediaplayer] - TV Auto off'
   trigger:
-    - platform: state
-      entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
-      to: 'idle'
-      for:
-        minutes: 15
     - platform: state
       entity_id: media_player.slaapkamer_tv
       to: 'off'
@@ -52,10 +59,7 @@
         entity_id: media_player.slaapkamer_tv
         state: 'off'
       - condition: state
-        entity_id: media_player.emby_kodi_kodi_libreelec_slaapkamer
-        state: 'idle'
-      - condition: state
-        entity_id: media_player.3c36e4_eosstb_003898505601
+        entity_id: media_player.stb_arris_uhd_2
         state: 'off'
       - condition: state
         entity_id: switch.tv_lg
@@ -69,6 +73,26 @@
         entity_id: input_select.bedroom_tv_input
         option: 'False'
 
+# 90 minutes after bedtime turn off the TV!
+- alias: '[Slaapkamer][Mediaplayer] - TV Auto off sleepmode'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.peter_inbed
+      to: 'on'
+      for:
+        minutes: 90
+    - platform: state
+      entity_id: input_boolean.sharona_inbed
+      to: 'on'
+      for:
+        minutes: 90
+  action:
+    - service: script.shutdown_bedroom_mediacenter
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_tv_input
+        option: 'False'
+
 # Continue watching TV programme
 - alias: '[Slaapkamer][Mediaplayer] - Continue watching'
   initial_state: True
@@ -76,7 +100,7 @@
     - platform: event
       event_type: ios.notification_action_fired
       event_data:
-        actionName: CONTINUE_WATCHING_YES
+        actionName: TRANSFER_TVTO_BEDROOM
   action:
     - service: script.bedroom_transfer
     - condition: template
@@ -93,24 +117,8 @@
     - platform: event
       event_type: ios.notification_action_fired
       event_data:
-        actionName: CONTINUE_WATCHING_NO
+        actionName: TRANSFER_NO
   action:
-    - condition: template
-      value_template: >-
-        {{ (is_state('input_boolean.sharona_inbed','on') and is_state('input_boolean.peter_inbed','on')) or
-           (is_state('input_boolean.sharona_inbed','on') and is_state('person.peter','not_home')) or
-           (is_state('input_boolean.peter_inbed','on') and is_state('person.sharona','not_home')) }}
-    - service: script.shutdown_mediacenter
-
-- alias: '[Slaapkamer][Mediaplayer] - Continue watching Kodi'
-  initial_state: True
-  trigger:
-    - platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: CONTINUE_WATCHING_KODI
-  action:
-    - service: script.bedroom_watch_tvshow_kodi
     - condition: template
       value_template: >-
         {{ (is_state('input_boolean.sharona_inbed','on') and is_state('input_boolean.peter_inbed','on')) or

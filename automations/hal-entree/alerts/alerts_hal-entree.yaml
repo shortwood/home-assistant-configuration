@@ -1,7 +1,7 @@
 - alias: '[Hal-Entree][Melding] - Voordeur staat 5 minuten open'
   trigger:
     - platform: state
-      entity_id: binary_sensor.0x00158d00044b3df7_contact
+      entity_id: binary_sensor.hal_entree_voordeur_contact
       to: 'on'
       for:
         minutes: 5

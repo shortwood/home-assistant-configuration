@@ -1,0 +1,10 @@
+- platform: mqtt
+  schema: json
+  name: Slaapkamer
+  command_topic: "zigbee2mqtt/slaapkamer/set"
+  state_topic: "zigbee2mqtt/slaapkamer"
+
+  # Modify according to features supported by all devices in group
+  color_temp: true
+  brightness: true
+  rgb: false

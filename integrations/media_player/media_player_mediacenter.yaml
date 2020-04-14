@@ -2,14 +2,14 @@
   name: Mediacenter Woonkamer
   children:
     - media_player.kodi_woonkamer
-    - media_player.3c36e4_eosstb_003766202901
+    - media_player.stb_arris_uhd
     - media_player.mediacenter
   state_template: >-
     {% if is_state('switch.woonkamer_tv','off') %}
       off
     {% elif is_state('media_player.kodi_woonkamer','playing') %}
       playing
-    {% elif is_state('media_player.3c36e4_eosstb_003766202901','playing') %}
+    {% elif is_state('media_player.stb_arris_uhd','playing') %}
       playing
     {% elif is_state('media_player.mediacenter','playing') %}
       playing
@@ -61,7 +61,7 @@
   name: Mediacenter Slaapkamer
   children:
     - media_player.kodi_slaapkamer
-    - media_player.3c36e4_eosstb_003898505601
+    - media_player.stb_arris_uhd_2
     - media_player.slaapkamer_tv
   commands:
     turn_on:

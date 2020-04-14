@@ -1,0 +1,3 @@
+  - platform: switch
+    name: toilet_plafond_light
+    entity_id: switch.toilet

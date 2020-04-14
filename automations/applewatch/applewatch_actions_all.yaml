@@ -29,3 +29,23 @@
           {% endif %}
       - service: script.shutdown_mediacenter
       - service: script.shutdown_bedroom_mediacenter
+
+  - alias: "[AppleWatch][All] - Julie gaat slapen"
+    initial_state: true
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: 'Sleepmode On - Julie'
+    action:
+      - service: script.julie_tobed
+
+  - alias: "[AppleWatch][All] - Julie wordt wakker"
+    initial_state: true
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: 'Sleepmode Off - Julie'
+    action:
+      - service: script.julie_awake

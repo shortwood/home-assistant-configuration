@@ -1,0 +1,57 @@
+text-color: '#8395a7'                                                           # Grey text
+text-medium-light-color: '#c8d6e5'                                              # Medium-light grey text
+text-medium-color: '#8395a7'                                                    # Medium grey text
+text-dark-color: '#576574'
+text-very-dark-color: '#222f3e'
+border-color: '#222f3e'
+
+# Text
+primary-color: 'var(--text-dark-color)'
+text-primary-color: 'var(--text-dark-color)'
+
+app-header-background-color: '#2e86de'
+
+# UI
+paper-card-header-color: 'var(--text-color)'
+
+# CARDS
+# Card-Specific Modifications
+ha-card-box-shadow: 'none' # Shadows on cards. Same as `shadow-elevation-2dp_-_box-shadow:
+ha-card-border-radius: '10px' # Rounded corners on cards. NOTE: may not work with custom cards.
+
+# FONTS
+primary-font-family: 'Open Sans,sans-serif'
+paper-font-common-base_-_font-family: "var(--primary-font-family)"
+paper-font-common-code_-_font-family: "var(--primary-font-family)"
+paper-font-body1_-_font-family: "var(--primary-font-family)"
+paper-font-subhead_-_font-family: "var(--primary-font-family)"
+paper-font-headline_-_font-family: "var(--primary-font-family)"
+paper-font-caption_-_font-family: "var(--primary-font-family)"
+paper-font-title_-_font-family: "var(--primary-font-family)"
+
+# COLORS
+dark-primary-color: 'var(--text-color)'
+primary-text-color: 'var(--text-medium-color)'
+paper-listbox-color: 'var(--text-color)'
+light-primary-color: 'var(--text-dark-color)'
+secondary-text-color: 'var(--text-medium-color)'
+disabled-text-color: 'var(--text-dark-color)'
+
+#Icons
+paper-item-icon-color: '#8395a7'                                 # Off
+paper-item-icon-active-color: '#ff9f43'
+
+# Switches
+switch-checked-button-color: '#ff9f43'                   # Knob On
+switch-unchecked-button-color: '#576574'                 # Knob Off
+switch-checked-track-color: '#feca57'                                           # Background On
+switch-unchecked-track-color: '#8395a7'
+
+# Slider
+paper-slider-active-color: '#feca57'                                # Line On
+paper-slider-container-color: '#8395a7'                          # Line Off
+paper-slider-knob-color: '#ff9f43'                       # Knob On
+paper-slider-knob-start-color: '#576574'
+
+# PAPER COLORS
+paper-card-background-color: 'rgba(255, 255, 255, 0.05)'

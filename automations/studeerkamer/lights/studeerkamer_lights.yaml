@@ -1,0 +1,48 @@
+- alias: '[Studeerkamer][Licht] - Licht aan bij beweging'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.studeerkamer_beweging_occupancy
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: light.studeerkamer
+      state: 'off'
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "-00:30:00"
+        - condition: sun
+          before: sunrise
+          before_offset: "+00:30:00"
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.studeerkamer
+      brightness: 100
+
+- alias: '[Studeerkamer][Licht] - Licht uit bij inactiviteit'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.studeerkamer_beweging_occupancy
+      to: 'off'
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: sensor.roompresence_peter
+      from: 'Studeerkamer'
+    - platform: state
+      entity_id: sensor.roompresence_sharona
+      from: 'Studeerkamer'
+  condition:
+    - condition: state
+      entity_id: light.studeerkamer
+      state: 'on'
+    - condition: template
+      value_template: "{{ states('sensor.roompresence_peter') != 'Studeerkamer'}}"
+    - condition: template
+      value_template: "{{ states('sensor.roompresence_sharona') != 'Studeerkamer'}}"
+  action:
+    service: light.turn_off
+    data:
+      entity_id: light.studeerkamer

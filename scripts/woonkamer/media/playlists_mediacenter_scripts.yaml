@@ -1,0 +1,9 @@
+play_playlist_on:
+  alias: '[Woonkamer][Mediacenter] - Playlist afspelen op'
+  sequence:
+    - service: spotcast.start
+      data_template:
+        entity_id: "{{device}}"
+        uri: "{{playlist}}"
+        shuffle: true
+        offset: "{{offset_nr}}"

@@ -1,0 +1,6 @@
+  - name: "Eettafel - gedimd"
+    entities:
+      light.woonkamer_eettafel_light:
+        state: true
+        xy_color: [0.459,0.408]
+        brightness: 77
